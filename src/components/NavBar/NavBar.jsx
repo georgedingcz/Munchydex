@@ -9,7 +9,11 @@ export default function NavBar({ setUser, user }) {
   return (
     <nav>
       <Link to="/orders">Order History</Link>
+      &nbsp;&nbsp;
       <Link to="/orders/new">New Order</Link>
+      &nbsp;&nbsp;
+      <Link to="/homepage">Home</Link>
+      &nbsp;&nbsp;
       {user ? (
         <>
           &nbsp;&nbsp;<span>Welcome, {user.name}</span>
@@ -20,7 +24,7 @@ export default function NavBar({ setUser, user }) {
         </>
       ) : (
         <Link to="/authpage">Log In</Link>
-        )}
+      )}
     </nav>
   );
 }
