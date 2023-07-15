@@ -21,6 +21,8 @@ export default function NavBar({ setUser, user }) {
           <Link to="" onClick={handleLogOut}>
             Log Out
           </Link>
+          &nbsp;&nbsp;
+          <Link to="/eatcat">Eatery Categories</Link>
         </>
       ) : (
         <Link to="/authpage">Log In</Link>

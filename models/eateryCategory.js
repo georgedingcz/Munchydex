@@ -1,9 +1,9 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const foodCategorySchema = new Schema(
+const eateryCategorySchema = new Schema(
   {
-    foodCategory: {
+    name: {
       type: String,
       required: true,
       unique: true,
@@ -22,4 +22,4 @@ const foodCategorySchema = new Schema(
   }
 );
 
-module.exports = mongoose.model("FoodCategory", foodCategorySchema);
+module.exports = mongoose.model("EateryCategory", eateryCategorySchema);
