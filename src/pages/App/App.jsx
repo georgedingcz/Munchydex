@@ -20,19 +20,28 @@ function App() {
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
+      <Routes>
+        <Route path="/homepage" element={<HomePage />} />
+        <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
+      </Routes>
       {user ? (
         <>
           <Routes>
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
-            <Route path="/eatcat" element={<EateryCategoryPage newCategory={newCategory} setNewCategory={setNewCategory}/>}/>
+            <Route
+              path="/eatcat"
+              element={
+                <EateryCategoryPage
+                  newCategory={newCategory}
+                  setNewCategory={setNewCategory}
+                />
+              }
+            />
           </Routes>
         </>
       ) : (
-        <Routes>
-          <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
-          <Route path="/homepage" element={<HomePage />} />
-        </Routes>
+        <Routes></Routes>
       )}
     </main>
   );
