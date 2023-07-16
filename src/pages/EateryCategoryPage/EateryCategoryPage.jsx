@@ -1,17 +1,33 @@
 import { useState } from "react";
 
-export default function EateryCategoryPage(props) {
+export default function EateryCategoryPage({category, setCategory}) {
   const handleChange = (evt) => {
-    props.setCategory({
-      ...props.category,
+    setCategory({
+      ...category,
       [evt.target.name]: evt.target.value,
     });
   };
 
-  const handleSubmit = (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
-    props.setCategory({ ...props.category });
-    console.log(JSON.stringify(props.category));
+    setCategory({ ...category });
+    console.log(JSON.stringify(category));
+    const categoryData = {
+        name: category.categoryName,
+        image: category.categoryImage,
+        briefDesc: category.categoryDesc
+    }
+    try {
+      const response = await fetch("/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(categoryData),
+      });
+    } catch (err) {
+      console.log(err);
+    }
   };
   return (
     <>
@@ -21,7 +37,7 @@ export default function EateryCategoryPage(props) {
         <input
           type="text"
           name="categoryName"
-          value={props.category.categoryName}
+          value={category.categoryName}
           onChange={handleChange}
         />
         <br />
@@ -29,7 +45,7 @@ export default function EateryCategoryPage(props) {
         <input
           type="text"
           name="categoryImage"
-          value={props.category.categoryImage}
+          value={category.categoryImage}
           onChange={handleChange}
         />
         <br />
@@ -37,7 +53,7 @@ export default function EateryCategoryPage(props) {
         <input
           type="text"
           name="categoryDesc"
-          value={props.category.categoryDesc}
+          value={category.categoryDesc}
           onChange={handleChange}
         />
         <br />

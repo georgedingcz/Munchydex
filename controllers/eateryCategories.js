@@ -1,6 +1,6 @@
 const EateryCategory = require("../models/eateryCategory");
-const jwt = require("jsonwebtoken");
-const bcrypt = require("bcrypt");
+// const jwt = require("jsonwebtoken");
+// const bcrypt = require("bcrypt");
 
 module.exports = {
   create,

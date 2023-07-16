@@ -7,8 +7,6 @@ const logger = require("morgan");
 require("dotenv").config();
 require("./config/database");
 
-const eatCatRouter = require("./routes/eateryCategories");
-
 const app = express();
 
 app.use(logger("dev"));
@@ -34,4 +32,5 @@ app.listen(port, function () {
 // Put API routes here, before the "catch all" route
 app.use("/api/users", require("./routes/api/users"));
 
+const eatCatRouter = require("./routes/eateryCategories");
 app.use("/categories", eatCatRouter);
