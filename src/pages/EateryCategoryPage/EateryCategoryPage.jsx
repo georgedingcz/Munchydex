@@ -1,68 +1,55 @@
 import { useState } from "react";
 
 export default function EateryCategoryPage() {
-  const [categoryName, setCategoryName] = useState([]);
-  const [categoryImage, setCategoryImage] = useState([]);
-  const [categoryDesc, setCategoryDesc] = useState([]);
+  const [category, setCategory] = useState({
+    categoryName: "",
+    categoryImage: "",
+    categoryDesc: "",
+  });
 
-  const [nameTypedValue, setNameTypedValue] = useState("");
-  const [imageTypedValue, setImageTypedValue] = useState("");
-  const [descTypedValue, setDescTypedValue] = useState("");
-
-  const handleNameChange = (evt) => {
-    setNameTypedValue(evt.target.value);
-  };
-
-  const handleImageChange = (evt) => {
-    setImageTypedValue(evt.target.value);
-  };
-
-  const handleDescChange = (evt) => {
-    setDescTypedValue(evt.target.value);
+  const handleChange = (evt) => {
+    setCategory({
+      ...category,
+      [evt.target.name]: evt.target.value,
+    });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-
-    setCategoryName([...categoryName, nameTypedValue]);
-    setCategoryImage([...categoryImage, imageTypedValue]);
-    setCategoryDesc([...categoryDesc, descTypedValue]);
-
-    setNameTypedValue("");
-    setImageTypedValue("");
-    setDescTypedValue("");
+    console.log("test");
+    setCategory({ category });
   };
   return (
     <>
       <h1>To add eatery categories</h1>
       <form>
         Name:
-        <input type="text" value={nameTypedValue} onChange={handleNameChange} />
+        <input
+          type="text"
+          name="categoryName"
+          value={category.categoryName}
+          onChange={handleChange}
+        />
         <br />
         Image URL:
         <input
           type="text"
-          value={imageTypedValue}
-          onChange={handleImageChange}
+          name="categoryImage"
+          value={category.categoryImage}
+          onChange={handleChange}
         />
         <br />
         Description:
-        <input type="text" value={descTypedValue} onChange={handleDescChange} />
+        <input
+          type="text"
+          name="categoryDesc"
+          value={category.categoryDesc}
+          onChange={handleChange}
+        />
         <br />
         <button onClick={handleSubmit}>Add an eatery</button>
       </form>
 
-      <div>
-        {categoryName.map((name, index) => (
-          <p key={index}>{name}</p>
-        ))}
-        {categoryImage.map((image, index) => (
-          <p key={index}>{image}</p>
-        ))}
-        {categoryDesc.map((desc, index) => (
-          <p key={index}>{desc}</p>
-        ))}
-      </div>
     </>
   );
 }

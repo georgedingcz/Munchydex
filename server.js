@@ -4,8 +4,10 @@ const favicon = require("serve-favicon");
 const logger = require("morgan");
 
 //Always require and configure near the top
-require('dotenv').config()
-require('./config/database')
+require("dotenv").config();
+require("./config/database");
+
+const eatCatRouter = require("./routes/eateryCategories");
 
 const app = express();
 
@@ -19,7 +21,7 @@ app.use(express.static(path.join(__dirname, "build")));
 
 // Middleware to verify token and assign user object of payload to req.user.
 // Be sure to mount before routes
-app.use(require('./config/checkToken'));
+app.use(require("./config/checkToken"));
 
 //configure to use port 3001 instead of 3000 during
 //development to avoid collision with react's dev server
@@ -30,4 +32,6 @@ app.listen(port, function () {
 });
 
 // Put API routes here, before the "catch all" route
-app.use('/api/users', require('./routes/api/users'))
+app.use("/api/users", require("./routes/api/users"));
+
+app.use("/categories", eatCatRouter);
