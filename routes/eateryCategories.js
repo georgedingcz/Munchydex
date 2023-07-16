@@ -4,8 +4,6 @@ const eatCatCtrl = require("../controllers/eateryCategories");
 
 router.post("/", eatCatCtrl.create);
 
-router.get("/new", async (req, res) => {
-  res.send("All Categories");
-});
+router.get("/", eatCatCtrl.listAll);
 
 module.exports = router;

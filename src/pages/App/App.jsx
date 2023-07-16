@@ -11,7 +11,7 @@ import EateryCategoryPage from "../EateryCategoryPage/EateryCategoryPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
-  const [category, setCategory] = useState({
+  const [newCategory, setNewCategory] = useState({
     categoryName: "",
     categoryImage: "",
     categoryDesc: "",
@@ -25,7 +25,7 @@ function App() {
           <Routes>
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
-            <Route path="/eatcat" element={<EateryCategoryPage category={category} setCategory={setCategory}/>}/>
+            <Route path="/eatcat" element={<EateryCategoryPage newCategory={newCategory} setNewCategory={setNewCategory}/>}/>
           </Routes>
         </>
       ) : (
