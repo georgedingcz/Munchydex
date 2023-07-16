@@ -11,6 +11,12 @@ import EateryCategoryPage from "../EateryCategoryPage/EateryCategoryPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
+  const [category, setCategory] = useState({
+    categoryName: "",
+    categoryImage: "",
+    categoryDesc: "",
+  });
+
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
@@ -19,7 +25,7 @@ function App() {
           <Routes>
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
-            <Route path="/eatcat" element={<EateryCategoryPage/>}/>
+            <Route path="/eatcat" element={<EateryCategoryPage category={category} setCategory={setCategory}/>}/>
           </Routes>
         </>
       ) : (

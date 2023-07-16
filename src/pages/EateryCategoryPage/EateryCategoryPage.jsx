@@ -1,23 +1,17 @@
 import { useState } from "react";
 
-export default function EateryCategoryPage() {
-  const [category, setCategory] = useState({
-    categoryName: "",
-    categoryImage: "",
-    categoryDesc: "",
-  });
-
+export default function EateryCategoryPage(props) {
   const handleChange = (evt) => {
-    setCategory({
-      ...category,
+    props.setCategory({
+      ...props.category,
       [evt.target.name]: evt.target.value,
     });
   };
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
-    console.log("test");
-    setCategory({ category });
+    props.setCategory({ ...props.category });
+    console.log(JSON.stringify(props.category));
   };
   return (
     <>
@@ -27,7 +21,7 @@ export default function EateryCategoryPage() {
         <input
           type="text"
           name="categoryName"
-          value={category.categoryName}
+          value={props.category.categoryName}
           onChange={handleChange}
         />
         <br />
@@ -35,7 +29,7 @@ export default function EateryCategoryPage() {
         <input
           type="text"
           name="categoryImage"
-          value={category.categoryImage}
+          value={props.category.categoryImage}
           onChange={handleChange}
         />
         <br />
@@ -43,13 +37,12 @@ export default function EateryCategoryPage() {
         <input
           type="text"
           name="categoryDesc"
-          value={category.categoryDesc}
+          value={props.category.categoryDesc}
           onChange={handleChange}
         />
         <br />
         <button onClick={handleSubmit}>Add an eatery</button>
       </form>
-
     </>
   );
 }
