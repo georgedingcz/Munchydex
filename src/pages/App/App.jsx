@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
@@ -16,17 +16,47 @@ function App() {
     categoryImage: "",
     categoryDesc: "",
   });
+  const [existingCategories, setExistingCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("/categories", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setExistingCategories(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCategories();
+  }, []);
 
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
+
       <Routes>
-        <Route path="/homepage" element={<HomePage />} />
+        <Route
+          path="/homepage"
+          element={
+            <HomePage
+              existingCategories={existingCategories}
+              setExistingCategories={setExistingCategories}
+            />
+          }
+        />
         <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
-      </Routes>
-      {user ? (
-        <>
-          <Routes>
+
+        {user ? (
+          <>
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route
@@ -35,14 +65,16 @@ function App() {
                 <EateryCategoryPage
                   newCategory={newCategory}
                   setNewCategory={setNewCategory}
+                  existingCategories={existingCategories}
+                  setExistingCategories={setExistingCategories}
                 />
               }
             />
-          </Routes>
-        </>
-      ) : (
-        <Routes></Routes>
-      )}
+          </>
+        ) : (
+          <></>
+        )}
+      </Routes>
     </main>
   );
 }

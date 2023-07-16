@@ -5,6 +5,7 @@ const EateryCategory = require("../models/eateryCategory");
 module.exports = {
   create,
   listAll,
+  deleteOne,
 };
 
 async function create(req, res) {
@@ -25,4 +26,11 @@ async function listAll(req, res) {
   }
 }
 
-
+async function deleteOne(req, res) {
+  try {
+    const category = await EateryCategory.findOneAndDelete({name: req.params.categoryName});
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}

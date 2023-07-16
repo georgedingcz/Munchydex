@@ -1,7 +1,11 @@
 import { useEffect, useState } from "react";
 
-export default function EateryCategoryPage({ newCategory, setNewCategory }) {
-
+export default function EateryCategoryPage({
+  newCategory,
+  setNewCategory,
+  existingCategories,
+  setExistingCategories,
+}) {
   const handleChange = (evt) => {
     setNewCategory({
       ...newCategory,
@@ -18,6 +22,7 @@ export default function EateryCategoryPage({ newCategory, setNewCategory }) {
       image: newCategory.categoryImage,
       briefDesc: newCategory.categoryDesc,
     };
+    setExistingCategories([...existingCategories, categoryData]);
     try {
       const response = await fetch("/categories", {
         method: "POST",
@@ -30,8 +35,26 @@ export default function EateryCategoryPage({ newCategory, setNewCategory }) {
       console.log(err);
     }
   };
+
+  const handleDelete = async (evt) => {
+    evt.preventDefault();
+    console.log(JSON.stringify(evt.target.value));
+    try {
+      const response = await fetch(`/categories/${evt.target.value}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    setExistingCategories(existingCategories.filter((category)=> category.name !== evt.target.value))
+  };
+
   return (
-    <>
+    <div className="page-container">
       <h1>To add eatery categories</h1>
       <form>
         Name:
@@ -60,6 +83,27 @@ export default function EateryCategoryPage({ newCategory, setNewCategory }) {
         <br />
         <button onClick={handleSubmit}>Add an eatery</button>
       </form>
-    </>
+      <div className="section-container">
+        <h2>Food categories available:</h2>
+        {existingCategories.map((existingCategory, index) => (
+          <div key={index}>
+            <div>Category: {existingCategory.name}</div>
+            <div>
+              <img
+                src={existingCategory.image}
+                alt="category"
+                width="50"
+                height="50"
+              />
+            </div>
+            <div>Description: {existingCategory.briefDesc}</div>
+            <br />
+            <button value={existingCategory.name} onClick={handleDelete}>
+              Delete {existingCategory.name}
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 }

@@ -1,28 +1,10 @@
 import { useEffect, useState } from "react";
 
-export default function HomePage() {
-  const [existingCategories, setExistingCategories] = useState([]);
+export default function HomePage({
+  existingCategories,
+  setExistingCategories,
+}) {
 
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("/categories", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setExistingCategories(data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchCategories();
-  }, []);
   return (
     <div className="page-container">
       <h1>HomePage</h1>
