@@ -38,9 +38,10 @@ export default function EateryCategoryPage({
 
   const handleDelete = async (evt) => {
     evt.preventDefault();
-    console.log(JSON.stringify(evt.target.value));
+    const id = evt.target.value
+    console.log("this thing", JSON.stringify(evt.target.value));
     try {
-      const response = await fetch(`/categories/${evt.target.value}`, {
+      const response = await fetch(`/categories/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
@@ -50,7 +51,7 @@ export default function EateryCategoryPage({
     } catch (err) {
       console.log(err);
     }
-    setExistingCategories(existingCategories.filter((category)=> category.name !== evt.target.value))
+    setExistingCategories(existingCategories.filter((category)=> category._id !== evt.target.value))
   };
 
   return (
@@ -98,7 +99,7 @@ export default function EateryCategoryPage({
             </div>
             <div>Description: {existingCategory.briefDesc}</div>
             <br />
-            <button value={existingCategory.name} onClick={handleDelete}>
+            <button value={existingCategory._id} onClick={handleDelete}>
               Delete {existingCategory.name}
             </button>
           </div>

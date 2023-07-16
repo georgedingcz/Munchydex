@@ -28,7 +28,8 @@ async function listAll(req, res) {
 
 async function deleteOne(req, res) {
   try {
-    const category = await EateryCategory.findOneAndDelete({name: req.params.categoryName});
+    const categoryId = req.params.id
+    const category = await EateryCategory.findByIdAndDelete(categoryId);
     res.status(200).json(category);
   } catch (err) {
     res.status(500).json(err);
