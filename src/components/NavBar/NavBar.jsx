@@ -22,7 +22,7 @@ export default function NavBar({ setUser, user }) {
             Log Out
           </Link>
           &nbsp;&nbsp;
-          <Link to="/eatcat">Eatery Categories</Link>
+          <Link to="/eatcat">Add Categories</Link>
         </>
       ) : (
         <Link to="/authpage">Log In</Link>

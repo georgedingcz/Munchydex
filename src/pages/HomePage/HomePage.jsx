@@ -1,16 +1,51 @@
-export default function HomePage () {
-    return (
-        <>
-        <h1>HomePage</h1>
-        <p>
-            Website introduction:
-        </p>
-        <p>
-            Food categories available:
-        </p>
-        <p>
-            What are some of the reviews available:
-        </p>
-        </>
-    )
+import { useEffect, useState } from "react";
+
+export default function HomePage() {
+  const [existingCategories, setExistingCategories] = useState([]);
+
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        const response = await fetch("/categories", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setExistingCategories(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchCategories();
+  }, []);
+  return (
+    <div className="page-container">
+      <h1>HomePage</h1>
+      <p>Website introduction:</p>
+      <div className="section-container">
+        <h2>Food categories available:</h2>
+        {existingCategories.map((existingCategory, index) => (
+          <div key={index}>
+            <div>Name: {existingCategory.name}</div>
+            <div>
+              <img
+                src={existingCategory.image}
+                alt="category"
+                width="50"
+                height="50"
+              />
+            </div>
+            <div>Description: {existingCategory.briefDesc}</div>
+            <br />
+          </div>
+        ))}
+      </div>
+      <p>What are some of the reviews available:</p>
+    </div>
+  );
 }

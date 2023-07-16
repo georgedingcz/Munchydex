@@ -1,28 +1,6 @@
 import { useEffect, useState } from "react";
 
 export default function EateryCategoryPage({ newCategory, setNewCategory }) {
-  const [existingCategories, setExistingCategories] = useState([]);
-
-  useEffect(() => {
-    const fetchCategories = async () => {
-      try {
-        const response = await fetch("/categories", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setExistingCategories(data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchCategories();
-  }, []);
 
   const handleChange = (evt) => {
     setNewCategory({
@@ -82,20 +60,6 @@ export default function EateryCategoryPage({ newCategory, setNewCategory }) {
         <br />
         <button onClick={handleSubmit}>Add an eatery</button>
       </form>
-      {existingCategories.map((existingCategory, index) => (
-        <div key={index}>
-          <br />
-          <div>Name: {existingCategory.name}</div>
-          <img
-            src={existingCategory.image}
-            alt="category"
-            width="50"
-            height="50"
-          />
-          <div>Description: {existingCategory.briefDesc}</div>
-          <br />
-        </div>
-      ))}
     </>
   );
 }
