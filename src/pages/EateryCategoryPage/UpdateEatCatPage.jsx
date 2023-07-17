@@ -6,6 +6,24 @@ export default function UpdateEatCat({
   existingCategories,
   setExistingCategories,
 }) {
+  const fetchCategories = async () => {
+    try {
+      const response = await fetch("/categories", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setExistingCategories(data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   const handleChange = (evt) => {
     setNewCategory({
       ...newCategory,
@@ -24,7 +42,7 @@ export default function UpdateEatCat({
       categoryName: chosenCat.name,
       categoryImage: chosenCat.image,
       categoryDesc: chosenCat.briefDesc,
-      categoryID: chosenCat._id
+      categoryID: chosenCat._id,
     });
   };
 
@@ -52,7 +70,7 @@ export default function UpdateEatCat({
       console.log(err);
     }
 
-
+    fetchCategories()
 
   };
 
@@ -70,7 +88,6 @@ export default function UpdateEatCat({
               {existingCategory.name}
             </option>
           ))}
-
         </select>
         Name:
         <input
