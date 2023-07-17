@@ -33,7 +33,7 @@ export default function UpdateEatCat({
     const id = newCategory.categoryID;
     console.log("this thing", JSON.stringify(id));
 
-    const updateCategoryData = {
+    const updatedCatData = {
       name: newCategory.categoryName,
       image: newCategory.categoryImage,
       briefDesc: newCategory.categoryDesc,
@@ -45,14 +45,14 @@ export default function UpdateEatCat({
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updateCategoryData),
+        body: JSON.stringify(updatedCatData),
       });
       console.log(response);
     } catch (err) {
       console.log(err);
     }
 
-    
+
 
   };
 

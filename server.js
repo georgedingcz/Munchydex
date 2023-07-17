@@ -34,3 +34,7 @@ app.use("/api/users", require("./routes/api/users"));
 
 const eatCatRouter = require("./routes/eateryCategories");
 app.use("/categories", eatCatRouter);
+
+const eatRouter = require("./routes/eateries");
+app.use("/eateries", eatRouter);
+

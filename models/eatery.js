@@ -3,6 +3,10 @@ const Schema = mongoose.Schema;
 
 const eaterySchema = new Schema(
   {
+    category: {
+      type: Schema.Types.ObjectId,
+      ref: "EateryCategory",
+    },
     name: {
       type: String,
       required: true,
@@ -11,6 +15,10 @@ const eaterySchema = new Schema(
     location: {
       type: String,
       required: true,
+    },
+    reviewStatus: {
+      type: Boolean,
+      default: false,
     },
   },
   {
