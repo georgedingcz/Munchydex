@@ -10,7 +10,6 @@ const eateryCategorySchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     briefDesc: {
       type: String,

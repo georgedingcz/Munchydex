@@ -18,7 +18,6 @@ const eaterySchema = new Schema(
     },
     image: {
       type: String,
-      required: true,
     },
     reviewStatus: {
       type: Boolean,

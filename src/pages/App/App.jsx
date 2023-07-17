@@ -49,7 +49,26 @@ function App() {
     fetchCategories();
   }, []);
 
-  
+  useEffect(() => {
+    const fetchEateries = async () => {
+      try {
+        const response = await fetch("/eateries", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+
+        if (response.ok) {
+          const data = await response.json();
+          setExistingEateries(data);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchEateries();
+  }, []);
 
   return (
     <main className="App">
@@ -100,6 +119,8 @@ function App() {
                   existingCategories={existingCategories}
                   newEatery={newEatery}
                   setNewEatery={setNewEatery}
+                  existingEateries={existingEateries}
+                  setExistingEateries={setExistingEateries}
                 />
               }
             />

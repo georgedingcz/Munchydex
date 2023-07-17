@@ -5,7 +5,6 @@ const eateryReviewSchema = new Schema(
   {
     image: {
       type: String,
-      required: true,
     },
     review: {
       type: String,

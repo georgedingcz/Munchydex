@@ -2,6 +2,8 @@ export default function CreateEatery({
   existingCategories,
   newEatery,
   setNewEatery,
+  existingEateries,
+  setExistingEateries,
 }) {
   const handleCatSelect = async (evt) => {
     console.log(evt.target.value);
@@ -95,14 +97,14 @@ export default function CreateEatery({
         <button onClick={handleSubmit}>Create an eatery</button>
       </form>
       <div className="section-container">
-        <h2>Food categories available:</h2>
-        {existingCategories.map((existingCategory, index) => (
+        <h2>Eateries available:</h2>
+        {existingEateries.map((existingEatery, index) => (
           <div key={index}>
-            <div>Category: {existingCategory.name}</div>
+            <div>Category: {existingEatery.name}</div>
             <div>
               <img
-                src={existingCategory.image}
-                alt="category"
+                src={existingEatery.image}
+                alt="eatery"
                 width="50"
                 height="50"
               />
