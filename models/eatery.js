@@ -16,6 +16,10 @@ const eaterySchema = new Schema(
       type: String,
       required: true,
     },
+    image: {
+      type: String,
+      required: true,
+    },
     reviewStatus: {
       type: Boolean,
       default: false,

@@ -9,6 +9,7 @@ import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
 import CreateEatCat from "../EateryCategoryPage/CreateEatCatPage";
 import UpdateEatCat from "../EateryCategoryPage/UpdateEatCatPage";
+import CreateEatery from "../EateryPage/CreateEatery";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -17,7 +18,15 @@ function App() {
     categoryImage: "",
     categoryDesc: "",
   });
+  const [newEatery, setNewEatery] = useState({
+    eateryCategory: "",
+    eateryName: "",
+    eateryLocation: "",
+    eateryImage: "",
+    eateryReviewStatus: "",
+  });
   const [existingCategories, setExistingCategories] = useState([]);
+  const [existingEateries, setExistingEateries] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -39,6 +48,8 @@ function App() {
     };
     fetchCategories();
   }, []);
+
+  
 
   return (
     <main className="App">
@@ -79,6 +90,16 @@ function App() {
                   setNewCategory={setNewCategory}
                   existingCategories={existingCategories}
                   setExistingCategories={setExistingCategories}
+                />
+              }
+            />
+            <Route
+              path="/createeatery"
+              element={
+                <CreateEatery
+                  existingCategories={existingCategories}
+                  newEatery={newEatery}
+                  setNewEatery={setNewEatery}
                 />
               }
             />
