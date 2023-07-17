@@ -7,7 +7,8 @@ import AuthPage from "../AuthPage/AuthPage";
 import OrderHistoryPage from "../OrderHistoryPage/OrderHistoryPage";
 import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
-import EateryCategoryPage from "../EateryCategoryPage/EateryCategoryPage";
+import CreateEatCat from "../EateryCategoryPage/CreateEatCatPage";
+import UpdateEatCat from "../EateryCategoryPage/UpdateEatCatPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -60,9 +61,20 @@ function App() {
             <Route path="/orders" element={<OrderHistoryPage />} />
             <Route path="/orders/new" element={<NewOrderPage />} />
             <Route
-              path="/eatcat"
+              path="/createeatcat"
               element={
-                <EateryCategoryPage
+                <CreateEatCat
+                  newCategory={newCategory}
+                  setNewCategory={setNewCategory}
+                  existingCategories={existingCategories}
+                  setExistingCategories={setExistingCategories}
+                />
+              }
+            />
+            <Route
+              path="/updateeatcat"
+              element={
+                <UpdateEatCat
                   newCategory={newCategory}
                   setNewCategory={setNewCategory}
                   existingCategories={existingCategories}

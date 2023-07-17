@@ -8,10 +8,10 @@ export default function NavBar({ setUser, user }) {
   }
   return (
     <nav>
-      <Link to="/orders">Order History</Link>
+      {/* <Link to="/orders">Order History</Link>
       &nbsp;&nbsp;
       <Link to="/orders/new">New Order</Link>
-      &nbsp;&nbsp;
+      &nbsp;&nbsp; */}
       <Link to="/homepage">Home</Link>
       &nbsp;&nbsp;
       {user ? (
@@ -22,7 +22,10 @@ export default function NavBar({ setUser, user }) {
             Log Out
           </Link>
           &nbsp;&nbsp;
-          <Link to="/eatcat">Add Categories</Link>
+          <Link to="/createeatcat">Add Categories</Link>
+          &nbsp;&nbsp;
+          <Link to="/updateeatcat">Update Categories</Link>
+
         </>
       ) : (
         <Link to="/authpage">Log In</Link>

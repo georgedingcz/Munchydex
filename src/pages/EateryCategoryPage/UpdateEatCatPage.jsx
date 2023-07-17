@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 
-export default function EateryCategoryPage({
+export default function UpdateEatCat({
   newCategory,
   setNewCategory,
   existingCategories,
   setExistingCategories,
 }) {
+
   const handleChange = (evt) => {
     setNewCategory({
       ...newCategory,
@@ -13,51 +14,43 @@ export default function EateryCategoryPage({
     });
   };
 
-  const handleSubmit = async (evt) => {
+  const handleUpdate = async (evt) => {
     evt.preventDefault();
-    setNewCategory({ ...newCategory });
-    console.log(JSON.stringify(newCategory));
-    const categoryData = {
-      name: newCategory.categoryName,
-      image: newCategory.categoryImage,
-      briefDesc: newCategory.categoryDesc,
-    };
-    setExistingCategories([...existingCategories, categoryData]);
-    try {
-      const response = await fetch("/categories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(categoryData),
-      });
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const handleDelete = async (evt) => {
-    evt.preventDefault();
-    const id = evt.target.value
+    const id = evt.target.value;
     console.log("this thing", JSON.stringify(evt.target.value));
     try {
       const response = await fetch(`/categories/${id}`, {
-        method: "DELETE",
+        method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
+        // body: JSON.stringify(categoryData),
       });
       console.log(response);
     } catch (err) {
       console.log(err);
     }
-    setExistingCategories(existingCategories.filter((category)=> category._id !== evt.target.value))
+  };
+
+  const handleCatSelect = async (evt) => {
+    console.log("cat selected");
   };
 
   return (
     <div className="page-container">
-      <h1>To add eatery categories</h1>
-      <form>
+      <form className="section-container">
+        <h2>Update eatery categories</h2>
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleCatSelect}
+        >
+          {existingCategories.map((existingCategory, index) => (
+            <option key={index} value={existingCategory.name}>
+              {existingCategory.name}
+            </option>
+          ))}
+        </select>
         Name:
         <input
           type="text"
@@ -82,8 +75,9 @@ export default function EateryCategoryPage({
           onChange={handleChange}
         />
         <br />
-        <button onClick={handleSubmit}>Add an eatery</button>
+        <button onClick={handleUpdate}>Update an eatery</button>
       </form>
+
       <div className="section-container">
         <h2>Food categories available:</h2>
         {existingCategories.map((existingCategory, index) => (
@@ -99,9 +93,6 @@ export default function EateryCategoryPage({
             </div>
             <div>Description: {existingCategory.briefDesc}</div>
             <br />
-            <button value={existingCategory._id} onClick={handleDelete}>
-              Delete {existingCategory.name}
-            </button>
           </div>
         ))}
       </div>

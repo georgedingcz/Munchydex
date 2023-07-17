@@ -6,6 +6,8 @@ router.post("/", eatCatCtrl.create);
 
 router.get("/", eatCatCtrl.listAll);
 
-router.delete("/:id", eatCatCtrl.deleteOne)
+router.delete("/:id", eatCatCtrl.deleteOne);
+
+router.patch("/:id", eatCatCtrl.updateOne);
 
 module.exports = router;
