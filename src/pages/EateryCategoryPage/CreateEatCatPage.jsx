@@ -44,6 +44,7 @@ export default function CreateEatCat({
   const handleDelete = async (evt) => {
     evt.preventDefault();
     const id = evt.target.value;
+    
     try {
       const response = await fetch(`/categories/${id}`, {
         method: "DELETE",

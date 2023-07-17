@@ -6,7 +6,6 @@ export default function UpdateEatCat({
   existingCategories,
   setExistingCategories,
 }) {
-
   const handleChange = (evt) => {
     setNewCategory({
       ...newCategory,
@@ -14,26 +13,47 @@ export default function UpdateEatCat({
     });
   };
 
+  const handleCatSelect = async (evt) => {
+    console.log(evt.target.value);
+
+    const chosenCat = existingCategories.find(
+      (chosenCategory) => chosenCategory.name === evt.target.value
+    );
+
+    setNewCategory({
+      categoryName: chosenCat.name,
+      categoryImage: chosenCat.image,
+      categoryDesc: chosenCat.briefDesc,
+      categoryID: chosenCat._id
+    });
+  };
+
   const handleUpdate = async (evt) => {
     evt.preventDefault();
-    const id = evt.target.value;
-    console.log("this thing", JSON.stringify(evt.target.value));
+    const id = newCategory.categoryID;
+    console.log("this thing", JSON.stringify(id));
+
+    const updateCategoryData = {
+      name: newCategory.categoryName,
+      image: newCategory.categoryImage,
+      briefDesc: newCategory.categoryDesc,
+    };
+
     try {
       const response = await fetch(`/categories/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
-        // body: JSON.stringify(categoryData),
+        body: JSON.stringify(updateCategoryData),
       });
       console.log(response);
     } catch (err) {
       console.log(err);
     }
-  };
 
-  const handleCatSelect = async (evt) => {
-    console.log("cat selected");
+    
+
   };
 
   return (
@@ -50,6 +70,7 @@ export default function UpdateEatCat({
               {existingCategory.name}
             </option>
           ))}
+
         </select>
         Name:
         <input
