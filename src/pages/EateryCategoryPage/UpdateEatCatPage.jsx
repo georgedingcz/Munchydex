@@ -70,8 +70,7 @@ export default function UpdateEatCat({
       console.log(err);
     }
 
-    fetchCategories()
-
+    fetchCategories();
   };
 
   return (
@@ -83,6 +82,8 @@ export default function UpdateEatCat({
           id="categoryType-select"
           onChange={handleCatSelect}
         >
+          <option value="">Select a category</option>
+
           {existingCategories.map((existingCategory, index) => (
             <option key={index} value={existingCategory.name}>
               {existingCategory.name}
