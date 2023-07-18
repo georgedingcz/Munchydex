@@ -16,7 +16,7 @@ async function create(req, res) {
 
 async function listAll(req, res) {
   try {
-    const eatery = await Eatery.find(req.body);
+    const eatery = await Eatery.find(req.body).populate('category');
     res.status(200).json(eatery);
   } catch (err) {
     res.status(500).json(err);

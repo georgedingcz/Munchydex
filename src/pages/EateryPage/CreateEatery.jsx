@@ -65,7 +65,7 @@ export default function CreateEatery({
           onChange={handleCatSelect}
         >
           <option value="">Select a category</option>
-          
+
           {existingCategories.map((existingCategory, index) => (
             <option key={index} value={existingCategory.name}>
               {existingCategory.name}
@@ -102,7 +102,7 @@ export default function CreateEatery({
         <h2>Eateries available:</h2>
         {existingEateries.map((existingEatery, index) => (
           <div key={index}>
-            <div>Category: {existingEatery.name}</div>
+            <div>Name: {existingEatery.name}</div>
             <div>
               <img
                 src={existingEatery.image}
@@ -111,6 +111,7 @@ export default function CreateEatery({
                 height="50"
               />
             </div>
+            <div>Category: {existingEatery.category.name}</div>
             <br />
           </div>
         ))}
