@@ -9,7 +9,7 @@ export default function EateryReview({
   setExistingReviews,
   existingEateries,
 }) {
-  const [chosenCatID, setChosenCatID] = useState("");
+  const [chosenCatID, setChosenCatID] = useState();
 
   const handleCatSelect = async (evt) => {
     console.log(evt.target.value);
@@ -18,21 +18,21 @@ export default function EateryReview({
     );
     setNewReview({
       ...newReview,
-      reviewCategory: chosenCat._id,
+      reviewCategoryID: chosenCat._id,
       //send user info the moment a category is chosen
-      reviewUser: user._id,
+      reviewUserID: user._id,
     });
     setChosenCatID(chosenCat._id);
+    console.log(chosenCatID)
   };
 
   const handleEatNameSelect = async (evt) => {
     console.log(evt.target.value);
-    const chosenEatName = existingEateries.find(
-      (chosenEatery) => chosenEatery.name === evt.target.value
-    );
+    const eateryData = evt.target.value
     setNewReview({
       ...newReview,
-      reviewEateryName: evt.target.value,
+      //to edit this//
+      reviewEateryID: eateryData._id,
     });
   };
 
@@ -50,7 +50,7 @@ export default function EateryReview({
     console.log(JSON.stringify(newReview));
     const reviewData = {
       category: newReview.reviewCategory,
-      user: newReview.reviewUser,
+      user: newReview.reviewUserID,
       name: newReview.reviewEateryName,
       image: newReview.reviewImage,
       desc: newReview.reviewDesc,
@@ -70,9 +70,9 @@ export default function EateryReview({
       console.log(err);
     }
     setNewReview({
-      reviewCategory: "",
-      reviewUser: "",
-      reviewEateryName: "",
+      reviewCategoryID: "",
+      reviewUserID: "",
+      reviewEateryID: "",
       reviewImage: "",
       reviewDesc: "",
       reviewDate: new Date(),
@@ -112,10 +112,10 @@ export default function EateryReview({
 
           {existingEateries
             .filter(
-              (existingEatery) => existingEatery.categoryID === chosenCatID
+              (existingEatery) => existingEatery.category._id === chosenCatID
             )
             .map((existingEatery, index) => (
-              <option key={index} value={existingEatery.name}>
+              <option key={index} value={existingEatery}>
                 {existingEatery.name}
               </option>
             ))}

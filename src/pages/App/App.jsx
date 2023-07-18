@@ -25,9 +25,9 @@ function App() {
     eateryReviewStatus: "",
   });
   const [newReview, setNewReview] = useState({
-    reviewCategory: "",
-    reviewUser: "",
-    reviewEateryName: "",
+    reviewCategoryID: "",
+    reviewUserID: "",
+    reviewEateryID: "",
     reviewImage: "",
     reviewDesc: "",
     reviewDate: new Date(),
@@ -78,6 +78,7 @@ function App() {
       }
     };
     fetchEateries();
+    // console.log(existingEateries[0])
   }, []);
 
   return (
