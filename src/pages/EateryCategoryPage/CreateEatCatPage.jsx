@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CategoryDetails from "../../components/Category/CategoryDetails";
 
 export default function CreateEatCat({
   newCategory,
@@ -44,7 +45,6 @@ export default function CreateEatCat({
   const handleDelete = async (evt) => {
     evt.preventDefault();
     const id = evt.target.value;
-    
     try {
       const response = await fetch(`/categories/${id}`, {
         method: "DELETE",
@@ -65,31 +65,11 @@ export default function CreateEatCat({
     <div className="page-container">
       <form className="section-container">
         <h2>Add eatery categories</h2>
-        Name:
-        <input
-          type="text"
-          name="categoryName"
-          value={newCategory.categoryName}
-          onChange={handleChange}
+        <CategoryDetails
+          newCategory={newCategory}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
-        <br />
-        Image URL:
-        <input
-          type="text"
-          name="categoryImage"
-          value={newCategory.categoryImage}
-          onChange={handleChange}
-        />
-        <br />
-        Description:
-        <input
-          type="text"
-          name="categoryDesc"
-          value={newCategory.categoryDesc}
-          onChange={handleChange}
-        />
-        <br />
-        <button onClick={handleSubmit}>Add an eatery</button>
       </form>
 
       <div className="section-container">
@@ -116,3 +96,27 @@ export default function CreateEatCat({
     </div>
   );
 }
+
+// {/* Name:
+// <input
+//   type="text"
+//   name="categoryName"
+//   value={newCategory.categoryName}
+//   onChange={handleChange}
+// />
+// <br />
+// Image URL:
+// <input
+//   type="text"
+//   name="categoryImage"
+//   value={newCategory.categoryImage}
+//   onChange={handleChange}
+// />
+// <br />
+// Description:
+// <input
+//   type="text"
+//   name="categoryDesc"
+//   value={newCategory.categoryDesc}
+//   onChange={handleChange}
+// /> */}

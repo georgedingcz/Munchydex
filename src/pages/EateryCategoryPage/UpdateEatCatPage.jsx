@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import CategoryDetails from "../../components/Category/CategoryDetails";
 
 export default function UpdateEatCat({
   newCategory,
@@ -33,11 +34,9 @@ export default function UpdateEatCat({
 
   const handleCatSelect = async (evt) => {
     console.log(evt.target.value);
-
     const chosenCat = existingCategories.find(
       (chosenCategory) => chosenCategory.name === evt.target.value
     );
-
     setNewCategory({
       categoryName: chosenCat.name,
       categoryImage: chosenCat.image,
@@ -46,17 +45,15 @@ export default function UpdateEatCat({
     });
   };
 
-  const handleUpdate = async (evt) => {
+  const handleSubmit = async (evt) => {
     evt.preventDefault();
     const id = newCategory.categoryID;
     console.log("this thing", JSON.stringify(id));
-
     const updatedCatData = {
       name: newCategory.categoryName,
       image: newCategory.categoryImage,
       briefDesc: newCategory.categoryDesc,
     };
-
     try {
       const response = await fetch(`/categories/${id}`, {
         method: "PATCH",
@@ -69,7 +66,6 @@ export default function UpdateEatCat({
     } catch (err) {
       console.log(err);
     }
-
     fetchCategories();
   };
 
@@ -83,38 +79,17 @@ export default function UpdateEatCat({
           onChange={handleCatSelect}
         >
           <option value="">Select a category</option>
-
           {existingCategories.map((existingCategory, index) => (
             <option key={index} value={existingCategory.name}>
               {existingCategory.name}
             </option>
           ))}
         </select>
-        Name:
-        <input
-          type="text"
-          name="categoryName"
-          value={newCategory.categoryName}
-          onChange={handleChange}
+        <CategoryDetails
+          newCategory={newCategory}
+          handleChange={handleChange}
+          handleSubmit={handleSubmit}
         />
-        <br />
-        Image URL:
-        <input
-          type="text"
-          name="categoryImage"
-          value={newCategory.categoryImage}
-          onChange={handleChange}
-        />
-        <br />
-        Description:
-        <input
-          type="text"
-          name="categoryDesc"
-          value={newCategory.categoryDesc}
-          onChange={handleChange}
-        />
-        <br />
-        <button onClick={handleUpdate}>Update an eatery</button>
       </form>
 
       <div className="section-container">
@@ -138,3 +113,29 @@ export default function UpdateEatCat({
     </div>
   );
 }
+
+// Name:
+// <input
+//   type="text"
+//   name="categoryName"
+//   value={newCategory.categoryName}
+//   onChange={handleChange}
+// />
+// <br />
+// Image URL:
+// <input
+//   type="text"
+//   name="categoryImage"
+//   value={newCategory.categoryImage}
+//   onChange={handleChange}
+// />
+// <br />
+// Description:
+// <input
+//   type="text"
+//   name="categoryDesc"
+//   value={newCategory.categoryDesc}
+//   onChange={handleChange}
+// />
+// <br />
+// <button onClick={handleSubmit}>Update an eatery</button>
