@@ -38,3 +38,6 @@ app.use("/categories", eatCatRouter);
 const eatRouter = require("./routes/eateries");
 app.use("/eateries", eatRouter);
 
+const eatReviewRouter = require("./routes/eateryReviews")
+app.use("/reviews", eatReviewRouter)
+

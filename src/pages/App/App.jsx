@@ -8,6 +8,7 @@ import HomePage from "../HomePage/HomePage";
 import CreateEatCat from "../EateryCategoryPage/CreateEatCatPage";
 import UpdateEatCat from "../EateryCategoryPage/UpdateEatCatPage";
 import CreateEatery from "../EateryPage/CreateEatery";
+import EateryReview from "../EateryReviewPage/EateryReviewPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -23,8 +24,19 @@ function App() {
     eateryImage: "",
     eateryReviewStatus: "",
   });
+  const [newReview, setNewReview] = useState({
+    reviewCategory: "",
+    reviewUser: "",
+    reviewEateryName: "",
+    reviewImage: "",
+    reviewDesc: "",
+    reviewDate: new Date(),
+    reviewPrice: 0,
+    reviewScore: 0,
+  });
   const [existingCategories, setExistingCategories] = useState([]);
   const [existingEateries, setExistingEateries] = useState([]);
+  const [existingReviews, setExistingReviews] = useState([]);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -117,6 +129,20 @@ function App() {
                   setNewEatery={setNewEatery}
                   existingEateries={existingEateries}
                   setExistingEateries={setExistingEateries}
+                />
+              }
+            />
+            <Route
+              path="/createreview"
+              element={
+                <EateryReview
+                  existingCategories={existingCategories}
+                  user={user}
+                  newReview={newReview}
+                  setNewReview={setNewReview}
+                  existingReviews={existingReviews}
+                  setExistingReviews={setExistingReviews}
+                  existingEateries={existingEateries}
                 />
               }
             />

@@ -23,6 +23,8 @@ export default function NavBar({ setUser, user }) {
           <Link to="/updateeatcat">Update Category</Link>
           &nbsp;&nbsp;
           <Link to="/createeatery">Create Eatery</Link>
+          &nbsp;&nbsp;
+          <Link to="/createreview">Create Review</Link>
         </>
       ) : (
         <Link to="/authpage">Log In</Link>
