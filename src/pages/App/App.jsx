@@ -84,7 +84,6 @@ function App() {
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
-
       <Routes>
         <Route
           path="/homepage"
@@ -95,61 +94,64 @@ function App() {
             />
           }
         />
-        <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
-
         {user ? (
           <>
-            <Route
-              path="/createeatcat"
-              element={
-                <CreateEatCat
-                  newCategory={newCategory}
-                  setNewCategory={setNewCategory}
-                  existingCategories={existingCategories}
-                  setExistingCategories={setExistingCategories}
+            {user.isAdmin ? (
+              <>
+                <Route
+                  path="/createeatcat"
+                  element={
+                    <CreateEatCat
+                      newCategory={newCategory}
+                      setNewCategory={setNewCategory}
+                      existingCategories={existingCategories}
+                      setExistingCategories={setExistingCategories}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/updateeatcat"
-              element={
-                <UpdateEatCat
-                  newCategory={newCategory}
-                  setNewCategory={setNewCategory}
-                  existingCategories={existingCategories}
-                  setExistingCategories={setExistingCategories}
+                <Route
+                  path="/updateeatcat"
+                  element={
+                    <UpdateEatCat
+                      newCategory={newCategory}
+                      setNewCategory={setNewCategory}
+                      existingCategories={existingCategories}
+                      setExistingCategories={setExistingCategories}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/createeatery"
-              element={
-                <CreateEatery
-                  existingCategories={existingCategories}
-                  newEatery={newEatery}
-                  setNewEatery={setNewEatery}
-                  existingEateries={existingEateries}
-                  setExistingEateries={setExistingEateries}
+                <Route
+                  path="/createeatery"
+                  element={
+                    <CreateEatery
+                      existingCategories={existingCategories}
+                      newEatery={newEatery}
+                      setNewEatery={setNewEatery}
+                      existingEateries={existingEateries}
+                      setExistingEateries={setExistingEateries}
+                    />
+                  }
                 />
-              }
-            />
-            <Route
-              path="/createreview"
-              element={
-                <EateryReview
-                  existingCategories={existingCategories}
-                  user={user}
-                  newReview={newReview}
-                  setNewReview={setNewReview}
-                  existingReviews={existingReviews}
-                  setExistingReviews={setExistingReviews}
-                  existingEateries={existingEateries}
-                />
-              }
-            />
+              </>
+            ) : (
+              <Route
+                path="/createreview"
+                element={
+                  <EateryReview
+                    existingCategories={existingCategories}
+                    user={user}
+                    newReview={newReview}
+                    setNewReview={setNewReview}
+                    existingReviews={existingReviews}
+                    setExistingReviews={setExistingReviews}
+                    existingEateries={existingEateries}
+                  />
+                }
+              />
+            )}
           </>
         ) : (
-          <></>
+          <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
         )}
       </Routes>
     </main>
