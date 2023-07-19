@@ -15,6 +15,7 @@ function App() {
     categoryName: "",
     categoryImage: "",
     categoryDesc: "",
+    categoryID: ""
   });
   const [newEatery, setNewEatery] = useState({
     eateryCategory: "",

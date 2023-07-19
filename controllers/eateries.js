@@ -4,7 +4,7 @@ module.exports = {
   create,
   listForOneCat,
   deleteOne,
-  // updateOne,
+  updateOne,
 };
 
 async function create(req, res) {
@@ -38,12 +38,12 @@ async function deleteOne(req, res) {
   }
 }
 
-// async function updateOne(req, res) {
-//   try {
-//     const eateryID = req.params.id;
-//     const category = await Eatery.findByIdAndUpdate(eateryID, req.body);
-//     res.status(200).json(category);
-//   } catch (err) {
-//     res.status(500).json(err);
-//   }
-// }
+async function updateOne(req, res) {
+  try {
+    const eateryID = req.params.id;
+    const category = await Eatery.findByIdAndUpdate(eateryID, req.body);
+    res.status(200).json(category);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}

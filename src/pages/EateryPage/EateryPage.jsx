@@ -99,6 +99,43 @@ export default function Eatery({
     );
   };
 
+  const handleEatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const chosenEat = existingEateries.find(
+      (chosenEatery) => chosenEatery.name === evt.target.value
+    );
+    setNewEatery({
+      eateryName: chosenEat.name,
+      eateryLocation: chosenEat.location,
+      eateryImage: chosenEat.image,
+      eateryID: chosenEat._id
+    });
+  };
+
+  const handleUpdateEat = async (evt) => {
+    evt.preventDefault();
+    const id = newEatery.eateryID;
+    console.log("this thing", JSON.stringify(id));
+    const updatedEatData = {
+      name: newEatery.eateryName,
+      location: newEatery.eateryLocation,
+      image: newEatery.eateryImage,
+    };
+    try {
+      const response = await fetch(`/eateries/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedEatData),
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    // setForCategoryFetch(!forCategoryFetch);
+  };
+
   return (
     <div className="page-container">
       <form className="section-container">
@@ -110,6 +147,29 @@ export default function Eatery({
           handleChange={handleChange}
         />
         <button onClick={handleCreateEatery}>Create an eatery</button>
+      </form>
+
+      <form className="section-container">
+        <h2>Update eatery</h2>
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleEatSelect}
+        >
+          <option value="">Select an eatery</option>
+          {existingEateries.map((existingEatery, index) => (
+            <option key={index} value={existingEatery.name}>
+              {existingEatery.name}
+            </option>
+          ))}
+        </select>
+        <EateryDetails
+          handleCatSelect={handleCatSelect}
+          existingCategories={existingCategories}
+          newEatery={newEatery}
+          handleChange={handleChange}
+        />
+        <button onClick={handleUpdateEat}>Update an eatery</button>
       </form>
 
       <div className="section-container">
