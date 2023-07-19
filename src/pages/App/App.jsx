@@ -62,6 +62,31 @@ function App() {
     fetchCategories();
   }, [forCategoryFetch]);
 
+  useEffect(() => {
+    const fetchOneCatEateries = async () => {
+      try {
+        const id = newEatery.eateryCategory;
+        const response = await fetch(`/eateries/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setExistingEateries(data);
+        } else {
+          console.log("Problem with the response");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchOneCatEateries();
+  }, [forEateryFetch]);
+
+
+
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
@@ -101,6 +126,8 @@ function App() {
                       setNewEatery={setNewEatery}
                       existingEateries={existingEateries}
                       setExistingEateries={setExistingEateries}
+                      setForEateryFetch={setForEateryFetch}
+                      forEateryFetch={forEateryFetch}
                     />
                   }
                 />

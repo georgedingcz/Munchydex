@@ -1,4 +1,3 @@
-import { useEffect, useState } from "react";
 import EateryDetails from "../../components/Eatery/EateryDetails";
 import EateryList from "../../components/Eatery/EateryList";
 
@@ -8,39 +7,16 @@ export default function Eatery({
   setNewEatery,
   existingEateries,
   setExistingEateries,
+  setForEateryFetch,
+  forEateryFetch,
 }) {
-  const fetchOneCatEateries = async () => {
-    try {
-      const id = newEatery.eateryCategory;
-      const response = await fetch(`/eateries/${id}`, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        const data = await response.json();
-        setExistingEateries(data);
-      } else {
-        console.log("Problem with the response");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  useEffect(() => {
-    fetchOneCatEateries();
-  }, [newEatery.eateryCategory]);
-
 
   const handleCatSelect = async (evt) => {
     await setNewEatery({
       ...newEatery,
       eateryCategory: evt.target.value,
     });
-    // fetchOneCatEateries()
-
+    setForEateryFetch(!forEateryFetch);
   };
 
   const handleChange = (evt) => {
@@ -60,7 +36,7 @@ export default function Eatery({
       location: newEatery.eateryLocation,
       image: newEatery.eateryImage,
     };
-    setExistingEateries([...existingEateries, eateryData])
+    setExistingEateries([...existingEateries, eateryData]);
     try {
       await fetch("/eateries", {
         method: "POST",
@@ -78,6 +54,7 @@ export default function Eatery({
       eateryLocation: "",
       eateryImage: "",
     });
+    setForEateryFetch(!forEateryFetch);
   };
 
   const handleDelete = async (evt) => {
@@ -97,6 +74,7 @@ export default function Eatery({
     setExistingEateries(
       existingEateries.filter((eatery) => eatery._id !== evt.target.value)
     );
+    setForEateryFetch(!forEateryFetch);
   };
 
   const handleEatSelect = async (evt) => {
@@ -108,7 +86,7 @@ export default function Eatery({
       eateryName: chosenEat.name,
       eateryLocation: chosenEat.location,
       eateryImage: chosenEat.image,
-      eateryID: chosenEat._id
+      eateryID: chosenEat._id,
     });
   };
 
@@ -133,7 +111,7 @@ export default function Eatery({
     } catch (err) {
       console.log(err);
     }
-    // setForCategoryFetch(!forCategoryFetch);
+    setForEateryFetch(!forEateryFetch);
   };
 
   return (
@@ -188,8 +166,8 @@ export default function Eatery({
             <div>Category: {existingEatery.category.name}</div>
             <br />
             <button value={existingEatery._id} onClick={handleDelete}>
-            Delete {existingEatery.name}
-          </button>
+              Delete {existingEatery.name}
+            </button>
           </div>
         ))}{" "}
       </div>
