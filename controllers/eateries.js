@@ -18,7 +18,7 @@ async function create(req, res) {
 async function listForOneCat(req, res) {
   try {
     const categoryId = req.params.id;
-    const eatery = await Eatery.findById(categoryId);
+    const eatery = await Eatery.find({category: categoryId}).populate("category");
     res.status(200).json(eatery);
   } catch (err) {
     res.status(500).json(err);

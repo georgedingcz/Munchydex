@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import EateryDetails from "../../components/Eatery/EateryDetails";
 import EateryList from "../../components/Eatery/EateryList";
 
@@ -9,11 +9,39 @@ export default function Eatery({
   existingEateries,
   setExistingEateries,
 }) {
+  const fetchOneCatEateries = async () => {
+    try {
+      const id = newEatery.eateryCategory;
+      const response = await fetch(`/eateries/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setExistingEateries(data);
+      } else {
+        console.log("Problem with the response");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchOneCatEateries();
+  }, [newEatery.eateryCategory]);
+
+
   const handleCatSelect = async (evt) => {
-    setNewEatery({
+    await setNewEatery({
       ...newEatery,
       eateryCategory: evt.target.value,
     });
+
+    // fetchOneCatEateries()
+
   };
 
   const handleChange = (evt) => {
@@ -66,7 +94,22 @@ export default function Eatery({
       </form>
 
       <div className="section-container">
-        <EateryList existingEateries={existingEateries} />
+        <h2>Category eateries:</h2>
+        {existingEateries.map((existingEatery, index) => (
+          <div key={index}>
+            <div>Name: {existingEatery.name}</div>
+            <div>
+              <img
+                src={existingEatery.image}
+                alt="eatery"
+                width="50"
+                height="50"
+              />
+            </div>
+            <div>Category: {existingEatery.category.name}</div>
+            <br />
+          </div>
+        ))}{" "}
       </div>
     </div>
   );
