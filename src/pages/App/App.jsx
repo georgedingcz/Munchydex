@@ -37,6 +37,8 @@ function App() {
   const [existingEateries, setExistingEateries] = useState([]);
   const [existingReviews, setExistingReviews] = useState([]);
 
+  const [forCategoryFetch, setForCategoryFetch] = useState(false)
+
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -56,7 +58,7 @@ function App() {
       }
     };
     fetchCategories();
-  }, []);
+  }, [forCategoryFetch]);
 
   useEffect(() => {
     const fetchEateries = async () => {
@@ -105,6 +107,8 @@ function App() {
                       setNewCategory={setNewCategory}
                       existingCategories={existingCategories}
                       setExistingCategories={setExistingCategories}
+                      setForCategoryFetch={setForCategoryFetch}
+                      forCategoryFetch={forCategoryFetch}
                     />
                   }
                 />

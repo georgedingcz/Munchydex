@@ -6,24 +6,9 @@ export default function CreateEatCat({
   setNewCategory,
   existingCategories,
   setExistingCategories,
+  setForCategoryFetch,
+  forCategoryFetch,
 }) {
-  const fetchCategories = async () => {
-    try {
-      const response = await fetch("/categories", {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-
-      if (response.ok) {
-        const data = await response.json();
-        setExistingCategories(data);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
   const handleChange = (evt) => {
     setNewCategory({
@@ -81,7 +66,7 @@ export default function CreateEatCat({
     } catch (err) {
       console.log(err);
     }
-    fetchCategories();
+    setForCategoryFetch(!forCategoryFetch);
   };
 
   const handleDelete = async (evt) => {
