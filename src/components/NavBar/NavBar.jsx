@@ -24,9 +24,8 @@ export default function NavBar({ setUser, user }) {
               &nbsp;&nbsp;
               <Link to="/eatcat">Eatery Category</Link>
               &nbsp;&nbsp;
-              <Link to="/createeatery">Create Eatery</Link>
+              <Link to="/eatery">Eatery</Link>
               &nbsp;&nbsp;
-              <Link to="/updateeatery">Update Eatery</Link>
             </>
           ) : (
             <>

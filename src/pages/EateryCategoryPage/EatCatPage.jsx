@@ -60,6 +60,30 @@ export default function CreateEatCat({
     });
   };
 
+  const handleUpdateCat = async (evt) => {
+    evt.preventDefault();
+    const id = newCategory.categoryID;
+    console.log("this thing", JSON.stringify(id));
+    const updatedCatData = {
+      name: newCategory.categoryName,
+      image: newCategory.categoryImage,
+      briefDesc: newCategory.categoryDesc,
+    };
+    try {
+      const response = await fetch(`/categories/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCatData),
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    fetchCategories();
+  };
+
   const handleDelete = async (evt) => {
     evt.preventDefault();
     const id = evt.target.value;
@@ -90,30 +114,6 @@ export default function CreateEatCat({
       categoryDesc: chosenCat.briefDesc,
       categoryID: chosenCat._id,
     });
-  };
-
-  const handleUpdateCat = async (evt) => {
-    evt.preventDefault();
-    const id = newCategory.categoryID;
-    console.log("this thing", JSON.stringify(id));
-    const updatedCatData = {
-      name: newCategory.categoryName,
-      image: newCategory.categoryImage,
-      briefDesc: newCategory.categoryDesc,
-    };
-    try {
-      const response = await fetch(`/categories/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedCatData),
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    fetchCategories();
   };
 
   return (

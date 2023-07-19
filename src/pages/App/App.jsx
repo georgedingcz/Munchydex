@@ -6,10 +6,8 @@ import AuthPage from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
 import EatCat from "../EateryCategoryPage/EatCatPage";
-import UpdateEatCat from "../../yetToRemove/UpdateEatCatPage";
-import CreateEatery from "../EateryPage/CreateEateryPage";
+import Eatery from "../EateryPage/EateryPage";
 import EateryReview from "../EateryReviewPage/EateryReviewPage";
-import UpdateEatery from "../EateryPage/UpdateEateryPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -111,21 +109,9 @@ function App() {
                   }
                 />
                 <Route
-                  path="/createeatery"
+                  path="/eatery"
                   element={
-                    <CreateEatery
-                      existingCategories={existingCategories}
-                      newEatery={newEatery}
-                      setNewEatery={setNewEatery}
-                      existingEateries={existingEateries}
-                      setExistingEateries={setExistingEateries}
-                    />
-                  }
-                />
-                <Route
-                  path="/updateeatery"
-                  element={
-                    <UpdateEatery
+                    <Eatery
                       existingCategories={existingCategories}
                       newEatery={newEatery}
                       setNewEatery={setNewEatery}
@@ -141,13 +127,13 @@ function App() {
                   path="/createreview"
                   element={
                     <EateryReview
-                      existingCategories={existingCategories}
-                      user={user}
-                      newReview={newReview}
-                      setNewReview={setNewReview}
-                      existingReviews={existingReviews}
-                      setExistingReviews={setExistingReviews}
-                      existingEateries={existingEateries}
+                    existingCategories={existingCategories}
+                    user={user}
+                    newReview={newReview}
+                    setNewReview={setNewReview}
+                    existingReviews={existingReviews}
+                    setExistingReviews={setExistingReviews}
+                    existingEateries={existingEateries}
                     />
                   }
                 />
@@ -156,7 +142,7 @@ function App() {
           </>
         ) : (
           <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
-        )}
+          )}
       </Routes>
     </main>
   );
@@ -172,6 +158,19 @@ export default App;
 //       setNewCategory={setNewCategory}
 //       existingCategories={existingCategories}
 //       setExistingCategories={setExistingCategories}
+//     />
+//   }
+// /> */}
+
+// {/* <Route
+//   path="/updateeatery"
+//   element={
+//     <UpdateEatery
+//       existingCategories={existingCategories}
+//       newEatery={newEatery}
+//       setNewEatery={setNewEatery}
+//       existingEateries={existingEateries}
+//       setExistingEateries={setExistingEateries}
 //     />
 //   }
 // /> */}
