@@ -39,7 +39,6 @@ export default function Eatery({
       ...newEatery,
       eateryCategory: evt.target.value,
     });
-
     // fetchOneCatEateries()
 
   };
@@ -61,6 +60,7 @@ export default function Eatery({
       location: newEatery.eateryLocation,
       image: newEatery.eateryImage,
     };
+    setExistingEateries([...existingEateries, eateryData])
     try {
       await fetch("/eateries", {
         method: "POST",
@@ -78,6 +78,25 @@ export default function Eatery({
       eateryLocation: "",
       eateryImage: "",
     });
+  };
+
+  const handleDelete = async (evt) => {
+    evt.preventDefault();
+    const id = evt.target.value;
+    try {
+      const response = await fetch(`/eateries/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    setExistingEateries(
+      existingEateries.filter((eatery) => eatery._id !== evt.target.value)
+    );
   };
 
   return (
@@ -108,6 +127,9 @@ export default function Eatery({
             </div>
             <div>Category: {existingEatery.category.name}</div>
             <br />
+            <button value={existingEatery._id} onClick={handleDelete}>
+            Delete {existingEatery.name}
+          </button>
           </div>
         ))}{" "}
       </div>

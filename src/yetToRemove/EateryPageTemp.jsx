@@ -1,6 +1,6 @@
 import { useState } from "react";
-import EateryDetails from "../../components/Eatery/EateryDetails";
-import EateryList from "../../components/Eatery/EateryList";
+import EateryDetails from "../components/Eatery/EateryDetails";
+import EateryList from "../components/Eatery/EateryList";
 
 export default function Eatery({
   existingCategories,
