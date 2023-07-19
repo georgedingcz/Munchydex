@@ -1,5 +1,5 @@
-import { useEffect, useState } from "react";
-import CategoryDetails from "../../components/Category/CategoryDetails";
+import CategoryDetails from "../components/Category/CategoryDetails";
+import CategoryList from "../components/Category/CategoryList";
 
 export default function UpdateEatCat({
   newCategory,
@@ -69,6 +69,25 @@ export default function UpdateEatCat({
     fetchCategories();
   };
 
+  const handleDelete = async (evt) => {
+    evt.preventDefault();
+    const id = evt.target.value;
+    try {
+      const response = await fetch(`/categories/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      console.log(response);
+    } catch (err) {
+      console.log(err);
+    }
+    setExistingCategories(
+      existingCategories.filter((category) => category._id !== evt.target.value)
+    );
+  };
+
   return (
     <div className="page-container">
       <form className="section-container">
@@ -88,54 +107,16 @@ export default function UpdateEatCat({
         <CategoryDetails
           newCategory={newCategory}
           handleChange={handleChange}
-          handleSubmit={handleSubmit}
         />
+        <button onClick={handleSubmit}>Submit</button>
       </form>
 
       <div className="section-container">
-        <h2>Food categories available:</h2>
-        {existingCategories.map((existingCategory, index) => (
-          <div key={index}>
-            <div>Category: {existingCategory.name}</div>
-            <div>
-              <img
-                src={existingCategory.image}
-                alt="category"
-                width="50"
-                height="50"
-              />
-            </div>
-            <div>Description: {existingCategory.briefDesc}</div>
-            <br />
-          </div>
-        ))}
+        <CategoryList
+          existingCategories={existingCategories}
+          handleDelete={handleDelete}
+        />
       </div>
     </div>
   );
 }
-
-// Name:
-// <input
-//   type="text"
-//   name="categoryName"
-//   value={newCategory.categoryName}
-//   onChange={handleChange}
-// />
-// <br />
-// Image URL:
-// <input
-//   type="text"
-//   name="categoryImage"
-//   value={newCategory.categoryImage}
-//   onChange={handleChange}
-// />
-// <br />
-// Description:
-// <input
-//   type="text"
-//   name="categoryDesc"
-//   value={newCategory.categoryDesc}
-//   onChange={handleChange}
-// />
-// <br />
-// <button onClick={handleSubmit}>Update an eatery</button>

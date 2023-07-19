@@ -22,12 +22,11 @@ export default function NavBar({ setUser, user }) {
           {user.isAdmin ? (
             <>
               &nbsp;&nbsp;
-              <Link to="/createeatcat">Add Category</Link>
-              &nbsp;&nbsp;
-              <Link to="/updateeatcat">Update Category</Link>
+              <Link to="/eatcat">Eatery Category</Link>
               &nbsp;&nbsp;
               <Link to="/createeatery">Create Eatery</Link>
               &nbsp;&nbsp;
+              <Link to="/updateeatery">Update Eatery</Link>
             </>
           ) : (
             <>
