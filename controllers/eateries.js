@@ -2,7 +2,8 @@ const Eatery = require("../models/eatery");
 
 module.exports = {
   create,
-  listAll,
+  listForOneCat,
+  // updateOne,
 };
 
 async function create(req, res) {
@@ -14,11 +15,22 @@ async function create(req, res) {
   }
 }
 
-async function listAll(req, res) {
+async function listForOneCat(req, res) {
   try {
-    const eatery = await Eatery.find(req.body).populate('category');
+    const categoryId = req.params.id;
+    const eatery = await Eatery.findById(categoryId);
     res.status(200).json(eatery);
   } catch (err) {
     res.status(500).json(err);
   }
 }
+
+// async function updateOne(req, res) {
+//   try {
+//     const eateryID = req.params.id;
+//     const category = await Eatery.findByIdAndUpdate(eateryID, req.body);
+//     res.status(200).json(category);
+//   } catch (err) {
+//     res.status(500).json(err);
+//   }
+// }

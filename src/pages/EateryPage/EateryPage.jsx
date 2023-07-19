@@ -1,3 +1,4 @@
+import { useState } from "react";
 import EateryDetails from "../../components/Eatery/EateryDetails";
 import EateryList from "../../components/Eatery/EateryList";
 
@@ -9,15 +10,10 @@ export default function Eatery({
   setExistingEateries,
 }) {
   const handleCatSelect = async (evt) => {
-    console.log(evt.target.value);
-    const chosenCat = existingCategories.find(
-      (chosenCategory) => chosenCategory.name === evt.target.value
-    );
     setNewEatery({
       ...newEatery,
-      eateryCategory: chosenCat._id,
+      eateryCategory: evt.target.value,
     });
-    console.log(JSON.stringify(newEatery));
   };
 
   const handleChange = (evt) => {
@@ -29,7 +25,6 @@ export default function Eatery({
 
   const handleCreateEatery = async (evt) => {
     evt.preventDefault();
-    console.log("new eatery created");
     setNewEatery({ ...newEatery });
     console.log(JSON.stringify(newEatery));
     const eateryData = {
@@ -39,7 +34,7 @@ export default function Eatery({
       image: newEatery.eateryImage,
     };
     try {
-      const response = await fetch("/eateries", {
+      await fetch("/eateries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -50,35 +45,7 @@ export default function Eatery({
       console.log(err);
     }
     setNewEatery({
-      eateryName: "",
-      eateryLocation: "",
-      eateryImage: "",
-    });
-  };
-
-  const handleUpdateEatery = async (evt) => {
-    evt.preventDefault();
-    console.log("new eatery created");
-    setNewEatery({ ...newEatery });
-    console.log(JSON.stringify(newEatery));
-    const eateryData = {
-      category: newEatery.eateryCategory,
-      name: newEatery.eateryName,
-      location: newEatery.eateryLocation,
-      image: newEatery.eateryImage,
-    };
-    try {
-      const response = await fetch("/eateries", {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(eateryData),
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    setNewEatery({
+      eateryCategory: eateryData.category,
       eateryName: "",
       eateryLocation: "",
       eateryImage: "",
@@ -96,17 +63,6 @@ export default function Eatery({
           handleChange={handleChange}
         />
         <button onClick={handleCreateEatery}>Create an eatery</button>
-      </form>
-
-      <form className="section-container">
-        <h2>Update eatery</h2>
-        <EateryDetails
-          handleCatSelect={handleCatSelect}
-          existingCategories={existingCategories}
-          newEatery={newEatery}
-          handleChange={handleChange}
-        />
-        <button onClick={handleUpdateEatery}>Create an eatery</button>
       </form>
 
       <div className="section-container">

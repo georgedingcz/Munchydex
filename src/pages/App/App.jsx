@@ -38,6 +38,7 @@ function App() {
   const [existingReviews, setExistingReviews] = useState([]);
 
   const [forCategoryFetch, setForCategoryFetch] = useState(false)
+  const [forEateryFetch, setForEateryFetch] = useState(false)
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -59,28 +60,6 @@ function App() {
     };
     fetchCategories();
   }, [forCategoryFetch]);
-
-  useEffect(() => {
-    const fetchEateries = async () => {
-      try {
-        const response = await fetch("/eateries", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-
-        if (response.ok) {
-          const data = await response.json();
-          setExistingEateries(data);
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchEateries();
-    // console.log(existingEateries[0])
-  }, []);
 
   return (
     <main className="App">
