@@ -1,5 +1,6 @@
 import { useState } from "react";
 import CreateReviewForm from "../../components/Review/CreateReviewForm";
+import ReviewListPerUser from "../../components/Review/ReviewListPerUser";
 
 export default function EateryReview({
   existingCategories,
@@ -9,9 +10,10 @@ export default function EateryReview({
   existingEateries,
   setForEateryFetch,
   forEateryFetch,
-
   newMegaState,
   setNewMegaState,
+  forReviewFetch,
+  setForReviewFetch,
 }) {
   const handleCatSelect = async (evt) => {
     await setNewMegaState({
@@ -24,7 +26,7 @@ export default function EateryReview({
   const handleEatSelect = async (evt) => {
     console.log(evt.target.value);
     const chosenEat = existingEateries.find(
-      (chosenEatery) => chosenEatery.name === evt.target.value
+      (chosenEatery) => chosenEatery._id === evt.target.value
     );
     setNewMegaState({
       ...newMegaState,
@@ -51,9 +53,21 @@ export default function EateryReview({
           existingEateries={existingEateries}
           newMegaState={newMegaState}
           setNewMegaState={setNewMegaState}
+          existingReviews={existingReviews}
+          setExistingReviews={setExistingReviews}
+          forReviewFetch={forReviewFetch}
+          setForReviewFetch={setForReviewFetch}
         />
       }
-      
+      {
+        <ReviewListPerUser
+          newMegaState={newMegaState}
+          setExistingReviews={setExistingReviews}
+          existingReviews={existingReviews}
+          forReviewFetch={forReviewFetch}
+          user={user}
+        />
+      }
     </div>
   );
 }

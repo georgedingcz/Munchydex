@@ -1,6 +1,6 @@
 export default function CreateReviewForm({
   user,
-  
+
   handleCatSelect,
   handleEatSelect,
   handleChange,
@@ -10,10 +10,15 @@ export default function CreateReviewForm({
 
   newMegaState,
   setNewMegaState,
+
+  existingReviews,
+  setExistingReviews,
+
+  forReviewFetch,
+  setForReviewFetch,
 }) {
   const handleCreateReview = async (evt) => {
     evt.preventDefault();
-    console.log("new eatery created");
     setNewMegaState({ ...newMegaState });
     console.log(JSON.stringify(newMegaState));
     const reviewData = {
@@ -28,7 +33,7 @@ export default function CreateReviewForm({
       score: newMegaState.reviewScore,
     };
     try {
-      const response = await fetch("/reviews", {
+      await fetch("/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -49,6 +54,7 @@ export default function CreateReviewForm({
       reviewPrice: 0,
       reviewScore: 0,
     });
+    setForReviewFetch(!forReviewFetch);
   };
 
   return (
@@ -79,7 +85,7 @@ export default function CreateReviewForm({
       >
         <option value="">Select an eatery</option>
         {existingEateries.map((existingEatery, index) => (
-          <option key={index} value={existingEatery.name}>
+          <option key={index} value={existingEatery._id}>
             {existingEatery.name}
           </option>
         ))}

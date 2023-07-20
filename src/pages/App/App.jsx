@@ -145,6 +145,8 @@ function App() {
                       forEateryFetch={forEateryFetch}
                       newMegaState={newMegaState}
                       setNewMegaState={setNewMegaState}
+                      forReviewFetch={forReviewFetch}
+                      setForReviewFetch={setForReviewFetch}
                     />
                   }
                 />

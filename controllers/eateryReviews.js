@@ -41,7 +41,7 @@ async function listForOneEat(req, res) {
 async function listForOneUser(req, res) {
   try {
     const userID = req.params.id;
-    const eatery = await EateryReview.find({ user: userID }).populate("user");
+    const eatery = await EateryReview.find({ user: userID }).populate("user").populate("category").populate("name");
     res.status(200).json(eatery);
   } catch (err) {
     res.status(500).json(err);
