@@ -1,5 +1,6 @@
 import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
 import DeleteEateryForm from "../../components/Eatery/DeleteEateryForm";
+import EateryListPerCat from "../../components/Eatery/EateryListPerCat";
 import UpdateEateryForm from "../../components/Eatery/UpdateEateryForm";
 
 export default function Eatery({
@@ -82,27 +83,13 @@ export default function Eatery({
         />
       }
 
-      {/* <div className="section-container">
-        <h2>Category eateries:</h2>
-        {existingEateries.map((existingEatery, index) => (
-          <div key={index}>
-            <div>Name: {existingEatery.name}</div>
-            <div>
-              <img
-                src={existingEatery.image}
-                alt="eatery"
-                width="50"
-                height="50"
-              />
-            </div>
-            <div>Category: {existingEatery.category.name}</div>
-            <br />
-            <button value={existingEatery._id} onClick={handleDelete}>
-              Delete {existingEatery.name}
-            </button>
-          </div>
-        ))}{" "}
-      </div> */}
+      {
+        <EateryListPerCat
+          existingEateries={existingEateries}
+          handleCatSelect={handleCatSelect}
+          existingCategories={existingCategories}
+        />
+      }
     </div>
   );
 }
