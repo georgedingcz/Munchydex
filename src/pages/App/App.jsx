@@ -15,7 +15,7 @@ function App() {
     categoryName: "",
     categoryImage: "",
     categoryDesc: "",
-    categoryID: ""
+    categoryID: "",
   });
   const [newEatery, setNewEatery] = useState({
     eateryCategory: "",
@@ -38,8 +38,29 @@ function App() {
   const [existingEateries, setExistingEateries] = useState([]);
   const [existingReviews, setExistingReviews] = useState([]);
 
-  const [forCategoryFetch, setForCategoryFetch] = useState(false)
-  const [forEateryFetch, setForEateryFetch] = useState(false)
+  const [forCategoryFetch, setForCategoryFetch] = useState(false);
+  const [forEateryFetch, setForEateryFetch] = useState(false);
+
+  const [newMegaState, setNewMegaState] = useState({
+    userID: "",
+    categoryID: "",
+    eateryID: "",
+
+    categoryName: "",
+    categoryImage: "",
+    categoryDesc: "",
+
+    eateryName: "",
+    eateryLocation: "",
+    eateryImage: "",
+    eateryReviewStatus: "",
+
+    reviewImage: "",
+    reviewDesc: "",
+    reviewDate: new Date(),
+    reviewPrice: 0,
+    reviewScore: 0,
+  });
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -50,7 +71,6 @@ function App() {
             "Content-Type": "application/json",
           },
         });
-
         if (response.ok) {
           const data = await response.json();
           setExistingCategories(data);
@@ -85,8 +105,6 @@ function App() {
     fetchOneCatEateries();
   }, [forEateryFetch]);
 
-
-
   return (
     <main className="App">
       <NavBar setUser={setUser} user={user} />
@@ -114,6 +132,9 @@ function App() {
                       setExistingCategories={setExistingCategories}
                       setForCategoryFetch={setForCategoryFetch}
                       forCategoryFetch={forCategoryFetch}
+
+                      newMegaState={newMegaState}
+                      setNewMegaState={setNewMegaState}
                     />
                   }
                 />
@@ -138,13 +159,15 @@ function App() {
                   path="/createreview"
                   element={
                     <EateryReview
-                    existingCategories={existingCategories}
-                    user={user}
-                    newReview={newReview}
-                    setNewReview={setNewReview}
-                    existingReviews={existingReviews}
-                    setExistingReviews={setExistingReviews}
-                    existingEateries={existingEateries}
+                      existingCategories={existingCategories}
+                      user={user}
+                      newReview={newReview}
+                      setNewReview={setNewReview}
+                      existingReviews={existingReviews}
+                      setExistingReviews={setExistingReviews}
+                      existingEateries={existingEateries}
+                      setForEateryFetch={setForEateryFetch}
+                      forEateryFetch={forEateryFetch}
                     />
                   }
                 />
@@ -153,7 +176,7 @@ function App() {
           </>
         ) : (
           <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
-          )}
+        )}
       </Routes>
     </main>
   );

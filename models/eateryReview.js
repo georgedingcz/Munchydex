@@ -15,6 +15,10 @@ const eateryReviewSchema = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Eatery"
     },
+    title: {
+      type: String,
+      required: true
+    },
     image: {
       type: String,
     },

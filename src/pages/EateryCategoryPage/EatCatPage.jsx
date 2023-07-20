@@ -8,23 +8,25 @@ export default function CreateEatCat({
   setExistingCategories,
   setForCategoryFetch,
   forCategoryFetch,
-}) {
 
+  newMegaState,
+  setNewMegaState,
+}) {
   const handleChange = (evt) => {
-    setNewCategory({
-      ...newCategory,
+    setNewMegaState({
+      ...newMegaState,
       [evt.target.name]: evt.target.value,
     });
   };
 
   const handleCreateCat = async (evt) => {
     evt.preventDefault();
-    setNewCategory({ ...newCategory });
-    console.log(JSON.stringify(newCategory));
+    setNewMegaState({ ...newMegaState });
+    console.log(JSON.stringify(newMegaState));
     const categoryData = {
-      name: newCategory.categoryName,
-      image: newCategory.categoryImage,
-      briefDesc: newCategory.categoryDesc,
+      name: newMegaState.categoryName,
+      image: newMegaState.categoryImage,
+      briefDesc: newMegaState.categoryDesc,
     };
     setExistingCategories([...existingCategories, categoryData]);
     try {
@@ -38,7 +40,7 @@ export default function CreateEatCat({
     } catch (err) {
       console.log(err);
     }
-    setNewCategory({
+    setNewMegaState({
       categoryName: "",
       categoryImage: "",
       categoryDesc: "",
@@ -47,12 +49,12 @@ export default function CreateEatCat({
 
   const handleUpdateCat = async (evt) => {
     evt.preventDefault();
-    const id = newCategory.categoryID;
+    const id = newMegaState.categoryID;
     console.log("this thing", JSON.stringify(id));
     const updatedCatData = {
-      name: newCategory.categoryName,
-      image: newCategory.categoryImage,
-      briefDesc: newCategory.categoryDesc,
+      name: newMegaState.categoryName,
+      image: newMegaState.categoryImage,
+      briefDesc: newMegaState.categoryDesc,
     };
     try {
       const response = await fetch(`/categories/${id}`, {
@@ -93,7 +95,7 @@ export default function CreateEatCat({
     const chosenCat = existingCategories.find(
       (chosenCategory) => chosenCategory.name === evt.target.value
     );
-    setNewCategory({
+    setNewMegaState({
       categoryName: chosenCat.name,
       categoryImage: chosenCat.image,
       categoryDesc: chosenCat.briefDesc,
@@ -106,7 +108,7 @@ export default function CreateEatCat({
       <form className="section-container">
         <h2>Add eatery categories</h2>
         <CategoryDetails
-          newCategory={newCategory}
+          newCategory={newMegaState}
           handleChange={handleChange}
         />
         <button onClick={handleCreateCat}>Submit</button>
@@ -127,7 +129,7 @@ export default function CreateEatCat({
           ))}
         </select>
         <CategoryDetails
-          newCategory={newCategory}
+          newCategory={newMegaState}
           handleChange={handleChange}
         />
         <button onClick={handleUpdateCat}>Submit</button>
