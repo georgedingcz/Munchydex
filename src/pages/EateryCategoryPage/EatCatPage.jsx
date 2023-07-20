@@ -1,4 +1,3 @@
-import CategoryDetails from "../../components/Category/CategoryDetails";
 import CategoryList from "../../components/Category/CategoryList";
 import CreateCatForm from "../../components/Category/CreateCatForm";
 import UpdateCatForm from "../../components/Category/UpdateCatForm";

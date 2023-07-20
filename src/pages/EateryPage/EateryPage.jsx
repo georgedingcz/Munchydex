@@ -1,5 +1,7 @@
+import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
 import EateryDetails from "../../components/Eatery/EateryDetails";
 import EateryList from "../../components/Eatery/EateryList";
+import UpdateEateryForm from "../../components/Eatery/UpdateEateryForm";
 
 export default function Eatery({
   existingCategories,
@@ -11,7 +13,6 @@ export default function Eatery({
   newMegaState,
   setNewMegaState,
 }) {
-
   const handleCatSelect = async (evt) => {
     await setNewMegaState({
       ...newMegaState,
@@ -25,37 +26,6 @@ export default function Eatery({
       ...newMegaState,
       [evt.target.name]: evt.target.value,
     });
-  };
-
-  const handleCreateEatery = async (evt) => {
-    evt.preventDefault();
-    setNewMegaState({ ...newMegaState });
-    console.log(JSON.stringify(newMegaState));
-    const eateryData = {
-      category: newMegaState.categoryID,
-      name: newMegaState.eateryName,
-      location: newMegaState.eateryLocation,
-      image: newMegaState.eateryImage,
-    };
-    setExistingEateries([...existingEateries, eateryData]);
-    try {
-      await fetch("/eateries", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(eateryData),
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    setNewMegaState({
-      categoryID: eateryData.category,
-      eateryName: "",
-      eateryLocation: "",
-      eateryImage: "",
-    });
-    setForEateryFetch(!forEateryFetch);
   };
 
   const handleDelete = async (evt) => {
@@ -91,65 +61,34 @@ export default function Eatery({
     });
   };
 
-  const handleUpdateEat = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.eateryID;
-    console.log("this thing", JSON.stringify(id));
-    const updatedEatData = {
-      name: newMegaState.eateryName,
-      location: newMegaState.eateryLocation,
-      image: newMegaState.eateryImage,
-    };
-    try {
-      const response = await fetch(`/eateries/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedEatData),
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    setForEateryFetch(!forEateryFetch);
-  };
-
   return (
     <div className="page-container">
-      <form className="section-container">
-        <h2>Create eatery</h2>
-        <EateryDetails
-          handleCatSelect={handleCatSelect}
+      {
+        <CreateEateryForm
           existingCategories={existingCategories}
-          newMegaState={newMegaState}
+          handleCatSelect={handleCatSelect}
           handleChange={handleChange}
+          newMegaState={newMegaState}
+          setNewMegaState={setNewMegaState}
+          existingEateries={existingEateries}
+          setExistingEateries={setExistingEateries}
+          forEateryFetch={forEateryFetch}
+          setForEateryFetch={setForEateryFetch}
         />
-        <button onClick={handleCreateEatery}>Create an eatery</button>
-      </form>
+      }
 
-      <form className="section-container">
-        <h2>Update eatery</h2>
-        <select
-          name="categoryType"
-          id="categoryType-select"
-          onChange={handleEatSelect}
-        >
-          <option value="">Select an eatery</option>
-          {existingEateries.map((existingEatery, index) => (
-            <option key={index} value={existingEatery.name}>
-              {existingEatery.name}
-            </option>
-          ))}
-        </select>
-        <EateryDetails
-          handleCatSelect={handleCatSelect}
+      {
+        <UpdateEateryForm
           existingCategories={existingCategories}
-          newMegaState={newMegaState}
+          handleCatSelect={handleCatSelect}
           handleChange={handleChange}
+          newMegaState={newMegaState}
+          existingEateries={existingEateries}
+          forEateryFetch={forEateryFetch}
+          setForEateryFetch={setForEateryFetch}
+          handleEatSelect={handleEatSelect}
         />
-        <button onClick={handleUpdateEat}>Update an eatery</button>
-      </form>
+      }
 
       <div className="section-container">
         <h2>Category eateries:</h2>

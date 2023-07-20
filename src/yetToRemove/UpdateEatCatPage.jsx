@@ -1,4 +1,4 @@
-import CategoryDetails from "../components/Category/CategoryDetails";
+import CategoryDetails from "./CategoryDetails";
 import CategoryList from "../components/Category/CategoryList";
 
 export default function UpdateEatCat({

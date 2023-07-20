@@ -161,28 +161,3 @@ function App() {
 }
 
 export default App;
-
-// {/* <Route
-//   path="/updateeatcat"
-//   element={
-//     <UpdateEatCat
-//       newCategory={newCategory}
-//       setNewCategory={setNewCategory}
-//       existingCategories={existingCategories}
-//       setExistingCategories={setExistingCategories}
-//     />
-//   }
-// /> */}
-
-// {/* <Route
-//   path="/updateeatery"
-//   element={
-//     <UpdateEatery
-//       existingCategories={existingCategories}
-//       newEatery={newEatery}
-//       setNewEatery={setNewEatery}
-//       existingEateries={existingEateries}
-//       setExistingEateries={setExistingEateries}
-//     />
-//   }
-// /> */}
