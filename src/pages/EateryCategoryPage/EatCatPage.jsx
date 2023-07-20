@@ -1,5 +1,6 @@
 import CategoryList from "../../components/Category/CategoryList";
 import CreateCatForm from "../../components/Category/CreateCatForm";
+import DeleteCatForm from "../../components/Category/DeleteCatForm";
 import UpdateCatForm from "../../components/Category/UpdateCatForm";
 
 export default function CreateEatCat({
@@ -18,29 +19,10 @@ export default function CreateEatCat({
     });
   };
 
-  const handleDelete = async (evt) => {
-    evt.preventDefault();
-    const id = evt.target.value;
-    try {
-      const response = await fetch(`/categories/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    setExistingCategories(
-      existingCategories.filter((category) => category._id !== evt.target.value)
-    );
-  };
-
   const handleCatSelect = async (evt) => {
     console.log(evt.target.value);
     const chosenCat = existingCategories.find(
-      (chosenCategory) => chosenCategory.name === evt.target.value
+      (chosenCategory) => chosenCategory._id === evt.target.value
     );
     setNewMegaState({
       categoryName: chosenCat.name,
@@ -72,13 +54,15 @@ export default function CreateEatCat({
           setForCategoryFetch={setForCategoryFetch}
         />
       }
-
-      <div className="section-container">
-        <CategoryList
+      {
+        <DeleteCatForm
+          handleCatSelect={handleCatSelect}
           existingCategories={existingCategories}
-          handleDelete={handleDelete}
+          setExistingCategories={setExistingCategories}
+          newMegaState={newMegaState}
         />
-      </div>
+      }
+      {<CategoryList existingCategories={existingCategories} />}
     </div>
   );
 }

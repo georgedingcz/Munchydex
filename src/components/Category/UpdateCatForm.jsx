@@ -39,7 +39,7 @@ export default function UpdateCatForm({
       >
         <option value="">Select a category</option>
         {existingCategories.map((existingCategory, index) => (
-          <option key={index} value={existingCategory.name}>
+          <option key={index} value={existingCategory._id}>
             {existingCategory.name}
           </option>
         ))}

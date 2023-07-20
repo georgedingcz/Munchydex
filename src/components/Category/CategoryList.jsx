@@ -1,6 +1,6 @@
-export default function CategoryList({ existingCategories, handleDelete }) {
+export default function CategoryList({ existingCategories }) {
   return (
-    <>
+    <div className="section-container">
       <h2>Food categories available:</h2>
       {existingCategories.map((existingCategory, index) => (
         <div key={index}>
@@ -15,11 +15,8 @@ export default function CategoryList({ existingCategories, handleDelete }) {
           </div>
           <div>Description: {existingCategory.briefDesc}</div>
           <br />
-          <button value={existingCategory._id} onClick={handleDelete}>
-            Delete {existingCategory.name}
-          </button>
         </div>
       ))}
-    </>
+    </div>
   );
 }

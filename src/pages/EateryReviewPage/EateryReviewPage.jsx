@@ -53,6 +53,7 @@ export default function EateryReview({
           setNewMegaState={setNewMegaState}
         />
       }
+      
     </div>
   );
 }

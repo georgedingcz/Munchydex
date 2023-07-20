@@ -30,7 +30,7 @@ export default function NavBar({ setUser, user }) {
           ) : (
             <>
               &nbsp;&nbsp;
-              <Link to="/createreview">Create Review</Link>
+              <Link to="/createreview">Eatery Review</Link>
               &nbsp;&nbsp;
             </>
           )}

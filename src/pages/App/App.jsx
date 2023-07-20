@@ -143,7 +143,6 @@ function App() {
                       existingEateries={existingEateries}
                       setForEateryFetch={setForEateryFetch}
                       forEateryFetch={forEateryFetch}
-
                       newMegaState={newMegaState}
                       setNewMegaState={setNewMegaState}
                     />

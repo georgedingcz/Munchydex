@@ -1,6 +1,4 @@
 import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
-import EateryDetails from "../../components/Eatery/EateryDetails";
-import EateryList from "../../components/Eatery/EateryList";
 import UpdateEateryForm from "../../components/Eatery/UpdateEateryForm";
 
 export default function Eatery({
