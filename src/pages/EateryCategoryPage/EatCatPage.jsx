@@ -2,8 +2,6 @@ import CategoryDetails from "../../components/Category/CategoryDetails";
 import CategoryList from "../../components/Category/CategoryList";
 
 export default function CreateEatCat({
-  newCategory,
-  setNewCategory,
   existingCategories,
   setExistingCategories,
   setForCategoryFetch,

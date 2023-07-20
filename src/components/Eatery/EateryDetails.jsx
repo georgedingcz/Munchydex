@@ -1,7 +1,7 @@
 export default function EateryDetails({
   handleCatSelect,
   existingCategories,
-  newEatery,
+  newMegaState,
   handleChange,
 }) {
   return (
@@ -23,7 +23,7 @@ export default function EateryDetails({
       <input
         type="text"
         name="eateryName"
-        value={newEatery.eateryName}
+        value={newMegaState.eateryName}
         onChange={handleChange}
       />
       <br />
@@ -31,7 +31,7 @@ export default function EateryDetails({
       <input
         type="text"
         name="eateryLocation"
-        value={newEatery.eateryLocation}
+        value={newMegaState.eateryLocation}
         onChange={handleChange}
       />
       <br />
@@ -39,7 +39,7 @@ export default function EateryDetails({
       <input
         type="text"
         name="eateryImage"
-        value={newEatery.eateryImage}
+        value={newMegaState.eateryImage}
         onChange={handleChange}
       />
       <br />

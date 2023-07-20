@@ -11,12 +11,7 @@ import EateryReview from "../EateryReviewPage/EateryReviewPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
-  const [newCategory, setNewCategory] = useState({
-    categoryName: "",
-    categoryImage: "",
-    categoryDesc: "",
-    categoryID: "",
-  });
+
   const [newEatery, setNewEatery] = useState({
     eateryCategory: "",
     eateryName: "",
@@ -85,7 +80,7 @@ function App() {
   useEffect(() => {
     const fetchOneCatEateries = async () => {
       try {
-        const id = newEatery.eateryCategory;
+        const id = newMegaState.categoryID;
         const response = await fetch(`/eateries/${id}`, {
           method: "GET",
           headers: {
@@ -126,13 +121,10 @@ function App() {
                   path="/eatcat"
                   element={
                     <EatCat
-                      newCategory={newCategory}
-                      setNewCategory={setNewCategory}
                       existingCategories={existingCategories}
                       setExistingCategories={setExistingCategories}
                       setForCategoryFetch={setForCategoryFetch}
                       forCategoryFetch={forCategoryFetch}
-
                       newMegaState={newMegaState}
                       setNewMegaState={setNewMegaState}
                     />
@@ -149,6 +141,8 @@ function App() {
                       setExistingEateries={setExistingEateries}
                       setForEateryFetch={setForEateryFetch}
                       forEateryFetch={forEateryFetch}
+                      newMegaState={newMegaState}
+                      setNewMegaState={setNewMegaState}
                     />
                   }
                 />

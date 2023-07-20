@@ -9,32 +9,35 @@ export default function Eatery({
   setExistingEateries,
   setForEateryFetch,
   forEateryFetch,
+
+  newMegaState,
+  setNewMegaState,
 }) {
 
   const handleCatSelect = async (evt) => {
-    await setNewEatery({
-      ...newEatery,
-      eateryCategory: evt.target.value,
+    await setNewMegaState({
+      ...newMegaState,
+      categoryID: evt.target.value,
     });
     setForEateryFetch(!forEateryFetch);
   };
 
   const handleChange = (evt) => {
-    setNewEatery({
-      ...newEatery,
+    setNewMegaState({
+      ...newMegaState,
       [evt.target.name]: evt.target.value,
     });
   };
 
   const handleCreateEatery = async (evt) => {
     evt.preventDefault();
-    setNewEatery({ ...newEatery });
-    console.log(JSON.stringify(newEatery));
+    setNewMegaState({ ...newMegaState });
+    console.log(JSON.stringify(newMegaState));
     const eateryData = {
-      category: newEatery.eateryCategory,
-      name: newEatery.eateryName,
-      location: newEatery.eateryLocation,
-      image: newEatery.eateryImage,
+      category: newMegaState.categoryID,
+      name: newMegaState.eateryName,
+      location: newMegaState.eateryLocation,
+      image: newMegaState.eateryImage,
     };
     setExistingEateries([...existingEateries, eateryData]);
     try {
@@ -48,8 +51,8 @@ export default function Eatery({
     } catch (err) {
       console.log(err);
     }
-    setNewEatery({
-      eateryCategory: eateryData.category,
+    setNewMegaState({
+      categoryID: eateryData.category,
       eateryName: "",
       eateryLocation: "",
       eateryImage: "",
@@ -82,7 +85,7 @@ export default function Eatery({
     const chosenEat = existingEateries.find(
       (chosenEatery) => chosenEatery.name === evt.target.value
     );
-    setNewEatery({
+    setNewMegaState({
       eateryName: chosenEat.name,
       eateryLocation: chosenEat.location,
       eateryImage: chosenEat.image,
@@ -92,12 +95,12 @@ export default function Eatery({
 
   const handleUpdateEat = async (evt) => {
     evt.preventDefault();
-    const id = newEatery.eateryID;
+    const id = newMegaState.eateryID;
     console.log("this thing", JSON.stringify(id));
     const updatedEatData = {
-      name: newEatery.eateryName,
-      location: newEatery.eateryLocation,
-      image: newEatery.eateryImage,
+      name: newMegaState.eateryName,
+      location: newMegaState.eateryLocation,
+      image: newMegaState.eateryImage,
     };
     try {
       const response = await fetch(`/eateries/${id}`, {
@@ -121,7 +124,7 @@ export default function Eatery({
         <EateryDetails
           handleCatSelect={handleCatSelect}
           existingCategories={existingCategories}
-          newEatery={newEatery}
+          newMegaState={newMegaState}
           handleChange={handleChange}
         />
         <button onClick={handleCreateEatery}>Create an eatery</button>
@@ -144,7 +147,7 @@ export default function Eatery({
         <EateryDetails
           handleCatSelect={handleCatSelect}
           existingCategories={existingCategories}
-          newEatery={newEatery}
+          newMegaState={newMegaState}
           handleChange={handleChange}
         />
         <button onClick={handleUpdateEat}>Update an eatery</button>
