@@ -1,5 +1,7 @@
 import CategoryDetails from "../../components/Category/CategoryDetails";
 import CategoryList from "../../components/Category/CategoryList";
+import CreateCatForm from "../../components/Category/CreateCatForm";
+import UpdateCatForm from "../../components/Category/UpdateCatForm";
 
 export default function CreateEatCat({
   existingCategories,
@@ -15,58 +17,6 @@ export default function CreateEatCat({
       ...newMegaState,
       [evt.target.name]: evt.target.value,
     });
-  };
-
-  const handleCreateCat = async (evt) => {
-    evt.preventDefault();
-    setNewMegaState({ ...newMegaState });
-    console.log(JSON.stringify(newMegaState));
-    const categoryData = {
-      name: newMegaState.categoryName,
-      image: newMegaState.categoryImage,
-      briefDesc: newMegaState.categoryDesc,
-    };
-    setExistingCategories([...existingCategories, categoryData]);
-    try {
-      const response = await fetch("/categories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(categoryData),
-      });
-    } catch (err) {
-      console.log(err);
-    }
-    setNewMegaState({
-      categoryName: "",
-      categoryImage: "",
-      categoryDesc: "",
-    });
-  };
-
-  const handleUpdateCat = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.categoryID;
-    console.log("this thing", JSON.stringify(id));
-    const updatedCatData = {
-      name: newMegaState.categoryName,
-      image: newMegaState.categoryImage,
-      briefDesc: newMegaState.categoryDesc,
-    };
-    try {
-      const response = await fetch(`/categories/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedCatData),
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    setForCategoryFetch(!forCategoryFetch);
   };
 
   const handleDelete = async (evt) => {
@@ -103,35 +53,26 @@ export default function CreateEatCat({
 
   return (
     <div className="page-container">
-      <form className="section-container">
-        <h2>Add eatery categories</h2>
-        <CategoryDetails
-          newCategory={newMegaState}
+      {
+        <CreateCatForm
+          newMegaState={newMegaState}
+          setNewMegaState={setNewMegaState}
+          existingCategories={existingCategories}
+          setExistingCategories={setExistingCategories}
           handleChange={handleChange}
         />
-        <button onClick={handleCreateCat}>Submit</button>
-      </form>
+      }
 
-      <form className="section-container">
-        <h2>Update eatery categories</h2>
-        <select
-          name="categoryType"
-          id="categoryType-select"
-          onChange={handleCatSelect}
-        >
-          <option value="">Select a category</option>
-          {existingCategories.map((existingCategory, index) => (
-            <option key={index} value={existingCategory.name}>
-              {existingCategory.name}
-            </option>
-          ))}
-        </select>
-        <CategoryDetails
-          newCategory={newMegaState}
+      {
+        <UpdateCatForm
+          newMegaState={newMegaState}
+          existingCategories={existingCategories}
           handleChange={handleChange}
+          handleCatSelect={handleCatSelect}
+          forCategoryFetch={forCategoryFetch}
+          setForCategoryFetch={setForCategoryFetch}
         />
-        <button onClick={handleUpdateCat}>Submit</button>
-      </form>
+      }
 
       <div className="section-container">
         <CategoryList

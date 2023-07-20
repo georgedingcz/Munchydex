@@ -1,11 +1,11 @@
-export default function CategoryDetails({ newCategory, handleChange }) {
+export default function CategoryDetails({ newMegaState, handleChange }) {
   return (
     <>
       Name:
       <input
         type="text"
         name="categoryName"
-        value={newCategory.categoryName}
+        value={newMegaState.categoryName}
         onChange={handleChange}
       />
       <br />
@@ -13,7 +13,7 @@ export default function CategoryDetails({ newCategory, handleChange }) {
       <input
         type="text"
         name="categoryImage"
-        value={newCategory.categoryImage}
+        value={newMegaState.categoryImage}
         onChange={handleChange}
       />
       <br />
@@ -21,7 +21,7 @@ export default function CategoryDetails({ newCategory, handleChange }) {
       <input
         type="text"
         name="categoryDesc"
-        value={newCategory.categoryDesc}
+        value={newMegaState.categoryDesc}
         onChange={handleChange}
       />
       <br />
