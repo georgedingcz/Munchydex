@@ -12,29 +12,13 @@ import EateryReview from "../EateryReviewPage/EateryReviewPage";
 function App() {
   const [user, setUser] = useState(getUser());
 
-  const [newEatery, setNewEatery] = useState({
-    eateryCategory: "",
-    eateryName: "",
-    eateryLocation: "",
-    eateryImage: "",
-    eateryReviewStatus: "",
-  });
-  const [newReview, setNewReview] = useState({
-    reviewCategoryID: "",
-    reviewUserID: "",
-    reviewEateryID: "",
-    reviewImage: "",
-    reviewDesc: "",
-    reviewDate: new Date(),
-    reviewPrice: 0,
-    reviewScore: 0,
-  });
   const [existingCategories, setExistingCategories] = useState([]);
   const [existingEateries, setExistingEateries] = useState([]);
   const [existingReviews, setExistingReviews] = useState([]);
 
   const [forCategoryFetch, setForCategoryFetch] = useState(false);
   const [forEateryFetch, setForEateryFetch] = useState(false);
+  const [forReviewFetch, setForReviewFetch] = useState(false);
 
   const [newMegaState, setNewMegaState] = useState({
     userID: "",
@@ -50,6 +34,7 @@ function App() {
     eateryImage: "",
     eateryReviewStatus: "",
 
+    reviewTitle:"",
     reviewImage: "",
     reviewDesc: "",
     reviewDate: new Date(),
@@ -135,8 +120,6 @@ function App() {
                   element={
                     <Eatery
                       existingCategories={existingCategories}
-                      newEatery={newEatery}
-                      setNewEatery={setNewEatery}
                       existingEateries={existingEateries}
                       setExistingEateries={setExistingEateries}
                       setForEateryFetch={setForEateryFetch}
@@ -155,13 +138,14 @@ function App() {
                     <EateryReview
                       existingCategories={existingCategories}
                       user={user}
-                      newReview={newReview}
-                      setNewReview={setNewReview}
                       existingReviews={existingReviews}
                       setExistingReviews={setExistingReviews}
                       existingEateries={existingEateries}
                       setForEateryFetch={setForEateryFetch}
                       forEateryFetch={forEateryFetch}
+
+                      newMegaState={newMegaState}
+                      setNewMegaState={setNewMegaState}
                     />
                   }
                 />

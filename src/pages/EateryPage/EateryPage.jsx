@@ -3,8 +3,6 @@ import EateryList from "../../components/Eatery/EateryList";
 
 export default function Eatery({
   existingCategories,
-  newEatery,
-  setNewEatery,
   existingEateries,
   setExistingEateries,
   setForEateryFetch,

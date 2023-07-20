@@ -3,42 +3,39 @@ import { useState } from "react";
 export default function EateryReview({
   existingCategories,
   user,
-  newReview,
-  setNewReview,
   existingReviews,
   setExistingReviews,
   existingEateries,
+  setForEateryFetch,
+  forEateryFetch,
+
+  newMegaState,
+  setNewMegaState,
 }) {
-  const [chosenCatID, setChosenCatID] = useState();
 
   const handleCatSelect = async (evt) => {
-    console.log(evt.target.value);
-    const chosenCat = existingCategories.find(
-      (chosenCategory) => chosenCategory.name === evt.target.value
-    );
-    setNewReview({
-      ...newReview,
-      reviewCategoryID: chosenCat._id,
-      //send user info the moment a category is chosen
-      reviewUserID: user._id,
+    await setNewMegaState({
+      ...newMegaState,
+      categoryID: evt.target.value,
     });
-    setChosenCatID(chosenCat._id);
-    console.log(chosenCatID)
+    setForEateryFetch(!forEateryFetch);
   };
 
-  const handleEatNameSelect = async (evt) => {
+  const handleEatSelect = async (evt) => {
     console.log(evt.target.value);
-    const eateryData = evt.target.value
-    setNewReview({
-      ...newReview,
+    const chosenEat = existingEateries.find(
+      (chosenEatery) => chosenEatery.name === evt.target.value
+    );
+    setNewMegaState({
+      ...newMegaState,
       //to edit this//
-      reviewEateryID: eateryData._id,
+      reviewEateryID: chosenEat._id,
     });
   };
 
   const handleChange = (evt) => {
-    setNewReview({
-      ...newReview,
+    setNewMegaState({
+      ...newMegaState,
       [evt.target.name]: evt.target.value,
     });
   };
@@ -46,17 +43,18 @@ export default function EateryReview({
   const handleSubmit = async (evt) => {
     evt.preventDefault();
     console.log("new eatery created");
-    setNewReview({ ...newReview });
-    console.log(JSON.stringify(newReview));
+    setNewMegaState({ ...newMegaState });
+    console.log(JSON.stringify(newMegaState));
     const reviewData = {
-      category: newReview.reviewCategory,
-      user: newReview.reviewUserID,
-      name: newReview.reviewEateryName,
-      image: newReview.reviewImage,
-      desc: newReview.reviewDesc,
-      date: newReview.reviewDate,
-      price: newReview.reviewPrice,
-      score: newReview.reviewScore,
+      category: newMegaState.categoryID,
+      user: newMegaState.userID,
+      name: newMegaState.eateryID,
+      title: newMegaState.reviewTitle,
+      image: newMegaState.reviewImage,
+      desc: newMegaState.reviewDesc,
+      date: newMegaState.reviewDate,
+      price: newMegaState.reviewPrice,
+      score: newMegaState.reviewScore,
     };
     try {
       const response = await fetch("/reviews", {
@@ -69,10 +67,11 @@ export default function EateryReview({
     } catch (err) {
       console.log(err);
     }
-    setNewReview({
-      reviewCategoryID: "",
-      reviewUserID: "",
-      reviewEateryID: "",
+    setNewMegaState({
+      categoryID: "",
+      userID: "",
+      eateryID: "",
+      reviewTitle: "",
       reviewImage: "",
       reviewDesc: "",
       reviewDate: new Date(),
@@ -96,7 +95,7 @@ export default function EateryReview({
             <option value="">Select a category</option>
 
             {existingCategories.map((existingCategory, index) => (
-              <option key={index} value={existingCategory.name}>
+              <option key={index} value={existingCategory._id}>
                 {existingCategory.name}
               </option>
             ))}
@@ -106,11 +105,15 @@ export default function EateryReview({
         <select
           name="eateryName"
           id="eateryName-select"
-          onChange={handleEatNameSelect}
+          onChange={handleEatSelect}
         >
           <option value="">Select an eatery</option>
-
-          {existingEateries
+          {existingEateries.map((existingEatery, index) => (
+            <option key={index} value={existingEatery.name}>
+              {existingEatery.name}
+            </option>
+          ))}
+          {/* {existingEateries
             .filter(
               (existingEatery) => existingEatery.category._id === chosenCatID
             )
@@ -118,14 +121,22 @@ export default function EateryReview({
               <option key={index} value={existingEatery}>
                 {existingEatery.name}
               </option>
-            ))}
+            ))} */}
         </select>
+        <br />
+        Title:
+        <input
+          type="text"
+          name="reviewTitle"
+          value={newMegaState.reviewTitle}
+          onChange={handleChange}
+        />
         <br />
         Image:
         <input
           type="text"
           name="reviewImage"
-          value={newReview.reviewImage}
+          value={newMegaState.reviewImage}
           onChange={handleChange}
         />
         <br />
@@ -133,7 +144,7 @@ export default function EateryReview({
         <input
           type="text"
           name="reviewDesc"
-          value={newReview.reviewDesc}
+          value={newMegaState.reviewDesc}
           onChange={handleChange}
         />
         <br />
@@ -141,7 +152,7 @@ export default function EateryReview({
         <input
           type="date"
           name="reviewDate"
-          value={newReview.reviewDate}
+          value={newMegaState.reviewDate}
           onChange={handleChange}
         />
         <br />
@@ -149,7 +160,7 @@ export default function EateryReview({
         <input
           type="number"
           name="reviewPrice"
-          value={newReview.reviewPrice}
+          value={newMegaState.reviewPrice}
           onChange={handleChange}
         />
         <br />
@@ -157,30 +168,12 @@ export default function EateryReview({
         <input
           type="number"
           name="reviewScore"
-          value={newReview.reviewScore}
+          value={newMegaState.reviewScore}
           onChange={handleChange}
         />
         <br />
         <button onClick={handleSubmit}>Create a review</button>
       </form>
-      {/* <div className="section-container">
-        <h2>Eateries available:</h2>
-        {existingEateries.map((existingEatery, index) => (
-          <div key={index}>
-            <div>Name: {existingEatery.name}</div>
-            <div>
-              <img
-                src={existingEatery.image}
-                alt="eatery"
-                width="50"
-                height="50"
-              />
-            </div>
-            <div>Category: {existingEatery.category.name}</div>
-            <br />
-          </div>
-        ))}
-      </div> */}
     </div>
   );
 }
