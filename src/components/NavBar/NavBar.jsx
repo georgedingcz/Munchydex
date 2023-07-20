@@ -22,7 +22,7 @@ export default function NavBar({ setUser, user }) {
           {user.isAdmin ? (
             <>
               &nbsp;&nbsp;
-              <Link to="/eatcat">Eatery Category</Link>
+              <Link to="/eatcat">Category</Link>
               &nbsp;&nbsp;
               <Link to="/eatery">Eatery</Link>
               &nbsp;&nbsp;
@@ -30,7 +30,7 @@ export default function NavBar({ setUser, user }) {
           ) : (
             <>
               &nbsp;&nbsp;
-              <Link to="/createreview">Eatery Review</Link>
+              <Link to="/createreview">Review</Link>
               &nbsp;&nbsp;
             </>
           )}

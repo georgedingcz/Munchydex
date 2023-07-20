@@ -1,4 +1,5 @@
 import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
+import DeleteEateryForm from "../../components/Eatery/DeleteEateryForm";
 import UpdateEateryForm from "../../components/Eatery/UpdateEateryForm";
 
 export default function Eatery({
@@ -26,30 +27,10 @@ export default function Eatery({
     });
   };
 
-  const handleDelete = async (evt) => {
-    evt.preventDefault();
-    const id = evt.target.value;
-    try {
-      const response = await fetch(`/eateries/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      console.log(response);
-    } catch (err) {
-      console.log(err);
-    }
-    setExistingEateries(
-      existingEateries.filter((eatery) => eatery._id !== evt.target.value)
-    );
-    setForEateryFetch(!forEateryFetch);
-  };
-
   const handleEatSelect = async (evt) => {
     console.log(evt.target.value);
     const chosenEat = existingEateries.find(
-      (chosenEatery) => chosenEatery.name === evt.target.value
+      (chosenEatery) => chosenEatery._id === evt.target.value
     );
     setNewMegaState({
       eateryName: chosenEat.name,
@@ -88,7 +69,20 @@ export default function Eatery({
         />
       }
 
-      <div className="section-container">
+      {
+        <DeleteEateryForm
+          handleCatSelect={handleCatSelect}
+          handleEatSelect={handleEatSelect}
+          existingCategories={existingCategories}
+          existingEateries={existingEateries}
+          setExistingEateries={setExistingEateries}
+          forEateryFetch={forEateryFetch}
+          setForEateryFetch={setForEateryFetch}
+          newMegaState={newMegaState}
+        />
+      }
+
+      {/* <div className="section-container">
         <h2>Category eateries:</h2>
         {existingEateries.map((existingEatery, index) => (
           <div key={index}>
@@ -108,7 +102,7 @@ export default function Eatery({
             </button>
           </div>
         ))}{" "}
-      </div>
+      </div> */}
     </div>
   );
 }
