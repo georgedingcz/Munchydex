@@ -4,4 +4,10 @@ const eatReviewCtrl = require("../controllers/eateryReviews");
 
 router.post("/", eatReviewCtrl.create);
 
+router.get("/category/:id", eatReviewCtrl.listForOneCat);
+
+router.get("/eatery/:id", eatReviewCtrl.listForOneEat);
+
+router.get("/user/:id", eatReviewCtrl.listForOneUser);
+
 module.exports = router;

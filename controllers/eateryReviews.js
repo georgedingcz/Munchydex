@@ -2,12 +2,47 @@ const EateryReview = require("../models/eateryReview");
 
 module.exports = {
   create,
+  listForOneCat,
+  listForOneEat,
+  listForOneUser,
 };
 
 async function create(req, res) {
   try {
     const eateryReview = await EateryReview.create(req.body);
     res.status(200).json(eateryReview);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function listForOneCat(req, res) {
+  try {
+    const categoryId = req.params.id;
+    const eatery = await EateryReview.find({ category: categoryId }).populate(
+      "category"
+    );
+    res.status(200).json(eatery);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function listForOneEat(req, res) {
+  try {
+    const eateryID = req.params.id;
+    const eatery = await EateryReview.find({ name: eateryID }).populate("name");
+    res.status(200).json(eatery);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function listForOneUser(req, res) {
+  try {
+    const userID = req.params.id;
+    const eatery = await EateryReview.find({ user: userID }).populate("user");
+    res.status(200).json(eatery);
   } catch (err) {
     res.status(500).json(err);
   }
