@@ -5,6 +5,7 @@ module.exports = {
   listForOneCat,
   listForOneEat,
   listForOneUser,
+  updateOne,
 };
 
 async function create(req, res) {
@@ -41,8 +42,21 @@ async function listForOneEat(req, res) {
 async function listForOneUser(req, res) {
   try {
     const userID = req.params.id;
-    const eatery = await EateryReview.find({ user: userID }).populate("user").populate("category").populate("name");
+    const eatery = await EateryReview.find({ user: userID })
+      .populate("user")
+      .populate("category")
+      .populate("name");
     res.status(200).json(eatery);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function updateOne(req, res) {
+  try {
+    const reviewID = req.params.id;
+    const category = await EateryReview.findByIdAndUpdate(reviewID, req.body);
+    res.status(200).json(category);
   } catch (err) {
     res.status(500).json(err);
   }

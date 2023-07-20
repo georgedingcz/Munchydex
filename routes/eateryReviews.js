@@ -10,4 +10,6 @@ router.get("/eatery/:id", eatReviewCtrl.listForOneEat);
 
 router.get("/user/:id", eatReviewCtrl.listForOneUser);
 
+router.patch("/:id", eatReviewCtrl.updateOne);
+
 module.exports = router;

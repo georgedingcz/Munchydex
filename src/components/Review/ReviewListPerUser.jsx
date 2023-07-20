@@ -1,35 +1,9 @@
 import { useEffect } from "react";
 
 export default function ReviewListPerUser({
-  newMegaState,
-  setExistingReviews,
-  forReviewFetch,
   existingReviews,
-  user,
 }) {
-  useEffect(() => {
-    const fetchOneUserReviews = async () => {
-      try {
-        const id = user._id;
-        const response = await fetch(`/reviews/user/${id}`, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setExistingReviews(data);
-          console.log("ok");
-        } else {
-          console.log("Problem with the response");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchOneUserReviews();
-  }, [forReviewFetch]);
+  
 
   return (
     <div className="section-container">

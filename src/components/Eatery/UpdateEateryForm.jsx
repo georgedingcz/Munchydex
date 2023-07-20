@@ -11,7 +11,6 @@ export default function UpdateEateryForm({
   const handleUpdateEat = async (evt) => {
     evt.preventDefault();
     const id = newMegaState.eateryID;
-    console.log("this thing", JSON.stringify(id));
     const updatedEatData = {
       name: newMegaState.eateryName,
       location: newMegaState.eateryLocation,
