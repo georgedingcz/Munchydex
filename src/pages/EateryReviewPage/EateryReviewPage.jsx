@@ -28,8 +28,7 @@ export default function EateryReview({
     );
     setNewMegaState({
       ...newMegaState,
-      //to edit this//
-      reviewEateryID: chosenEat._id,
+      eateryID: chosenEat._id,
     });
   };
 
@@ -40,14 +39,15 @@ export default function EateryReview({
     });
   };
 
-  const handleSubmit = async (evt) => {
+
+  const handleCreateReview = async (evt) => {
     evt.preventDefault();
     console.log("new eatery created");
     setNewMegaState({ ...newMegaState });
     console.log(JSON.stringify(newMegaState));
     const reviewData = {
       category: newMegaState.categoryID,
-      user: newMegaState.userID,
+      user: user._id,
       name: newMegaState.eateryID,
       title: newMegaState.reviewTitle,
       image: newMegaState.reviewImage,
@@ -113,15 +113,6 @@ export default function EateryReview({
               {existingEatery.name}
             </option>
           ))}
-          {/* {existingEateries
-            .filter(
-              (existingEatery) => existingEatery.category._id === chosenCatID
-            )
-            .map((existingEatery, index) => (
-              <option key={index} value={existingEatery}>
-                {existingEatery.name}
-              </option>
-            ))} */}
         </select>
         <br />
         Title:
@@ -172,7 +163,7 @@ export default function EateryReview({
           onChange={handleChange}
         />
         <br />
-        <button onClick={handleSubmit}>Create a review</button>
+        <button onClick={handleCreateReview}>Create a review</button>
       </form>
     </div>
   );
