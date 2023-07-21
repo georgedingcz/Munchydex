@@ -1,6 +1,6 @@
 export default function EateryListPerCat({
   existingEateries,
-  handleCatSelect,
+  handleEatCatSelect,
   existingCategories,
 }) {
   return (
@@ -9,7 +9,7 @@ export default function EateryListPerCat({
       <select
         name="categoryType"
         id="categoryType-select"
-        onChange={handleCatSelect}
+        onChange={handleEatCatSelect}
       >
         <option value="">Select a category</option>
 
