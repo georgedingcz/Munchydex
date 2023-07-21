@@ -5,15 +5,8 @@ export default function DeleteCatForm({
   setNewMegaState,
 }) {
   const handleCatSelect = async (evt) => {
-    console.log(evt.target.value);
-    const chosenCat = existingCategories.find(
-      (chosenCategory) => chosenCategory._id === evt.target.value
-    );
     setNewMegaState({
-      categoryName: chosenCat.name,
-      categoryImage: chosenCat.image,
-      categoryDesc: chosenCat.briefDesc,
-      categoryID: chosenCat._id,
+      categoryID: evt.target.value,
     });
   };
 
@@ -28,12 +21,21 @@ export default function DeleteCatForm({
         },
       });
       console.log(response);
+      if (response.ok) {
+        // Update the state after successful deletion
+        setExistingCategories(
+          existingCategories.filter((category) => category._id !== newMegaState.categoryID)
+        );
+        console.log("Category deleted successfully!");
+      } else {
+        console.log("Failed to delete the category.");
+      }
     } catch (err) {
       console.log(err);
     }
-    setExistingCategories(
-      existingCategories.filter((category) => category._id !== evt.target.value)
-    );
+    // setExistingCategories(
+    //   existingCategories.filter((category) => category._id !== newMegaState.categoryID)
+    // );
   };
 
   return (

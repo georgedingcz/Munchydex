@@ -7,8 +7,6 @@ export default function CreateCatForm({
 }) {
   const handleCreateCat = async (evt) => {
     evt.preventDefault();
-    setNewMegaState({ ...newMegaState });
-    console.log(JSON.stringify(newMegaState));
     const categoryData = {
       name: newMegaState.categoryName,
       image: newMegaState.categoryImage,
