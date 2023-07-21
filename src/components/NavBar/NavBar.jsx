@@ -8,36 +8,34 @@ export default function NavBar({ setUser, user }) {
   }
 
   return (
-    <nav>
+    <nav
+      className="navbar bg-dark border-bottom border-bottom-dark"
+      data-bs-theme="dark"
+    >
+      <div className="container-fluid">
+
       <Link to="/homepage">Home</Link>
-      &nbsp;&nbsp;
       {user ? (
         <>
-          &nbsp;&nbsp;
-          <span>Welcome, {user.name}</span>
-          &nbsp;&nbsp;
+          <span className="navbar-text">Welcome, {user.name}</span>
           <Link to="/homepage" onClick={handleLogOut}>
             Log Out
           </Link>
           {user.isAdmin ? (
             <>
-              &nbsp;&nbsp;
               <Link to="/eatcat">Category</Link>
-              &nbsp;&nbsp;
               <Link to="/eatery">Eatery</Link>
-              &nbsp;&nbsp;
             </>
           ) : (
             <>
-              &nbsp;&nbsp;
               <Link to="/createreview">Review</Link>
-              &nbsp;&nbsp;
             </>
           )}
         </>
       ) : (
         <Link to="/authpage">Log In</Link>
       )}
+      </div>
     </nav>
   );
 }
