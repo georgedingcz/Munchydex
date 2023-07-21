@@ -16,6 +16,7 @@ export default function EateryReview({
   setNewMegaState,
   forReviewFetch,
   setForReviewFetch,
+  handleChange
 }) {
   const handleCatSelect = async (evt) => {
     await setNewMegaState({
@@ -33,13 +34,6 @@ export default function EateryReview({
     setNewMegaState({
       ...newMegaState,
       eateryID: chosenEat._id,
-    });
-  };
-
-  const handleChange = (evt) => {
-    setNewMegaState({
-      ...newMegaState,
-      [evt.target.name]: evt.target.value,
     });
   };
 
