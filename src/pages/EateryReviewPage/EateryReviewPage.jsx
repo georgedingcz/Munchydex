@@ -51,7 +51,8 @@ export default function EateryReview({
           const data = await response.json();
           setExistingReviews(data);
           console.log(existingReviews);
-        } else {
+        } 
+        else {
           console.log("Problem with the response");
         }
       } catch (err) {

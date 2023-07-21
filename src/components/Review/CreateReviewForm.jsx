@@ -11,9 +11,6 @@ export default function CreateReviewForm({
   newMegaState,
   setNewMegaState,
 
-  existingReviews,
-  setExistingReviews,
-
   forReviewFetch,
   setForReviewFetch,
 }) {

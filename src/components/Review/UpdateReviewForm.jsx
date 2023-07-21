@@ -1,18 +1,15 @@
+import { set } from "mongoose";
+import { useState } from "react";
+
 export default function UpdateReviewForm({
   user,
-
-  handleEatSelect,
   handleChange,
-
   existingCategories,
   existingEateries,
-
   newMegaState,
   setNewMegaState,
-
   existingReviews,
   setExistingReviews,
-
   forReviewFetch,
   setForReviewFetch,
 }) {
@@ -41,19 +38,56 @@ export default function UpdateReviewForm({
     setForReviewFetch(!forReviewFetch);
   };
 
+  const [filteredReviewsByCat, setFilteredReviewsByCat] = useState([]);
+  const [filteredReviewsByEatery, setFilteredReviewsByEatery] = useState([]);
+
   const handleUserCatSelect = async (evt) => {
     const userChosenCat = existingReviews.find(
       (existingReview) => existingReview.category.name === evt.target.value
     );
-    const userChosenCatID = userChosenCat._id;
+    const userChosenCatID = userChosenCat.category._id;
     await setNewMegaState({
       ...newMegaState,
       categoryID: userChosenCatID,
     });
-    console.log(userChosenCatID);
+    setFilteredReviewsByCat(
+      existingReviews.filter(
+        (review) => review.category._id === userChosenCatID
+      )
+    );
   };
 
+  const handleUserEatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const userChosenEat = existingReviews.find(
+      (chosenEatery) => chosenEatery.name.name === evt.target.value
+    );
+    const userChosenEateryID = userChosenEat.name._id;
+    await setNewMegaState({
+      ...newMegaState,
+      eateryID: userChosenEateryID,
+    });
+    setFilteredReviewsByEatery(
+      filteredReviewsByCat.filter(
+        (review) => review.name._id === userChosenEateryID
+      )
+    );
+  };
 
+  const handleUserTitleSelect = async (evt) => {
+    const userChosenReview = existingReviews.find(
+      (chosenReview) => chosenReview._id === evt.target.value
+    );
+    setNewMegaState({
+      reviewTitle: userChosenReview.title,
+      reviewImage: userChosenReview.image,
+      reviewDesc: userChosenReview.desc,
+      reviewDate: userChosenReview.date,
+      reviewPrice: userChosenReview.price,
+      reviewScore: userChosenReview.score,
+      reviewID: userChosenReview._id,
+    });
+  };
 
   return (
     <form className="section-container">
@@ -83,16 +117,31 @@ export default function UpdateReviewForm({
       <select
         name="eateryName"
         id="eateryName-select"
-        onChange={handleEatSelect}
+        onChange={handleUserEatSelect}
       >
         <option value="">Select an eatery</option>
-        {existingReviews.map((existingReview, index) => (
-          <option key={index} value={existingReview.name.name}>
-            {existingReview.name.name}
+        {[
+          ...new Set(
+            filteredReviewsByCat.map(
+              (filteredReview) => filteredReview.name.name
+            )
+          ),
+        ].map((eateryName, index) => (
+          <option key={index} value={eateryName}>
+            {eateryName}
           </option>
         ))}
       </select>
       <br />
+      Select title:
+      <select name="title" id="title-select" onChange={handleUserTitleSelect}>
+        <option value="">Select a title</option>
+        {filteredReviewsByEatery.map((filteredReview, index) => (
+          <option key={index} value={filteredReview._id}>
+            {filteredReview.title}
+          </option>
+        ))}
+      </select>
       Title:
       <input
         type="text"
@@ -141,7 +190,7 @@ export default function UpdateReviewForm({
         onChange={handleChange}
       />
       <br />
-      <button onClick={handleUpdateReview}>Create a review</button>
+      <button onClick={handleUpdateReview}>Update a review</button>
     </form>
   );
 }
