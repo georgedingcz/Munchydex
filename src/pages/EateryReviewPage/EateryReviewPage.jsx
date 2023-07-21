@@ -56,7 +56,7 @@ export default function EateryReview({
         if (response.ok) {
           const data = await response.json();
           setExistingReviews(data);
-          console.log(existingReviews)
+          console.log(existingReviews);
         } else {
           console.log("Problem with the response");
         }
@@ -67,45 +67,26 @@ export default function EateryReview({
     fetchOneUserReviews();
   }, [forReviewFetch]);
 
+  const commonProps = {
+    user,
+    handleCatSelect,
+    handleEatSelect,
+    handleChange,
+    existingCategories,
+    existingEateries,
+    newMegaState,
+    setNewMegaState,
+    existingReviews,
+    setExistingReviews,
+    forReviewFetch,
+    setForReviewFetch,
+  };
+
   return (
     <div className="page-container">
-      {
-        <CreateReviewForm
-          user={user}
-          handleCatSelect={handleCatSelect}
-          handleEatSelect={handleEatSelect}
-          handleChange={handleChange}
-          existingCategories={existingCategories}
-          existingEateries={existingEateries}
-          newMegaState={newMegaState}
-          setNewMegaState={setNewMegaState}
-          existingReviews={existingReviews}
-          setExistingReviews={setExistingReviews}
-          forReviewFetch={forReviewFetch}
-          setForReviewFetch={setForReviewFetch}
-        />
-      }
-      {
-        <UpdateReviewForm
-          user={user}
-          handleCatSelect={handleCatSelect}
-          handleEatSelect={handleEatSelect}
-          handleChange={handleChange}
-          existingCategories={existingCategories}
-          existingEateries={existingEateries}
-          newMegaState={newMegaState}
-          setNewMegaState={setNewMegaState}
-          existingReviews={existingReviews}
-          setExistingReviews={setExistingReviews}
-          forReviewFetch={forReviewFetch}
-          setForReviewFetch={setForReviewFetch}
-        />
-      }
-      {
-        <ReviewListPerUser
-          existingReviews={existingReviews}
-        />
-      }
+      {<CreateReviewForm {...commonProps} />}
+      {<UpdateReviewForm {...commonProps} />}
+      {<ReviewListPerUser {...commonProps} />}
     </div>
   );
 }
