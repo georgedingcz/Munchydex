@@ -1,6 +1,6 @@
 export default function CreateEateryForm({
   existingCategories,
-  handleCatSelect,
+  handleEatCatSelect,
   handleChange,
   newMegaState,
   setNewMegaState,
@@ -39,13 +39,14 @@ export default function CreateEateryForm({
     });
     setForEateryFetch(!forEateryFetch);
   };
+
   return (
     <form className="section-container">
       <h2>Create eatery</h2>
       <select
         name="categoryType"
         id="categoryType-select"
-        onChange={handleCatSelect}
+        onChange={handleEatCatSelect}
       >
         <option value="">Select a category</option>
 

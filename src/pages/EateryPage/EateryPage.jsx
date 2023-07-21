@@ -7,14 +7,14 @@ export default function Eatery({
   existingCategories,
   existingEateries,
   setExistingEateries,
-  setForEateryFetch,
   forEateryFetch,
-
+  setForEateryFetch,
   newMegaState,
   setNewMegaState,
-  handleChange
+
+  handleChange,
 }) {
-  const handleCatSelect = async (evt) => {
+  const handleEatCatSelect = async (evt) => {
     await setNewMegaState({
       ...newMegaState,
       categoryID: evt.target.value,
@@ -35,55 +35,26 @@ export default function Eatery({
     });
   };
 
+  const reusedProps = {
+    existingCategories,
+    existingEateries,
+    setExistingEateries,
+    forEateryFetch,
+    setForEateryFetch,
+    newMegaState,
+    setNewMegaState,
+
+    handleChange,
+    handleEatCatSelect,
+    handleEatSelect,
+  };
+
   return (
     <div className="page-container">
-      {
-        <CreateEateryForm
-          existingCategories={existingCategories}
-          handleCatSelect={handleCatSelect}
-          handleChange={handleChange}
-          newMegaState={newMegaState}
-          setNewMegaState={setNewMegaState}
-          existingEateries={existingEateries}
-          setExistingEateries={setExistingEateries}
-          forEateryFetch={forEateryFetch}
-          setForEateryFetch={setForEateryFetch}
-        />
-      }
-
-      {
-        <UpdateEateryForm
-          existingCategories={existingCategories}
-          handleCatSelect={handleCatSelect}
-          handleChange={handleChange}
-          newMegaState={newMegaState}
-          existingEateries={existingEateries}
-          forEateryFetch={forEateryFetch}
-          setForEateryFetch={setForEateryFetch}
-          handleEatSelect={handleEatSelect}
-        />
-      }
-
-      {
-        <DeleteEateryForm
-          handleCatSelect={handleCatSelect}
-          handleEatSelect={handleEatSelect}
-          existingCategories={existingCategories}
-          existingEateries={existingEateries}
-          setExistingEateries={setExistingEateries}
-          forEateryFetch={forEateryFetch}
-          setForEateryFetch={setForEateryFetch}
-          newMegaState={newMegaState}
-        />
-      }
-
-      {
-        <EateryListPerCat
-          existingEateries={existingEateries}
-          handleCatSelect={handleCatSelect}
-          existingCategories={existingCategories}
-        />
-      }
+      {<CreateEateryForm {...reusedProps} />}
+      {<UpdateEateryForm {...reusedProps} />}
+      {<DeleteEateryForm {...reusedProps} />}
+      {<EateryListPerCat {...reusedProps} />}
     </div>
   );
 }

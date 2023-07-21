@@ -1,6 +1,6 @@
 export default function UpdateEateryForm({
   existingCategories,
-  handleCatSelect,
+  handleEatCatSelect,
   handleChange,
   newMegaState,
   existingEateries,
@@ -36,7 +36,7 @@ export default function UpdateEateryForm({
       <select
         name="categoryType"
         id="categoryType-select"
-        onChange={handleCatSelect}
+        onChange={handleEatCatSelect}
       >
         <option value="">Select a category</option>
 
@@ -53,7 +53,7 @@ export default function UpdateEateryForm({
       >
         <option value="">Select an eatery</option>
         {existingEateries.map((existingEatery, index) => (
-          <option key={index} value={existingEatery.name}>
+          <option key={index} value={existingEatery._id}>
             {existingEatery.name}
           </option>
         ))}

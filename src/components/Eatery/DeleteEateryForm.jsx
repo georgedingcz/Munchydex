@@ -1,12 +1,12 @@
 export default function DeleteEateryForm({
-  handleCatSelect,
+  handleEatCatSelect,
   handleEatSelect,
   existingCategories,
   existingEateries,
   setExistingEateries,
   forEateryFetch,
   setForEateryFetch,
-  newMegaState
+  newMegaState,
 }) {
   const handleDelete = async (evt) => {
     evt.preventDefault();
@@ -34,7 +34,7 @@ export default function DeleteEateryForm({
       <select
         name="categoryType"
         id="categoryType-select"
-        onChange={handleCatSelect}
+        onChange={handleEatCatSelect}
       >
         <option value="">Select a category</option>
 
