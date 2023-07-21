@@ -12,6 +12,7 @@ export default function Eatery({
 
   newMegaState,
   setNewMegaState,
+  handleChange
 }) {
   const handleCatSelect = async (evt) => {
     await setNewMegaState({
@@ -19,13 +20,6 @@ export default function Eatery({
       categoryID: evt.target.value,
     });
     setForEateryFetch(!forEateryFetch);
-  };
-
-  const handleChange = (evt) => {
-    setNewMegaState({
-      ...newMegaState,
-      [evt.target.name]: evt.target.value,
-    });
   };
 
   const handleEatSelect = async (evt) => {

@@ -32,6 +32,7 @@ export default function CreateCatForm({
       categoryDesc: "",
     });
   };
+
   return (
     <form className="section-container">
       <h2>Add eatery categories</h2>

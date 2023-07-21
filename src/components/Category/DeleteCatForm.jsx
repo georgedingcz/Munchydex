@@ -1,9 +1,22 @@
 export default function DeleteCatForm({
-  handleCatSelect,
   existingCategories,
   setExistingCategories,
-  newMegaState
+  newMegaState,
+  setNewMegaState,
 }) {
+  const handleCatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const chosenCat = existingCategories.find(
+      (chosenCategory) => chosenCategory._id === evt.target.value
+    );
+    setNewMegaState({
+      categoryName: chosenCat.name,
+      categoryImage: chosenCat.image,
+      categoryDesc: chosenCat.briefDesc,
+      categoryID: chosenCat._id,
+    });
+  };
+
   const handleCatDelete = async (evt) => {
     evt.preventDefault();
     const id = newMegaState.categoryID;
@@ -22,6 +35,7 @@ export default function DeleteCatForm({
       existingCategories.filter((category) => category._id !== evt.target.value)
     );
   };
+
   return (
     <form className="section-container">
       <h2>Delete eatery categories</h2>

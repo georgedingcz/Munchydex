@@ -35,13 +35,41 @@ function App() {
     eateryImage: "",
     eateryReviewStatus: "",
 
-    reviewTitle:"",
+    reviewTitle: "",
     reviewImage: "",
     reviewDesc: "",
     reviewDate: new Date(),
     reviewPrice: 0,
     reviewScore: 0,
   });
+
+  const handleChange = (evt) => {
+    setNewMegaState({
+      ...newMegaState,
+      [evt.target.name]: evt.target.value,
+    });
+  };
+
+  const reusedProps = {
+    user,
+    setUser,
+    existingCategories,
+    setExistingCategories,
+    existingEateries,
+    setExistingEateries,
+    existingReviews,
+    setExistingReviews,
+    forCategoryFetch,
+    setForCategoryFetch,
+    forEateryFetch,
+    setForEateryFetch,
+    forReviewFetch,
+    setForReviewFetch,
+    newMegaState,
+    setNewMegaState,
+
+    handleChange
+  };
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -90,72 +118,25 @@ function App() {
     <main className="App">
       <NavBar setUser={setUser} user={user} />
       <Routes>
-        <Route
-          path="/homepage"
-          element={
-            <HomePage
-              existingCategories={existingCategories}
-              setExistingCategories={setExistingCategories}
-            />
-          }
-        />
+        <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         {user ? (
           <>
             {user.isAdmin ? (
               <>
-                <Route
-                  path="/eatcat"
-                  element={
-                    <EatCat
-                      existingCategories={existingCategories}
-                      setExistingCategories={setExistingCategories}
-                      setForCategoryFetch={setForCategoryFetch}
-                      forCategoryFetch={forCategoryFetch}
-                      newMegaState={newMegaState}
-                      setNewMegaState={setNewMegaState}
-                    />
-                  }
-                />
-                <Route
-                  path="/eatery"
-                  element={
-                    <Eatery
-                      existingCategories={existingCategories}
-                      existingEateries={existingEateries}
-                      setExistingEateries={setExistingEateries}
-                      setForEateryFetch={setForEateryFetch}
-                      forEateryFetch={forEateryFetch}
-                      newMegaState={newMegaState}
-                      setNewMegaState={setNewMegaState}
-                    />
-                  }
-                />
+                <Route path="/eatcat" element={<EatCat {...reusedProps} />} />
+                <Route path="/eatery" element={<Eatery {...reusedProps} />} />
               </>
             ) : (
               <>
                 <Route
                   path="/createreview"
-                  element={
-                    <EateryReview
-                      existingCategories={existingCategories}
-                      user={user}
-                      existingReviews={existingReviews}
-                      setExistingReviews={setExistingReviews}
-                      existingEateries={existingEateries}
-                      setForEateryFetch={setForEateryFetch}
-                      forEateryFetch={forEateryFetch}
-                      newMegaState={newMegaState}
-                      setNewMegaState={setNewMegaState}
-                      forReviewFetch={forReviewFetch}
-                      setForReviewFetch={setForReviewFetch}
-                    />
-                  }
+                  element={<EateryReview {...reusedProps} />}
                 />
               </>
             )}
           </>
         ) : (
-          <Route path="/authpage" element={<AuthPage setUser={setUser} />} />
+          <Route path="/authpage" element={<AuthPage {...reusedProps} />} />
         )}
       </Routes>
     </main>

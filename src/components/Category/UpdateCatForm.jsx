@@ -2,10 +2,23 @@ export default function UpdateCatForm({
   newMegaState,
   existingCategories,
   handleChange,
-  handleCatSelect,
   forCategoryFetch,
-  setForCategoryFetch
+  setForCategoryFetch,
+  setNewMegaState,
 }) {
+  const handleUpdateCatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const chosenCat = existingCategories.find(
+      (chosenCategory) => chosenCategory._id === evt.target.value
+    );
+    setNewMegaState({
+      categoryName: chosenCat.name,
+      categoryImage: chosenCat.image,
+      categoryDesc: chosenCat.briefDesc,
+      categoryID: chosenCat._id,
+    });
+  };
+
   const handleUpdateCat = async (evt) => {
     evt.preventDefault();
     const id = newMegaState.categoryID;
@@ -29,13 +42,14 @@ export default function UpdateCatForm({
     }
     setForCategoryFetch(!forCategoryFetch);
   };
+
   return (
     <form className="section-container">
       <h2>Update eatery categories</h2>
       <select
         name="categoryType"
         id="categoryType-select"
-        onChange={handleCatSelect}
+        onChange={handleUpdateCatSelect}
       >
         <option value="">Select a category</option>
         {existingCategories.map((existingCategory, index) => (
