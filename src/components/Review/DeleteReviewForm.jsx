@@ -1,44 +1,32 @@
-export default function UpdateReviewForm({
-  handleChange,
-  newMegaState,
-  existingReviews,
-  forReviewFetch,
-  setForReviewFetch,
+export default function DeleteReviewForm({
   handleUserCatSelect,
+  existingReviews,
   handleUserEatSelect,
   filteredReviewsByCat,
   handleUserTitleSelect,
   filteredReviewsByEatery,
+  newMegaState,
+  setForReviewFetch,
+  forReviewFetch,
 }) {
-  const handleUpdateReview = async (evt) => {
+  const handleDeleteReview = async (evt) => {
     evt.preventDefault();
     const id = newMegaState.reviewID;
-    const updatedReviewData = {
-      title: newMegaState.reviewTitle,
-      image: newMegaState.reviewImage,
-      desc: newMegaState.reviewDesc,
-      date: newMegaState.reviewDate,
-      price: newMegaState.reviewPrice,
-      score: newMegaState.reviewScore,
-    };
     try {
       await fetch(`/reviews/${id}`, {
-        method: "PATCH",
+        method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(updatedReviewData),
       });
     } catch (err) {
       console.log(err);
     }
     setForReviewFetch(!forReviewFetch);
   };
-
-  
   return (
     <form className="section-container">
-      <h2>Update a review</h2>
+      <h2>Delete a review</h2>
       <div>
         Category:
         <select
@@ -89,55 +77,7 @@ export default function UpdateReviewForm({
           </option>
         ))}
       </select>
-      Title:
-      <input
-        type="text"
-        name="reviewTitle"
-        value={newMegaState.reviewTitle}
-        onChange={handleChange}
-      />
-      <br />
-      Image:
-      <input
-        type="text"
-        name="reviewImage"
-        value={newMegaState.reviewImage}
-        onChange={handleChange}
-      />
-      <br />
-      Description:
-      <input
-        type="text"
-        name="reviewDesc"
-        value={newMegaState.reviewDesc}
-        onChange={handleChange}
-      />
-      <br />
-      Date:
-      <input
-        type="date"
-        name="reviewDate"
-        value={newMegaState.reviewDate}
-        onChange={handleChange}
-      />
-      <br />
-      Price:
-      <input
-        type="number"
-        name="reviewPrice"
-        value={newMegaState.reviewPrice}
-        onChange={handleChange}
-      />
-      <br />
-      Score:
-      <input
-        type="number"
-        name="reviewScore"
-        value={newMegaState.reviewScore}
-        onChange={handleChange}
-      />
-      <br />
-      <button onClick={handleUpdateReview}>Update a review</button>
+      <button onClick={handleDeleteReview}>Delete a review</button>
     </form>
   );
 }

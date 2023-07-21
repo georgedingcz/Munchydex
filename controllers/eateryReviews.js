@@ -6,6 +6,7 @@ module.exports = {
   listForOneEat,
   listForOneUser,
   updateOne,
+  deleteOne,
 };
 
 async function create(req, res) {
@@ -20,10 +21,10 @@ async function create(req, res) {
 async function listForOneCat(req, res) {
   try {
     const categoryId = req.params.id;
-    const eatery = await EateryReview.find({ category: categoryId }).populate(
+    const reviews = await EateryReview.find({ category: categoryId }).populate(
       "category"
     );
-    res.status(200).json(eatery);
+    res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -32,8 +33,10 @@ async function listForOneCat(req, res) {
 async function listForOneEat(req, res) {
   try {
     const eateryID = req.params.id;
-    const eatery = await EateryReview.find({ name: eateryID }).populate("name");
-    res.status(200).json(eatery);
+    const reviews = await EateryReview.find({ name: eateryID }).populate(
+      "name"
+    );
+    res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -42,11 +45,11 @@ async function listForOneEat(req, res) {
 async function listForOneUser(req, res) {
   try {
     const userID = req.params.id;
-    const eatery = await EateryReview.find({ user: userID })
+    const reviews = await EateryReview.find({ user: userID })
       .populate("user")
       .populate("category")
       .populate("name");
-    res.status(200).json(eatery);
+    res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }
@@ -55,8 +58,18 @@ async function listForOneUser(req, res) {
 async function updateOne(req, res) {
   try {
     const reviewID = req.params.id;
-    const category = await EateryReview.findByIdAndUpdate(reviewID, req.body);
-    res.status(200).json(category);
+    const reviews = await EateryReview.findByIdAndUpdate(reviewID, req.body);
+    res.status(200).json(reviews);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
+async function deleteOne(req, res) {
+  try {
+    const reviewID = req.params.id;
+    const reviews = await EateryReview.findByIdAndDelete(reviewID);
+    res.status(200).json(reviews);
   } catch (err) {
     res.status(500).json(err);
   }

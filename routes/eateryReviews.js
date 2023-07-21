@@ -12,4 +12,6 @@ router.get("/user/:id", eatReviewCtrl.listForOneUser);
 
 router.patch("/:id", eatReviewCtrl.updateOne);
 
+router.delete("/:id", eatReviewCtrl.deleteOne);
+
 module.exports = router;
