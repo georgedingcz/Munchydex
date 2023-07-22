@@ -1,22 +1,22 @@
 export default function CategoryList({ existingCategories }) {
   return (
     <div className="section-container">
-      <h2>Food categories available:</h2>
-      {existingCategories.map((existingCategory, index) => (
-        <div key={index}>
-          <div>Category: {existingCategory.name}</div>
-          <div>
+        <h2>Food categories available:</h2>
+        {existingCategories.map((existingCategory, index) => (
+          <div key={index} className="card" style={{ width: "18rem" }}>
             <img
               src={existingCategory.image}
               alt="category"
               width="50"
-              height="50"
+              height="200"
+              className="card-img-top"
             />
+            <div className="card-body">
+              <h5 class="card-title">{existingCategory.name}</h5>
+              <p class="card-text">{existingCategory.briefDesc}</p>
+            </div>
           </div>
-          <div>Description: {existingCategory.briefDesc}</div>
-          <br />
-        </div>
-      ))}
-    </div>
+        ))}
+      </div>
   );
 }
