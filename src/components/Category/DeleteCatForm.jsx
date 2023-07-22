@@ -22,9 +22,10 @@ export default function DeleteCatForm({
       });
       console.log(response);
       if (response.ok) {
-        // Update the state after successful deletion
         setExistingCategories(
-          existingCategories.filter((category) => category._id !== newMegaState.categoryID)
+          existingCategories.filter(
+            (category) => category._id !== newMegaState.categoryID
+          )
         );
         console.log("Category deleted successfully!");
       } else {
@@ -33,27 +34,34 @@ export default function DeleteCatForm({
     } catch (err) {
       console.log(err);
     }
-    // setExistingCategories(
-    //   existingCategories.filter((category) => category._id !== newMegaState.categoryID)
-    // );
   };
 
   return (
     <form className="section-container">
       <h2>Delete eatery categories</h2>
-      <select
-        name="categoryType"
-        id="categoryType-select"
-        onChange={handleCatSelect}
+      <div className="mb-3">
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleCatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select a category</option>
+          {existingCategories.map((existingCategory, index) => (
+            <option key={index} value={existingCategory._id}>
+              {existingCategory.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onClick={handleCatDelete}
       >
-        <option value="">Select a category</option>
-        {existingCategories.map((existingCategory, index) => (
-          <option key={index} value={existingCategory._id}>
-            {existingCategory.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleCatDelete}>Submit</button>
+        Submit
+      </button>
     </form>
   );
 }

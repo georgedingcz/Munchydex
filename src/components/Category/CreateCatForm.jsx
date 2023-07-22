@@ -34,31 +34,49 @@ export default function CreateCatForm({
   return (
     <form className="section-container">
       <h2>Add eatery categories</h2>
-      Name:
-      <input
-        type="text"
-        name="categoryName"
-        value={newMegaState.categoryName}
-        onChange={handleChange}
-      />
-      <br />
-      Image URL:
-      <input
-        type="text"
-        name="categoryImage"
-        value={newMegaState.categoryImage}
-        onChange={handleChange}
-      />
-      <br />
-      Description:
-      <input
-        type="text"
-        name="categoryDesc"
-        value={newMegaState.categoryDesc}
-        onChange={handleChange}
-      />
-      <br />
-      <button onClick={handleCreateCat}>Submit</button>
+      <div className="mb-3">
+        <label for="categoryName" className="form-label">
+          Name
+        </label>
+        <input
+          type="text"
+          name="categoryName"
+          value={newMegaState.categoryName}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="categoryImage" className="form-label">
+          Image URL
+        </label>
+        <input
+          type="text"
+          name="categoryImage"
+          value={newMegaState.categoryImage}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="categoryDesc" className="form-label">
+          Description
+        </label>
+        <input
+          type="text"
+          name="categoryDesc"
+          value={newMegaState.categoryDesc}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onClick={handleCreateCat}
+      >
+        Submit
+      </button>
     </form>
   );
 }
