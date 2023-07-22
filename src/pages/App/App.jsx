@@ -2,12 +2,13 @@ import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
-import AuthPage from "../AuthPage/AuthPage";
+import Auth from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
 import EatCat from "../EateryCategoryPage/EatCatPage";
 import Eatery from "../EateryPage/EateryPage";
 import EateryReview from "../EateryReviewPage/EateryReviewPage";
+import EditPass from "../EditPassPage/EditPassPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -68,7 +69,7 @@ function App() {
     newMegaState,
     setNewMegaState,
 
-    handleChange
+    handleChange,
   };
 
   useEffect(() => {
@@ -119,22 +120,25 @@ function App() {
       <NavBar setUser={setUser} user={user} />
       <Routes>
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
-        <Route path="/authpage" element={<AuthPage {...reusedProps} />} />
+        <Route path="/authpage" element={<Auth {...reusedProps} />} />
         {user ? (
           <>
-            {user.isAdmin ? (
-              <>
-                <Route path="/eatcat" element={<EatCat {...reusedProps} />} />
-                <Route path="/eatery" element={<Eatery {...reusedProps} />} />
-              </>
-            ) : (
-              <>
-                <Route
-                  path="/createreview"
-                  element={<EateryReview {...reusedProps} />}
-                />
-              </>
-            )}
+            <Route path="/editpass" element={<EditPass {...reusedProps} />} />
+            <>
+              {user.isAdmin ? (
+                <>
+                  <Route path="/eatcat" element={<EatCat {...reusedProps} />} />
+                  <Route path="/eatery" element={<Eatery {...reusedProps} />} />
+                </>
+              ) : (
+                <>
+                  <Route
+                    path="/createreview"
+                    element={<EateryReview {...reusedProps} />}
+                  />
+                </>
+              )}
+            </>
           </>
         ) : (
           <></>

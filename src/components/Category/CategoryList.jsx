@@ -12,8 +12,8 @@ export default function CategoryList({ existingCategories }) {
               className="card-img-top"
             />
             <div className="card-body">
-              <h5 class="card-title">{existingCategory.name}</h5>
-              <p class="card-text">{existingCategory.briefDesc}</p>
+              <h5 className="card-title">{existingCategory.name}</h5>
+              <p className="card-text">{existingCategory.briefDesc}</p>
             </div>
           </div>
         ))}

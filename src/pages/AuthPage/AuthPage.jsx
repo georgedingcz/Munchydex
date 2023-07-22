@@ -1,7 +1,7 @@
 import LoginForm from "../../components/LoginForm/LoginForm";
 import SignUpForm from "../../components/SIgnUpForm/SignUpForm";
 
-export default function AuthPage({ setUser }) {
+export default function Auth({ setUser }) {
   return (
     <main>
       <h1>AuthPage</h1>

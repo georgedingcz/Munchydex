@@ -6,29 +6,15 @@ module.exports = {
   create,
   login,
   checkToken,
+  updatePass,
 };
-
-// function create(req, res) {
-//   res.json({
-//     user: {
-//       name: req.body.name,
-//       email: req.body.email,
-//     },
-//   });
-// }
 
 async function create(req, res) {
   try {
-    //add the user to the database
     const user = await User.create(req.body);
-    //token will be a string
     const token = createJWT(user);
-    //yes, we can use res.json to send back just a string
-    //the client code needs to take this into consideration
     res.json(token);
   } catch (err) {
-    //Client will check fr non-2xx status code
-    //400 = bad request
     res.status(400).json(err);
   }
 }
@@ -46,16 +32,22 @@ async function login(req, res) {
 }
 
 function createJWT(user) {
-  return jwt.sign(
-    //data payload
-    { user },
-    process.env.SECRET,
-    { expiresIn: "24h" }
-  );
+  return jwt.sign({ user }, process.env.SECRET, { expiresIn: "24h" });
 }
 
 function checkToken(req, res) {
-  // req.user will always be there for you when a token is sent
   console.log("req.user", req.user);
   res.json(req.exp);
+}
+
+async function updatePass(req, res) {
+  try {
+    const userID = req.params.id;
+    const newPass = req.body.password
+    console.log(newPass)
+    const user = await User.findByIdAndUpdate(userID, req.body);
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 }
