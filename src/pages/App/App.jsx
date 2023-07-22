@@ -119,6 +119,7 @@ function App() {
       <NavBar setUser={setUser} user={user} />
       <Routes>
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
+        <Route path="/authpage" element={<AuthPage {...reusedProps} />} />
         {user ? (
           <>
             {user.isAdmin ? (
@@ -136,7 +137,7 @@ function App() {
             )}
           </>
         ) : (
-          <Route path="/authpage" element={<AuthPage {...reusedProps} />} />
+          <></>
         )}
       </Routes>
     </main>

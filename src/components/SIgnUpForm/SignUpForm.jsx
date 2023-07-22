@@ -1,7 +1,6 @@
 import { Component } from "react";
 import { signUp } from "../../utilities/users-service";
-import { useNavigate } from "react-router-dom";
-
+import { Navigate } from "react-router-dom";
 
 export default class SignUpForm extends Component {
   state = {
@@ -10,8 +9,8 @@ export default class SignUpForm extends Component {
     password: "",
     confirm: "",
     error: "",
+    signUpSuccess: false,
   };
-
 
   handleChange = (evt) => {
     this.setState({
@@ -25,19 +24,19 @@ export default class SignUpForm extends Component {
       const formData = { ...this.state };
       delete formData.error;
       delete formData.confirm;
-      //The promise returned by the signUp service method
-      //will resolve to the user object included in the
-      //payload of the JSON Web Token (JWT)
       const user = await signUp(formData);
       this.props.setUser(user);
-      const navigate = useNavigate();
-      navigate("/homepage")
+      this.setState({ signUpSuccess: true });
     } catch {
       this.setState({ error: "Sign Up Failed - Try Again" });
     }
   };
+  
   render() {
     const disable = this.state.password !== this.state.confirm;
+    if (this.state.signUpSuccess) {
+      return <Navigate to="/homepage" />;
+    }
     return (
       <div>
         <div className="form-container">
