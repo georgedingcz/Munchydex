@@ -1,3 +1,5 @@
+import { Card, Form } from "react-bootstrap";
+
 export default function EateryListPerCat({
   existingEateries,
   handleEatCatSelect,
@@ -6,16 +8,14 @@ export default function EateryListPerCat({
   return (
     <div className="section-container">
       <h2>View eateries per category:</h2>
-      <div className="mb-3">
-        <label for="eateryCategory" className="form-label">
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Category
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleEatCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {existingCategories.map((existingCategory, index) => (
@@ -23,24 +23,21 @@ export default function EateryListPerCat({
               {existingCategory.name}
             </option>
           ))}
-        </select>
-      </div>
+        </Form.Select>
+      </Form.Group>
       {existingEateries.map((existingEatery, index) => (
-        <div key={index} className="card" style={{ width: "18rem" }}>
-          <div>
-            <img
-              src={existingEatery.image}
-              alt="eatery"
-              width="50"
-              height="200"
-              className="card-img-top"
-            />
-          </div>
-          <div className="card-body">
-            <h5 className="card-title">{existingEatery.name}</h5>
-            <p className="card-title">{existingEatery.category.name}</p>
-          </div>
-        </div>
+        <Card key={index} style={{ width: "18rem" }}>
+          <Card.Img
+            src={existingEatery.image}
+            alt="eatery"
+            width="50"
+            height="200"
+            variant="top"
+          />
+          <Card.Body>
+            <Card.Title>{existingEatery.name}</Card.Title>
+          </Card.Body>
+        </Card>
       ))}
     </div>
   );

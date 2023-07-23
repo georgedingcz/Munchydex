@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 export default function DeleteEateryForm({
   handleEatCatSelect,
   handleEatSelect,
@@ -28,19 +30,16 @@ export default function DeleteEateryForm({
     setForEateryFetch(!forEateryFetch);
   };
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Delete eatery</h2>
-
-      <div className="mb-3">
-        <label for="eateryCategory" className="form-label">
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Category
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleEatCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {existingCategories.map((existingCategory, index) => (
@@ -48,18 +47,16 @@ export default function DeleteEateryForm({
               {existingCategory.name}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="mb-3">
-        <label for="eateryName" className="form-label">
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="eatName">
           Name
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleEatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select an eatery</option>
           {existingEateries.map((existingEatery, index) => (
@@ -67,11 +64,11 @@ export default function DeleteEateryForm({
               {existingEatery.name}
             </option>
           ))}
-        </select>
-      </div>
-      <button type="submit" className="btn btn-primary" onClick={handleDelete}>
+        </Form.Select>
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleDelete}>
         Delete eatery
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

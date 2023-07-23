@@ -4,6 +4,7 @@ import UpdateReviewForm from "../../components/Review/UpdateReviewForm";
 
 import ReviewListPerUser from "../../components/Review/ReviewListPerUser";
 import DeleteReviewForm from "../../components/Review/DeleteReviewForm";
+import { Container } from "react-bootstrap";
 
 export default function EateryReview({
   existingCategories,
@@ -134,11 +135,11 @@ export default function EateryReview({
   };
 
   return (
-    <div className="page-container">
+    <Container>
       {<CreateReviewForm {...commonProps} />}
       {<UpdateReviewForm {...commonProps} />}
       {<DeleteReviewForm {...commonProps} />}
       {<ReviewListPerUser {...commonProps} />}
-    </div>
+    </Container>
   );
 }

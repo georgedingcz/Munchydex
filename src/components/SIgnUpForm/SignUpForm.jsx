@@ -1,6 +1,7 @@
 import { Component } from "react";
 import { signUp } from "../../utilities/users-service";
 import { Navigate } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
 
 export default class SignUpForm extends Component {
   state = {
@@ -31,55 +32,64 @@ export default class SignUpForm extends Component {
       this.setState({ error: "Sign Up Failed - Try Again" });
     }
   };
-  
+
   render() {
     const disable = this.state.password !== this.state.confirm;
     if (this.state.signUpSuccess) {
       return <Navigate to="/homepage" />;
     }
     return (
-      <div>
-        <div className="form-container">
-          <form autoComplete="off" onSubmit={this.handleSubmit}>
-            <label>Name</label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.name}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Email</label>
-            <input
-              type="email"
-              name="email"
-              value={this.state.email}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Password</label>
-            <input
-              type="password"
-              name="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-              required
-            />
-            <label>Confirm</label>
-            <input
-              type="password"
-              name="confirm"
-              value={this.state.confirm}
-              onChange={this.handleChange}
-              required
-            />
-            <button type="submit" disabled={disable}>
-              SIGN UP
-            </button>
-          </form>
-        </div>
+      <Form className="section-container">
+        <Form.Group className="mb-3">
+          <Form.Label>Name</Form.Label>
+          <Form.Control
+            type="text"
+            name="name"
+            value={this.state.name}
+            onChange={this.handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Email</Form.Label>
+          <Form.Control
+            type="email"
+            name="email"
+            value={this.state.email}
+            onChange={this.handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Password</Form.Label>
+          <Form.Control
+            type="password"
+            name="password"
+            value={this.state.password}
+            onChange={this.handleChange}
+            required
+          />
+        </Form.Group>
+        <Form.Group className="mb-3">
+          <Form.Label>Confirm</Form.Label>
+          <Form.Control
+            type="password"
+            name="confirm"
+            value={this.state.confirm}
+            onChange={this.handleChange}
+            required
+          />
+        </Form.Group>
+        <Button
+          variant="primary"
+          size="lg"
+          disabled={disable}
+          onClick={this.handleSubmit}
+        >
+          SIGN UP
+        </Button>
         <p className="error-message">&nbsp;{this.state.error}</p>
-      </div>
+      </Form>
     );
   }
 }

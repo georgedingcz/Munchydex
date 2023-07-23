@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 export default function UpdateCatForm({
   newMegaState,
   existingCategories,
@@ -44,15 +46,13 @@ export default function UpdateCatForm({
   };
 
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Update eatery categories</h2>
-      <div className="mb-3">
-        <select
+      <Form.Group className="mb-3">
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleUpdateCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {existingCategories.map((existingCategory, index) => (
@@ -60,51 +60,44 @@ export default function UpdateCatForm({
               {existingCategory.name}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="mb-3">
-        <label for="categoryName" className="form-label">
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Name
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryName"
           value={newMegaState.categoryName}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="categoryImage" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catImage">
           Image URL
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryImage"
           value={newMegaState.categoryImage}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="categoryDesc" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catDesc">
           Description
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryDesc"
           value={newMegaState.categoryDesc}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={handleUpdateCat}
-      >
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleUpdateCat}>
         Submit
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

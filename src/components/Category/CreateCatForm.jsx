@@ -1,3 +1,6 @@
+import { Button } from "react-bootstrap";
+import Form from "react-bootstrap/Form";
+
 export default function CreateCatForm({
   newMegaState,
   setNewMegaState,
@@ -32,51 +35,44 @@ export default function CreateCatForm({
   };
 
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Add eatery categories</h2>
-      <div className="mb-3">
-        <label for="categoryName" className="form-label">
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Name
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryName"
           value={newMegaState.categoryName}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="categoryImage" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catImage">
           Image URL
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryImage"
           value={newMegaState.categoryImage}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="categoryDesc" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catDesc">
           Description
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="categoryDesc"
           value={newMegaState.categoryDesc}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={handleCreateCat}
-      >
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleCreateCat}>
         Submit
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

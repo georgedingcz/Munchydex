@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
 import DeleteEateryForm from "../../components/Eatery/DeleteEateryForm";
 import EateryListPerCat from "../../components/Eatery/EateryListPerCat";
@@ -50,11 +51,11 @@ export default function Eatery({
   };
 
   return (
-    <div className="page-container">
+    <Container>
       {<CreateEateryForm {...reusedProps} />}
       {<UpdateEateryForm {...reusedProps} />}
       {<DeleteEateryForm {...reusedProps} />}
       {<EateryListPerCat {...reusedProps} />}
-    </div>
+    </Container>
   );
 }

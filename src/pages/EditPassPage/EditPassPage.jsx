@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Button, Container, Form } from "react-bootstrap";
 
 export default function EditPass({ user, setUser, newMegaState }) {
   const [credentials, setCredentials] = useState({
@@ -16,7 +17,7 @@ export default function EditPass({ user, setUser, newMegaState }) {
       password: credentials.password,
     };
     try {
-      const response = await fetch(`/api/users/${id}`, {
+      await fetch(`/api/users/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
@@ -28,20 +29,20 @@ export default function EditPass({ user, setUser, newMegaState }) {
     }
   }
   return (
-    <div>
-      <div className="form-container">
-        <form autoComplete="off" onSubmit={handleUpdatePass}>
-          <label>Password</label>
-          <input
+      <Form className="section-container">
+        <Form.Group>
+          <Form.Label>Password</Form.Label>
+          <Form.Control
             type="password"
             name="password"
             value={credentials.password}
             onChange={handleChange}
-            required
           />
-          <button type="submit">Update Password</button>
-        </form>
-      </div>
-    </div>
+        </Form.Group>
+        <Button variant="primary" size="lg" onClick={handleUpdatePass}>
+          Update Password
+        </Button>
+      </Form>
+
   );
 }

@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 export default function DeleteCatForm({
   existingCategories,
   setExistingCategories,
@@ -37,15 +39,13 @@ export default function DeleteCatForm({
   };
 
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Delete eatery categories</h2>
-      <div className="mb-3">
-        <select
+      <Form.Group className="mb-3">
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {existingCategories.map((existingCategory, index) => (
@@ -53,15 +53,11 @@ export default function DeleteCatForm({
               {existingCategory.name}
             </option>
           ))}
-        </select>
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={handleCatDelete}
-      >
+        </Form.Select>
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleCatDelete}>
         Submit
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

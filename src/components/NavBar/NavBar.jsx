@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import * as userService from "../../utilities/users-service";
+import { Container, Nav, Navbar } from "react-bootstrap";
 
 export default function NavBar({ setUser, user }) {
   function handleLogOut() {
@@ -8,34 +9,40 @@ export default function NavBar({ setUser, user }) {
   }
 
   return (
-    <nav
-      className="navbar bg-dark border-bottom border-bottom-dark"
-      data-bs-theme="dark"
+    <Navbar
+      expand="md"
+      className="bg-body-tertiary"
+      bg="light"
+      data-bs-theme="light"
     >
-      <div className="container-fluid">
-        <Link to="/homepage">Home</Link>
-        {user ? (
-          <>
-            <Link to="/editpass">Edit Password</Link>
-            <span className="navbar-text">Welcome, {user.name}</span>
-            <Link to="/homepage" onClick={handleLogOut}>
-              Log Out
-            </Link>
-            {user.isAdmin ? (
+      <Container>
+        <Navbar.Brand href="/homepage">Munchydex</Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto">
+            <Nav.Link href="/homepage">Home</Nav.Link>
+            {user ? (
               <>
-                <Link to="/eatcat">Category</Link>
-                <Link to="/eatery">Eatery</Link>
+                <Nav.Link href="/editpass">Edit Password</Nav.Link>
+                <Nav.Link href="/homepage" onClick={handleLogOut}>
+                  Log Out
+                </Nav.Link>
+                {user.isAdmin ? (
+                  <>
+                    <Nav.Link href="/eatcat">Category</Nav.Link>
+                    <Nav.Link href="eatery">Eater</Nav.Link>
+                  </>
+                ) : (
+                  <Nav.Link href="/createreview">Review</Nav.Link>
+                )}
+                <Navbar.Text>Signed in as: {user.name}</Navbar.Text>
               </>
             ) : (
-              <>
-                <Link to="/createreview">Review</Link>
-              </>
+              <Nav.Link href="/authpage">Log In</Nav.Link>
             )}
-          </>
-        ) : (
-          <Link to="/authpage">Log In</Link>
-        )}
-      </div>
-    </nav>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
+    </Navbar>
   );
 }

@@ -1,3 +1,4 @@
+import { Container } from "react-bootstrap";
 import CategoryList from "../../components/Category/CategoryList";
 import CreateCatForm from "../../components/Category/CreateCatForm";
 import DeleteCatForm from "../../components/Category/DeleteCatForm";
@@ -25,11 +26,11 @@ export default function EatCat({
   };
 
   return (
-    <div className="page-container">
+    <Container>
       {<CreateCatForm {...reusedProps} />}
       {<UpdateCatForm {...reusedProps} />}
       {<DeleteCatForm {...reusedProps} />}
       {<CategoryList {...reusedProps} />}
-    </div>
+    </Container>
   );
 }

@@ -1,15 +1,16 @@
-import CategoryList from "../../components/Category/CategoryList";
+import { Container } from "react-bootstrap";
+import HomeCatCarousel from "../../components/Home/HomeCatCarousel";
 
 export default function HomePage({
   existingCategories,
   setExistingCategories,
 }) {
   return (
-    <div className="page-container">
+    <Container>
       <h1>HomePage</h1>
       <p>Website introduction:</p>
-      {<CategoryList existingCategories={existingCategories} />}
+      {<HomeCatCarousel existingCategories={existingCategories} />}
       <p>What are some of the reviews available:</p>
-    </div>
+    </Container>
   );
 }

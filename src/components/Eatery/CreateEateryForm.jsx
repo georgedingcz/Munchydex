@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 export default function CreateEateryForm({
   existingCategories,
   handleEatCatSelect,
@@ -41,18 +43,16 @@ export default function CreateEateryForm({
   };
 
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Create eatery</h2>
-      <div className="mb-3">
-        <label for="eateryCategory" className="form-label">
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Category
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleEatCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {existingCategories.map((existingCategory, index) => (
@@ -60,51 +60,44 @@ export default function CreateEateryForm({
               {existingCategory.name}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="mb-3">
-        <label for="eateryName" className="form-label">
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="eatName">
           Name
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
-          name="eateryName"
-          value={newMegaState.eateryName}
+          name="categoryName"
+          value={newMegaState.categoryName}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="eateryLocation" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="eatLocation">
           Location
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="eateryLocation"
           value={newMegaState.eateryLocation}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <div className="mb-3">
-        <label for="eateryImage" className="form-label">
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="eatImage">
           Image
-        </label>
-        <input
+        </Form.Label>
+        <Form.Control
           type="text"
           name="eateryImage"
           value={newMegaState.eateryImage}
           onChange={handleChange}
-          className="form-control"
         />
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={handleCreateEatery}
-      >
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleCreateEatery}>
         Create an eatery
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

@@ -1,3 +1,5 @@
+import { Button, Form } from "react-bootstrap";
+
 export default function DeleteReviewForm({
   handleUserCatSelect,
   existingReviews,
@@ -25,18 +27,16 @@ export default function DeleteReviewForm({
     setForReviewFetch(!forReviewFetch);
   };
   return (
-    <form className="section-container">
+    <Form className="section-container">
       <h2>Delete a review</h2>
-      <div className="mb-3">
-        <label for="reviewCategory" className="form-label">
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="catName">
           Category
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="categoryType"
           id="categoryType-select"
           onChange={handleUserCatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {[
@@ -50,18 +50,16 @@ export default function DeleteReviewForm({
               {categoryName}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="mb-3">
-        <label for="reviewName" className="form-label">
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="eatName">
           Eatery
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="eateryName"
           id="eateryName-select"
           onChange={handleUserEatSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select an eatery</option>
           {[
@@ -75,18 +73,16 @@ export default function DeleteReviewForm({
               {eateryName}
             </option>
           ))}
-        </select>
-      </div>
-      <div className="mb-3">
-        <label for="reviewTitle" className="form-label">
+        </Form.Select>
+      </Form.Group>
+      <Form.Group className="mb-3">
+        <Form.Label className="form-label" controlId="reviewTitle">
           Title
-        </label>
-        <select
+        </Form.Label>
+        <Form.Select
           name="title"
           id="title-select"
           onChange={handleUserTitleSelect}
-          className="form-select"
-          aria-label="Default select example"
         >
           <option value="">Select a title</option>
           {filteredReviewsByEatery.map((filteredReview, index) => (
@@ -94,15 +90,11 @@ export default function DeleteReviewForm({
               {filteredReview.title}
             </option>
           ))}
-        </select>
-      </div>
-      <button
-        type="submit"
-        className="btn btn-primary"
-        onClick={handleDeleteReview}
-      >
+        </Form.Select>
+      </Form.Group>
+      <Button variant="primary" size="lg" onClick={handleDeleteReview}>
         Delete a review
-      </button>
-    </form>
+      </Button>
+    </Form>
   );
 }

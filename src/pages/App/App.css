@@ -24,3 +24,8 @@
   scroll-snap-type: y mandatory;
   border: solid red;
 }
+
+.carousel-container {
+  height: 400px;
+  overflow: hidden;
+}
