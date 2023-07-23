@@ -1,30 +1,32 @@
 import { useEffect } from "react";
 
-export default function ReviewListPerUser({
-  existingReviews,
-}) {
-  
-
+export default function ReviewListPerUser({ existingReviews }) {
   return (
     <div className="section-container">
       <h2>List of reviews</h2>
       {existingReviews.map((existingReview, index) => (
-        <div key={index}>
-          <div>Title: {existingReview.title}</div>
-          <div>Category: {existingReview.category.name}</div>
-          <div>Eatery: {existingReview.name.name} </div>
-          <div>Description: {existingReview.desc} </div>
-          <div>Date: {existingReview.date} </div>
-          <div>Price: {existingReview.price} </div>
-          <div>Score: {existingReview.score} </div>
+        <div key={index} className="card" style={{ width: "18rem" }}>
           <div>
             Picture:
             <img
               src={existingReview.image}
               alt="category"
               width="50"
-              height="50"
+              height="200"
+              className="card-img-top"
             />
+          </div>
+          <div className="card-body">
+            <h5 className="card-title">{existingReview.title}</h5>
+
+            <p className="card-text">
+              Category: {existingReview.category.name}
+            </p>
+            <p className="card-text">Eatery: {existingReview.name.name} </p>
+            <p className="card-text">Description: {existingReview.desc} </p>
+            <p className="card-text">Date: {existingReview.date} </p>
+            <p className="card-text">Price: {existingReview.price} </p>
+            <p className="card-text">Score: {existingReview.score} </p>
           </div>
         </div>
       ))}

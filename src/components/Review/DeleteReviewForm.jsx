@@ -27,12 +27,16 @@ export default function DeleteReviewForm({
   return (
     <form className="section-container">
       <h2>Delete a review</h2>
-      <div>
-        Category:
+      <div className="mb-3">
+        <label for="reviewCategory" className="form-label">
+          Category
+        </label>
         <select
           name="categoryType"
           id="categoryType-select"
           onChange={handleUserCatSelect}
+          className="form-select"
+          aria-label="Default select example"
         >
           <option value="">Select a category</option>
           {[
@@ -48,36 +52,57 @@ export default function DeleteReviewForm({
           ))}
         </select>
       </div>
-      Eatery Name:
-      <select
-        name="eateryName"
-        id="eateryName-select"
-        onChange={handleUserEatSelect}
+      <div className="mb-3">
+        <label for="reviewName" className="form-label">
+          Eatery
+        </label>
+        <select
+          name="eateryName"
+          id="eateryName-select"
+          onChange={handleUserEatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select an eatery</option>
+          {[
+            ...new Set(
+              filteredReviewsByCat.map(
+                (filteredReview) => filteredReview.name.name
+              )
+            ),
+          ].map((eateryName, index) => (
+            <option key={index} value={eateryName}>
+              {eateryName}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
+        <label for="reviewTitle" className="form-label">
+          Title
+        </label>
+        <select
+          name="title"
+          id="title-select"
+          onChange={handleUserTitleSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select a title</option>
+          {filteredReviewsByEatery.map((filteredReview, index) => (
+            <option key={index} value={filteredReview._id}>
+              {filteredReview.title}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onClick={handleDeleteReview}
       >
-        <option value="">Select an eatery</option>
-        {[
-          ...new Set(
-            filteredReviewsByCat.map(
-              (filteredReview) => filteredReview.name.name
-            )
-          ),
-        ].map((eateryName, index) => (
-          <option key={index} value={eateryName}>
-            {eateryName}
-          </option>
-        ))}
-      </select>
-      <br />
-      Select title:
-      <select name="title" id="title-select" onChange={handleUserTitleSelect}>
-        <option value="">Select a title</option>
-        {filteredReviewsByEatery.map((filteredReview, index) => (
-          <option key={index} value={filteredReview._id}>
-            {filteredReview.title}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleDeleteReview}>Delete a review</button>
+        Delete a review
+      </button>
     </form>
   );
 }

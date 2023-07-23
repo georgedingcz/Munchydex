@@ -31,32 +31,47 @@ export default function DeleteEateryForm({
     <form className="section-container">
       <h2>Delete eatery</h2>
 
-      <select
-        name="categoryType"
-        id="categoryType-select"
-        onChange={handleEatCatSelect}
-      >
-        <option value="">Select a category</option>
-
-        {existingCategories.map((existingCategory, index) => (
-          <option key={index} value={existingCategory._id}>
-            {existingCategory.name}
-          </option>
-        ))}
-      </select>
-      <select
-        name="categoryType"
-        id="categoryType-select"
-        onChange={handleEatSelect}
-      >
-        <option value="">Select an eatery</option>
-        {existingEateries.map((existingEatery, index) => (
-          <option key={index} value={existingEatery._id}>
-            {existingEatery.name}
-          </option>
-        ))}
-      </select>
-      <button onClick={handleDelete}>Delete eatery</button>
+      <div className="mb-3">
+        <label for="eateryCategory" className="form-label">
+          Category
+        </label>
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleEatCatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select a category</option>
+          {existingCategories.map((existingCategory, index) => (
+            <option key={index} value={existingCategory._id}>
+              {existingCategory.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
+        <label for="eateryName" className="form-label">
+          Name
+        </label>
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleEatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select an eatery</option>
+          {existingEateries.map((existingEatery, index) => (
+            <option key={index} value={existingEatery._id}>
+              {existingEatery.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <button type="submit" className="btn btn-primary" onClick={handleDelete}>
+        Delete eatery
+      </button>
     </form>
   );
 }

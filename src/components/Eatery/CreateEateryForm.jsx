@@ -43,44 +43,68 @@ export default function CreateEateryForm({
   return (
     <form className="section-container">
       <h2>Create eatery</h2>
-      <select
-        name="categoryType"
-        id="categoryType-select"
-        onChange={handleEatCatSelect}
+      <div className="mb-3">
+        <label for="eateryCategory" className="form-label">
+          Category
+        </label>
+        <select
+          name="categoryType"
+          id="categoryType-select"
+          onChange={handleEatCatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select a category</option>
+          {existingCategories.map((existingCategory, index) => (
+            <option key={index} value={existingCategory._id}>
+              {existingCategory.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
+        <label for="eateryName" className="form-label">
+          Name
+        </label>
+        <input
+          type="text"
+          name="eateryName"
+          value={newMegaState.eateryName}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="eateryLocation" className="form-label">
+          Location
+        </label>
+        <input
+          type="text"
+          name="eateryLocation"
+          value={newMegaState.eateryLocation}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="eateryImage" className="form-label">
+          Image
+        </label>
+        <input
+          type="text"
+          name="eateryImage"
+          value={newMegaState.eateryImage}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onClick={handleCreateEatery}
       >
-        <option value="">Select a category</option>
-
-        {existingCategories.map((existingCategory, index) => (
-          <option key={index} value={existingCategory._id}>
-            {existingCategory.name}
-          </option>
-        ))}
-      </select>
-      Name:
-      <input
-        type="text"
-        name="eateryName"
-        value={newMegaState.eateryName}
-        onChange={handleChange}
-      />
-      <br />
-      Location:
-      <input
-        type="text"
-        name="eateryLocation"
-        value={newMegaState.eateryLocation}
-        onChange={handleChange}
-      />
-      <br />
-      Image:
-      <input
-        type="text"
-        name="eateryImage"
-        value={newMegaState.eateryImage}
-        onChange={handleChange}
-      />
-      <br />
-      <button onClick={handleCreateEatery}>Create an eatery</button>
+        Create an eatery
+      </button>
     </form>
   );
 }

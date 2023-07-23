@@ -57,13 +57,16 @@ export default function CreateReviewForm({
   return (
     <form className="section-container">
       <h2>Write a review</h2>
-      <div>User name: {user.name}</div>
-      <div>
-        Category:
+      <div className="mb-3">
+        <label for="reviewCategory" className="form-label">
+          Category
+        </label>
         <select
           name="categoryType"
           id="categoryType-select"
           onChange={handleCatSelect}
+          className="form-select"
+          aria-label="Default select example"
         >
           <option value="">Select a category</option>
 
@@ -74,69 +77,104 @@ export default function CreateReviewForm({
           ))}
         </select>
       </div>
-      Eatery Name:
-      <select
-        name="eateryName"
-        id="eateryName-select"
-        onChange={handleEatSelect}
+      <div className="mb-3">
+        <label for="reviewName" className="form-label">
+          Eatery Name
+        </label>
+        <select
+          name="eateryName"
+          id="eateryName-select"
+          onChange={handleEatSelect}
+          className="form-select"
+          aria-label="Default select example"
+        >
+          <option value="">Select an eatery</option>
+          {existingEateries.map((existingEatery, index) => (
+            <option key={index} value={existingEatery._id}>
+              {existingEatery.name}
+            </option>
+          ))}
+        </select>
+      </div>
+      <div className="mb-3">
+        <label for="reviewTitle" className="form-label">
+          Title
+        </label>
+        <input
+          type="text"
+          name="reviewTitle"
+          value={newMegaState.reviewTitle}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="reviewImage" className="form-label">
+          Image
+        </label>
+        <input
+          type="text"
+          name="reviewImage"
+          value={newMegaState.reviewImage}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="reviewDesc" className="form-label">
+          Description
+        </label>
+        <input
+          type="text"
+          name="reviewDesc"
+          value={newMegaState.reviewDesc}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="reviewDate" className="form-label">
+          Date
+        </label>
+        <input
+          type="date"
+          name="reviewDate"
+          value={newMegaState.reviewDate}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="reviewPrice" className="form-label">
+          Price
+        </label>
+        <input
+          type="number"
+          name="reviewPrice"
+          value={newMegaState.reviewPrice}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <div className="mb-3">
+        <label for="reviewScore" className="form-label">
+          Score
+        </label>
+        <input
+          type="number"
+          name="reviewScore"
+          value={newMegaState.reviewScore}
+          onChange={handleChange}
+          className="form-control"
+        />
+      </div>
+      <button
+        type="submit"
+        className="btn btn-primary"
+        onClick={handleCreateReview}
       >
-        <option value="">Select an eatery</option>
-        {existingEateries.map((existingEatery, index) => (
-          <option key={index} value={existingEatery._id}>
-            {existingEatery.name}
-          </option>
-        ))}
-      </select>
-      <br />
-      Title:
-      <input
-        type="text"
-        name="reviewTitle"
-        value={newMegaState.reviewTitle}
-        onChange={handleChange}
-      />
-      <br />
-      Image:
-      <input
-        type="text"
-        name="reviewImage"
-        value={newMegaState.reviewImage}
-        onChange={handleChange}
-      />
-      <br />
-      Description:
-      <input
-        type="text"
-        name="reviewDesc"
-        value={newMegaState.reviewDesc}
-        onChange={handleChange}
-      />
-      <br />
-      Date:
-      <input
-        type="date"
-        name="reviewDate"
-        value={newMegaState.reviewDate}
-        onChange={handleChange}
-      />
-      <br />
-      Price:
-      <input
-        type="number"
-        name="reviewPrice"
-        value={newMegaState.reviewPrice}
-        onChange={handleChange}
-      />
-      <br />
-      Score:
-      <input
-        type="number"
-        name="reviewScore"
-        value={newMegaState.reviewScore}
-        onChange={handleChange}
-      />
-      <br />
-      <button onClick={handleCreateReview}>Create a review</button>
+        Create a review
+      </button>
     </form>
   );
 }
