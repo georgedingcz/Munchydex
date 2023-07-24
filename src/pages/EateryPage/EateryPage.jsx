@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Tab, Tabs } from "react-bootstrap";
 import CreateEateryForm from "../../components/Eatery/CreateEateryForm";
 import DeleteEateryForm from "../../components/Eatery/DeleteEateryForm";
 import EateryListPerCat from "../../components/Eatery/EateryListPerCat";
@@ -52,10 +52,18 @@ export default function Eatery({
 
   return (
     <Container>
-      {<CreateEateryForm {...reusedProps} />}
-      {<UpdateEateryForm {...reusedProps} />}
-      {<DeleteEateryForm {...reusedProps} />}
-      {<EateryListPerCat {...reusedProps} />}
+      <Tabs defaultActiveKey="createEat" id="auth-tab" className="mb-3" fill>
+        <Tab eventKey="createEat" title="Create Eatery">
+          <CreateEateryForm {...reusedProps} />
+        </Tab>
+        <Tab eventKey="updateEat" title="Update Eatery">
+          <UpdateEateryForm {...reusedProps} />
+        </Tab>
+        <Tab eventKey="deleteEat" title="Delete Eatery">
+          <DeleteEateryForm {...reusedProps} />
+        </Tab>
+      </Tabs>
+      <EateryListPerCat {...reusedProps} />
     </Container>
   );
 }

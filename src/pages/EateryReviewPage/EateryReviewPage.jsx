@@ -4,7 +4,7 @@ import UpdateReviewForm from "../../components/Review/UpdateReviewForm";
 
 import ReviewListPerUser from "../../components/Review/ReviewListPerUser";
 import DeleteReviewForm from "../../components/Review/DeleteReviewForm";
-import { Container } from "react-bootstrap";
+import { Container, Tab, Tabs } from "react-bootstrap";
 
 export default function EateryReview({
   existingCategories,
@@ -136,10 +136,18 @@ export default function EateryReview({
 
   return (
     <Container>
-      {<CreateReviewForm {...commonProps} />}
-      {<UpdateReviewForm {...commonProps} />}
-      {<DeleteReviewForm {...commonProps} />}
-      {<ReviewListPerUser {...commonProps} />}
+      <Tabs defaultActiveKey="createReview" id="auth-tab" className="mb-3" fill>
+        <Tab eventKey="createReview" title="Create Review">
+          <CreateReviewForm {...commonProps} />
+        </Tab>
+        <Tab eventKey="updateReview" title="Update Review">
+          <UpdateReviewForm {...commonProps} />
+        </Tab>
+        <Tab eventKey="deleteReview" title="Delete Review">
+          <DeleteReviewForm {...commonProps} />
+        </Tab>
+      </Tabs>
+      <ReviewListPerUser {...commonProps} />
     </Container>
   );
 }

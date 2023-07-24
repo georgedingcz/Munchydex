@@ -1,4 +1,4 @@
-import { Container } from "react-bootstrap";
+import { Container, Tab, Tabs } from "react-bootstrap";
 import CategoryList from "../../components/Category/CategoryList";
 import CreateCatForm from "../../components/Category/CreateCatForm";
 import DeleteCatForm from "../../components/Category/DeleteCatForm";
@@ -27,10 +27,18 @@ export default function EatCat({
 
   return (
     <Container>
-      {<CreateCatForm {...reusedProps} />}
-      {<UpdateCatForm {...reusedProps} />}
-      {<DeleteCatForm {...reusedProps} />}
-      {<CategoryList {...reusedProps} />}
+      <Tabs defaultActiveKey="createCat" id="auth-tab" className="mb-3" fill>
+        <Tab eventKey="createCat" title="Create Category">
+          <CreateCatForm {...reusedProps} />
+        </Tab>
+        <Tab eventKey="updateCat" title="Update Category">
+          <UpdateCatForm {...reusedProps} />
+        </Tab>
+        <Tab eventKey="deleteCat" title="Delete Category">
+          <DeleteCatForm {...reusedProps} />
+        </Tab>
+      </Tabs>
+      <CategoryList {...reusedProps} />
     </Container>
   );
 }
