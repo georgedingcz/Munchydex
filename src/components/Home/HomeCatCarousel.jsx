@@ -24,7 +24,7 @@ export default function CategoryList({ existingCategories }) {
               alt="category"
               fluid
             />
-          </Carousel.Item>
+          </Carousel.Item> 
         ))}
       </Carousel>
     </div>
