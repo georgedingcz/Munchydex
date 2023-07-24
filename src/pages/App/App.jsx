@@ -151,8 +151,8 @@ function App() {
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
         <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
-        <Route path="/eatery/:id" element={<IndvEat {...reusedProps}/>}/>
-        <Route path="/review/:id" element={<IndvReview {...reusedProps}/>}/>
+        <Route path="/eatery/:id" element={<IndvEat {...reusedProps} />} />
+        <Route path="/review/:id" element={<IndvReview {...reusedProps} />} />
         {user ? (
           <>
             {/* <Route path="/editpass" element={<EditPass {...reusedProps} />} /> */}
@@ -160,10 +160,10 @@ function App() {
               {user.isAdmin ? (
                 <>
                   <Route path="/eatcat" element={<EatCat {...reusedProps} />} />
-                  <Route path="/eatery" element={<Eatery {...reusedProps} />} />
                 </>
               ) : (
                 <>
+                  <Route path="/eatery" element={<Eatery {...reusedProps} />} />
                   <Route
                     path="/review"
                     element={<EateryReview {...reusedProps} />}

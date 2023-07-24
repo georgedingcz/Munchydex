@@ -30,10 +30,12 @@ export default function NavBar({ setUser, user }) {
                 {user.isAdmin ? (
                   <>
                     <Nav.Link href="/eatcat">Category</Nav.Link>
-                    <Nav.Link href="eatery">Eater</Nav.Link>
                   </>
                 ) : (
-                  <Nav.Link href="/review">Review</Nav.Link>
+                  <>
+                    <Nav.Link href="eatery">Eatery</Nav.Link>
+                    <Nav.Link href="/review">Review</Nav.Link>
+                  </>
                 )}
                 <Navbar.Text>Signed in as: {user.name}</Navbar.Text>
               </>
