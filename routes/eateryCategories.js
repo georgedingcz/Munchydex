@@ -10,4 +10,6 @@ router.delete("/:id", eatCatCtrl.deleteOne);
 
 router.patch("/:id", eatCatCtrl.updateOne);
 
+router.get("/:id", eatCatCtrl.listOne)
+
 module.exports = router;

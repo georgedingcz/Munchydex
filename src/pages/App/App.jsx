@@ -9,6 +9,7 @@ import EatCat from "../EateryCategoryPage/EatCatPage";
 import Eatery from "../EateryPage/EateryPage";
 import EateryReview from "../EateryReviewPage/EateryReviewPage";
 import EditPass from "../EditPassPage/EditPassPage";
+import IndvCat from "../EateryCategoryPage/IndvCatPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -147,9 +148,10 @@ function App() {
       <Routes>
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
+        <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
         {user ? (
           <>
-            <Route path="/editpass" element={<EditPass {...reusedProps} />} />
+            {/* <Route path="/editpass" element={<EditPass {...reusedProps} />} /> */}
             <>
               {user.isAdmin ? (
                 <>
