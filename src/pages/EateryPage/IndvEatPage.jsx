@@ -29,10 +29,10 @@ export default function IndvEat() {
 
   return (
     <Card>
-      <Card.Img src={oneEat.image} alt="eatery" fluid="true" variant="top" />
+      <Card.Img src={oneEat?.image} alt="eatery" fluid="true" variant="top" />
       <Card.Body>
-        <Card.Title>{oneEat.name}</Card.Title>
-        <Card.Text>{oneEat.location}</Card.Text>
+        <Card.Title>{oneEat?.name}</Card.Title>
+        <Card.Text>{oneEat?.location}</Card.Text>
       </Card.Body>
     </Card>
   );

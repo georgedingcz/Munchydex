@@ -9,15 +9,14 @@ export default function CategoryList({ existingCategories }) {
           <Col key={index}>
             <Card key={index} style={{ width: "18rem" }}>
               <Card.Img
-                src={existingCategory.image}
+                src={existingCategory?.image}
                 alt="category"
                 width="50"
                 height="200"
                 variant="top"
               />
               <Card.Body>
-                <Card.Title>{existingCategory.name}</Card.Title>
-                {/* <Card.Text>{existingCategory.briefDesc}</Card.Text> */}
+                <Card.Title>{existingCategory?.name}</Card.Title>
               </Card.Body>
             </Card>
             <br/>

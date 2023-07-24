@@ -33,7 +33,7 @@ export default function NavBar({ setUser, user }) {
                     <Nav.Link href="eatery">Eater</Nav.Link>
                   </>
                 ) : (
-                  <Nav.Link href="/createreview">Review</Nav.Link>
+                  <Nav.Link href="/review">Review</Nav.Link>
                 )}
                 <Navbar.Text>Signed in as: {user.name}</Navbar.Text>
               </>

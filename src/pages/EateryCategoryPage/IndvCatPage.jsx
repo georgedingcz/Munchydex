@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import ReviewListPerCat from "../../components/Review/ReviewListPerCat";
 
 export default function IndvCat() {
-  const [oneCat, setOneCat] = useState({})
+  const [oneCat, setOneCat] = useState({});
 
   const { id } = useParams();
   useEffect(() => {
@@ -27,17 +28,14 @@ export default function IndvCat() {
   }, []);
 
   return (
-    <Card>
-      <Card.Img
-        src={oneCat.image}
-        alt="category"
-        fluid
-        variant="top"
-      />
-      <Card.Body>
-        <Card.Title>{oneCat.name}</Card.Title>
-        <Card.Text>{oneCat.briefDesc}</Card.Text>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Card>
+        <Card.Img src={oneCat?.image} alt="category" fluid variant="top" />
+        <Card.Body>
+          <Card.Title>{oneCat?.name}</Card.Title>
+          <Card.Text>{oneCat?.briefDesc}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }

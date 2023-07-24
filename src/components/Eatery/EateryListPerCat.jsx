@@ -36,17 +36,17 @@ export default function EateryListPerCat({
             <Card
               key={index}
               style={{ width: "18rem" }}
-              onClick={() => handleOneEatPage(existingEatery._id)}
+              onClick={() => handleOneEatPage(existingEatery?._id)}
             >
               <Card.Img
-                src={existingEatery.image}
+                src={existingEatery?.image}
                 alt="eatery"
                 width="50"
                 height="200"
                 variant="top"
               />
               <Card.Body>
-                <Card.Title>{existingEatery.name}</Card.Title>
+                <Card.Title>{existingEatery?.name}</Card.Title>
               </Card.Body>
             </Card>
             <br />

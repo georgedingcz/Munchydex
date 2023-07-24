@@ -11,6 +11,7 @@ import EateryReview from "../EateryReviewPage/EateryReviewPage";
 import EditPass from "../EditPassPage/EditPassPage";
 import IndvCat from "../EateryCategoryPage/IndvCatPage";
 import IndvEat from "../EateryPage/IndvEatPage";
+import IndvReview from "../EateryReviewPage/IndvReviewPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -151,6 +152,7 @@ function App() {
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
         <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
         <Route path="/eatery/:id" element={<IndvEat {...reusedProps}/>}/>
+        <Route path="/review/:id" element={<IndvReview {...reusedProps}/>}/>
         {user ? (
           <>
             {/* <Route path="/editpass" element={<EditPass {...reusedProps} />} /> */}
@@ -163,7 +165,7 @@ function App() {
               ) : (
                 <>
                   <Route
-                    path="/createreview"
+                    path="/review"
                     element={<EateryReview {...reusedProps} />}
                   />
                 </>

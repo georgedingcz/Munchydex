@@ -1,16 +1,31 @@
-import { Container } from "react-bootstrap";
+import { Container, Form } from "react-bootstrap";
 import HomeCatCarousel from "../../components/Home/HomeCatCarousel";
 import SiteIntro from "../../components/Home/SiteIntro";
+import ReviewListPerCat from "../../components/Review/ReviewListPerCat";
 
 export default function HomePage({
   existingCategories,
   setExistingCategories,
+  setNewMegaState,
+  setExistingReviews,
+  existingReviews,
+  formatDate,
+  newMegaState,
 }) {
+  const reusedProps = {
+    existingCategories,
+    setExistingCategories,
+    setNewMegaState,
+    setExistingReviews,
+    existingReviews,
+    formatDate,
+    newMegaState,
+  };
   return (
     <Container>
-      {<SiteIntro />}
-      {<HomeCatCarousel existingCategories={existingCategories} />}
-      <p>What are some of the reviews available:</p>
+      <SiteIntro {...reusedProps} />
+      <HomeCatCarousel {...reusedProps} />
+      <ReviewListPerCat {...reusedProps} />
     </Container>
   );
 }
