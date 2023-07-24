@@ -5,8 +5,7 @@ import SignUpForm from "../../components/SIgnUpForm/SignUpForm";
 export default function Auth({ setUser }) {
   return (
     <Container>
-      <h1>AuthPage</h1>
-      <Tabs defaultActiveKey="login" id="auth-tab" className="mb-3">
+      <Tabs defaultActiveKey="login" id="auth-tab" className="mb-3" fill>
         <Tab eventKey="signUp" title="Sign Up">
           <SignUpForm setUser={setUser} />
         </Tab>

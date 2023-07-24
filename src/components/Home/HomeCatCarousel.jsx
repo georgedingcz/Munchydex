@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Accordion, Card, Carousel, Image } from "react-bootstrap";
+import { Carousel, Image } from "react-bootstrap";
 
 export default function CategoryList({ existingCategories }) {
   const [index, setIndex] = useState(0);
@@ -10,7 +10,6 @@ export default function CategoryList({ existingCategories }) {
 
   return (
     <div className="section-container">
-      <h2>Food categories available:</h2>
       <Carousel
         activeIndex={index}
         onSelect={handleCarousel}
@@ -25,10 +24,6 @@ export default function CategoryList({ existingCategories }) {
               alt="category"
               fluid
             />
-            {/* <Carousel.Caption>
-              <h5> {existingCategory.name}</h5>
-              <p>{existingCategory.briefDesc}</p>
-            </Carousel.Caption> */}
           </Carousel.Item>
         ))}
       </Carousel>
