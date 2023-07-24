@@ -13,7 +13,7 @@ export default function CategoryList({ existingCategories }) {
       <Carousel
         activeIndex={index}
         onSelect={handleCarousel}
-        data-bs-theme="dark"
+        data-bs-theme="light"
         className="carousel-container"
       >
         {existingCategories.map((existingCategory, index) => (
@@ -24,7 +24,16 @@ export default function CategoryList({ existingCategories }) {
               alt="category"
               fluid
             />
-          </Carousel.Item> 
+            <Carousel.Caption
+              style={{
+                position: "absolute",
+                top: 0,
+                color: "white",
+              }}
+            >
+              <h3>{existingCategory.name}</h3>
+            </Carousel.Caption>
+          </Carousel.Item>
         ))}
       </Carousel>
     </div>

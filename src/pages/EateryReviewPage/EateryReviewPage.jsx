@@ -19,6 +19,7 @@ export default function EateryReview({
   forReviewFetch,
   setForReviewFetch,
   handleChange,
+  formatDate,
 }) {
   const [filteredReviewsByCat, setFilteredReviewsByCat] = useState([]);
   const [filteredReviewsByEatery, setFilteredReviewsByEatery] = useState([]);
@@ -132,6 +133,7 @@ export default function EateryReview({
     setForReviewFetch,
     filteredReviewsByCat,
     filteredReviewsByEatery,
+    formatDate,
   };
 
   return (

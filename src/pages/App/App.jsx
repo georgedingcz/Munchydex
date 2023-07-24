@@ -44,6 +44,30 @@ function App() {
     reviewScore: 0,
   });
 
+  const formatDate = (dateString) => {
+    const date = new Date(dateString);
+    const day = date.getDate();
+    const monthIndex = date.getMonth();
+    const year = date.getFullYear();
+
+    const months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    return `${day} ${months[monthIndex]} ${year}`;
+  };
+
   const handleChange = (evt) => {
     setNewMegaState({
       ...newMegaState,
@@ -70,6 +94,8 @@ function App() {
     setNewMegaState,
 
     handleChange,
+
+    formatDate,
   };
 
   useEffect(() => {
