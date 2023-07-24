@@ -59,10 +59,8 @@ export default function CreateReviewForm({
   return (
     <Form className="section-container">
       <h2>Write a review</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Category
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -76,10 +74,8 @@ export default function CreateReviewForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatName">
-          Name
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatName">
+        <Form.Label className="form-label">Name</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -93,10 +89,8 @@ export default function CreateReviewForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewTitle">
-          Title
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewTitle">
+        <Form.Label className="form-label">Title</Form.Label>
         <Form.Control
           type="text"
           name="reviewTitle"
@@ -104,10 +98,8 @@ export default function CreateReviewForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewImage">
-          Image
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewImage">
+        <Form.Label className="form-label">Image</Form.Label>
         <Form.Control
           type="text"
           name="reviewImage"
@@ -115,10 +107,8 @@ export default function CreateReviewForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewDesc">
-          Description
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewDesc">
+        <Form.Label className="form-label">Description</Form.Label>
         <Form.Control
           type="text"
           name="reviewDesc"
@@ -126,10 +116,8 @@ export default function CreateReviewForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewDate">
-          Date
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewDate">
+        <Form.Label className="form-label">Date</Form.Label>
         <Form.Control
           type="date"
           name="reviewDate"
@@ -137,10 +125,8 @@ export default function CreateReviewForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewPrice">
-          Price
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewPrice">
+        <Form.Label className="form-label">Price</Form.Label>
         <Form.Control
           type="number"
           name="reviewPrice"
@@ -148,10 +134,8 @@ export default function CreateReviewForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewScore">
-          Score
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewScore">
+        <Form.Label className="form-label">Score</Form.Label>
         <Form.Control
           type="number"
           name="reviewScore"

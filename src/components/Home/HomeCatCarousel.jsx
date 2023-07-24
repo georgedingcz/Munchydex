@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Accordion, Card, Carousel } from "react-bootstrap";
+import { Accordion, Card, Carousel, Image } from "react-bootstrap";
 
 export default function CategoryList({ existingCategories }) {
   const [index, setIndex] = useState(0);
@@ -19,10 +19,11 @@ export default function CategoryList({ existingCategories }) {
       >
         {existingCategories.map((existingCategory, index) => (
           <Carousel.Item key={index}>
-            <img
+            <Image
               className="d-block w-100"
               src={existingCategory.image}
               alt="category"
+              fluid
             />
             {/* <Carousel.Caption>
               <h5> {existingCategory.name}</h5>

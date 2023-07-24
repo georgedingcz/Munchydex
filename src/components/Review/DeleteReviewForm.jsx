@@ -29,10 +29,8 @@ export default function DeleteReviewForm({
   return (
     <Form className="section-container">
       <h2>Delete a review</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Category
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -52,10 +50,8 @@ export default function DeleteReviewForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatName">
-          Eatery
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatName">
+        <Form.Label className="form-label">Eatery</Form.Label>
         <Form.Select
           name="eateryName"
           id="eateryName-select"
@@ -75,10 +71,8 @@ export default function DeleteReviewForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="reviewTitle">
-          Title
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="reviewTitle">
+        <Form.Label className="form-label">Title</Form.Label>
         <Form.Select
           name="title"
           id="title-select"

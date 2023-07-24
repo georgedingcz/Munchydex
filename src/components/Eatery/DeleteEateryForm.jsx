@@ -32,10 +32,8 @@ export default function DeleteEateryForm({
   return (
     <Form className="section-container">
       <h2>Delete eatery</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Category
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -49,10 +47,8 @@ export default function DeleteEateryForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatName">
-          Name
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatName">
+        <Form.Label className="form-label">Name</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"

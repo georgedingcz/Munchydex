@@ -1,5 +1,6 @@
 import { Container } from "react-bootstrap";
 import HomeCatCarousel from "../../components/Home/HomeCatCarousel";
+import SiteIntro from "../../components/Home/SiteIntro";
 
 export default function HomePage({
   existingCategories,
@@ -7,8 +8,7 @@ export default function HomePage({
 }) {
   return (
     <Container>
-      <h1>HomePage</h1>
-      <p>Website introduction:</p>
+      {<SiteIntro />}
       {<HomeCatCarousel existingCategories={existingCategories} />}
       <p>What are some of the reviews available:</p>
     </Container>

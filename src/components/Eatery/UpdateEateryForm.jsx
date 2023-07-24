@@ -35,10 +35,8 @@ export default function UpdateEateryForm({
   return (
     <Form className="section-container">
       <h2>Update eatery</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Category
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -52,10 +50,8 @@ export default function UpdateEateryForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatName">
-          Name
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatName">
+        <Form.Label className="form-label">Name</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"
@@ -69,10 +65,8 @@ export default function UpdateEateryForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatName">
-          Name
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatName">
+        <Form.Label className="form-label">Name</Form.Label>
         <Form.Control
           type="text"
           name="categoryName"
@@ -80,10 +74,8 @@ export default function UpdateEateryForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatLocation">
-          Location
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatLocation">
+        <Form.Label className="form-label">Location</Form.Label>
         <Form.Control
           type="text"
           name="eateryLocation"
@@ -91,10 +83,8 @@ export default function UpdateEateryForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="eatImage">
-          Image
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="eatImage">
+        <Form.Label className="form-label">Image</Form.Label>
         <Form.Control
           type="text"
           name="eateryImage"

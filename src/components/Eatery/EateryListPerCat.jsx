@@ -8,10 +8,8 @@ export default function EateryListPerCat({
   return (
     <div className="section-container">
       <h2>View eateries per category:</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Category
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
           name="categoryType"
           id="categoryType-select"

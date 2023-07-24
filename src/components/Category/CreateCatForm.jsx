@@ -37,10 +37,8 @@ export default function CreateCatForm({
   return (
     <Form className="section-container">
       <h2>Add eatery categories</h2>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catName">
-          Name
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catName">
+        <Form.Label className="form-label">Name</Form.Label>
         <Form.Control
           type="text"
           name="categoryName"
@@ -48,10 +46,8 @@ export default function CreateCatForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catImage">
-          Image URL
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catImage">
+        <Form.Label className="form-label">Image URL</Form.Label>
         <Form.Control
           type="text"
           name="categoryImage"
@@ -59,10 +55,8 @@ export default function CreateCatForm({
           onChange={handleChange}
         />
       </Form.Group>
-      <Form.Group className="mb-3">
-        <Form.Label className="form-label" controlId="catDesc">
-          Description
-        </Form.Label>
+      <Form.Group className="mb-3" controlId="catDesc">
+        <Form.Label className="form-label">Description</Form.Label>
         <Form.Control
           type="text"
           name="categoryDesc"
