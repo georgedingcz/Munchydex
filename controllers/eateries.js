@@ -5,6 +5,7 @@ module.exports = {
   listForOneCat,
   deleteOne,
   updateOne,
+  listOne
 };
 
 async function create(req, res) {
@@ -27,6 +28,17 @@ async function listForOneCat(req, res) {
     res.status(500).json(err);
   }
 }
+
+async function listOne(req, res) {
+  try {
+    const chosenEatId = req.params.id;
+    const chosenEat = await Eatery.findById(chosenEatId, req.body);
+    res.status(200).json(chosenEat);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+}
+
 
 async function deleteOne(req, res) {
   try {

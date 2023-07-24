@@ -4,10 +4,12 @@ const eatCtrl = require("../controllers/eateries");
 
 router.post("/", eatCtrl.create);
 
-router.get("/:id", eatCtrl.listForOneCat);
+router.get("/category/:id", eatCtrl.listForOneCat);
 
 router.delete("/:id", eatCtrl.deleteOne);
 
 router.patch("/:id", eatCtrl.updateOne);
+
+router.get("/:id", eatCtrl.listOne)
 
 module.exports = router;

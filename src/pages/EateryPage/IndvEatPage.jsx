@@ -2,14 +2,14 @@ import { useEffect, useState } from "react";
 import { Card } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
-export default function IndvCat() {
-  const [oneCat, setOneCat] = useState({})
+export default function IndvEat() {
+  const [oneEat, setOneEat] = useState({});
 
   const { id } = useParams();
   useEffect(() => {
-    const fetchChosenCat = async () => {
+    const fetchChosenEat = async () => {
       try {
-        const response = await fetch(`/categories/${id}`, {
+        const response = await fetch(`/eateries/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -17,26 +17,22 @@ export default function IndvCat() {
         });
         if (response.ok) {
           const data = await response.json();
-          setOneCat(data);
+          setOneEat(data);
+          console.log("at least here");
         }
       } catch (err) {
         console.log(err);
       }
     };
-    fetchChosenCat();
+    fetchChosenEat();
   }, []);
 
   return (
     <Card>
-      <Card.Img
-        src={oneCat.image}
-        alt="category"
-        fluid
-        variant="top"
-      />
+      <Card.Img src={oneEat.image} alt="eatery" fluid="true" variant="top" />
       <Card.Body>
-        <Card.Title>{oneCat.name}</Card.Title>
-        <Card.Text>{oneCat.briefDesc}</Card.Text>
+        <Card.Title>{oneEat.name}</Card.Title>
+        <Card.Text>{oneEat.location}</Card.Text>
       </Card.Body>
     </Card>
   );

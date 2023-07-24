@@ -48,7 +48,7 @@ export default function CreateEateryForm({
       <Form.Group className="mb-3" controlId="catName">
         <Form.Label className="form-label">Category</Form.Label>
         <Form.Select
-          name="categoryType"
+          name="categoryID"
           id="categoryType-select"
           onChange={handleEatCatSelect}
         >
@@ -64,8 +64,8 @@ export default function CreateEateryForm({
         <Form.Label className="form-label">Name</Form.Label>
         <Form.Control
           type="text"
-          name="categoryName"
-          value={newMegaState.categoryName}
+          name="eateryName"
+          value={newMegaState.eateryName}
           onChange={handleChange}
         />
       </Form.Group>

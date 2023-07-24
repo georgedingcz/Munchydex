@@ -10,6 +10,7 @@ import Eatery from "../EateryPage/EateryPage";
 import EateryReview from "../EateryReviewPage/EateryReviewPage";
 import EditPass from "../EditPassPage/EditPassPage";
 import IndvCat from "../EateryCategoryPage/IndvCatPage";
+import IndvEat from "../EateryPage/IndvEatPage";
 
 function App() {
   const [user, setUser] = useState(getUser());
@@ -123,7 +124,7 @@ function App() {
     const fetchOneCatEateries = async () => {
       try {
         const id = newMegaState.categoryID;
-        const response = await fetch(`/eateries/${id}`, {
+        const response = await fetch(`/eateries/category/${id}`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
@@ -149,6 +150,7 @@ function App() {
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
         <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
+        <Route path="/eatery/:id" element={<IndvEat {...reusedProps}/>}/>
         {user ? (
           <>
             {/* <Route path="/editpass" element={<EditPass {...reusedProps} />} /> */}

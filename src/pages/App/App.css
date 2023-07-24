@@ -22,7 +22,7 @@
   margin-top: 1%;
   padding: 2%;
   scroll-snap-type: y mandatory;
-  border: solid red;
+  border: solid black;
 }
 
 .carousel-container {
