@@ -60,6 +60,8 @@ export default function CreateCatForm({
         <Form.Control
           type="text"
           name="categoryDesc"
+          as="textarea"
+          rows={5}
           value={newMegaState.categoryDesc}
           onChange={handleChange}
         />

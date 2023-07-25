@@ -112,6 +112,8 @@ export default function CreateReviewForm({
         <Form.Control
           type="text"
           name="reviewDesc"
+          as="textarea"
+          rows={5}
           value={newMegaState.reviewDesc}
           onChange={handleChange}
         />

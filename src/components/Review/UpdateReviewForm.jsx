@@ -120,6 +120,8 @@ export default function UpdateReviewForm({
         <Form.Control
           type="text"
           name="reviewDesc"
+          as="textarea"
+          rows={5}
           value={newMegaState.reviewDesc}
           onChange={handleChange}
         />
