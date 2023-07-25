@@ -56,9 +56,8 @@ export default function EateryReview({
         if (response.ok) {
           const data = await response.json();
           setExistingReviews(data);
-          console.log(existingReviews);
         } else {
-          console.log("Problem with the response");
+          console.log("Failed to get reviews for one user");
         }
       } catch (err) {
         console.log(err);

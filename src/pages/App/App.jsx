@@ -113,6 +113,8 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           setExistingCategories(data);
+        } else {
+          console.log("Failed to get categories")
         }
       } catch (err) {
         console.log(err);
@@ -134,6 +136,8 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           setExistingEateries(data);
+        } else {
+          console.log("Failed to get eateries for one category")
         }
       } catch (err) {
         console.log(err);

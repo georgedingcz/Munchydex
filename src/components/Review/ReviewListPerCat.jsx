@@ -43,7 +43,7 @@ export default function ReviewListPerCat({
           const data = await response.json();
           setExistingReviews(data);
         } else {
-          console.log("Problem with the response");
+          console.log("Failed to get reviews for one category");
         }
       } catch (err) {
         console.log(err);

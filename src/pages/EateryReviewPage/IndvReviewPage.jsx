@@ -18,7 +18,8 @@ export default function IndvReview({ formatDate }) {
         if (response.ok) {
           const data = await response.json();
           setOneReview(data);
-          console.log("at least here");
+        } else {
+          console.log("Failed to get chosen review")
         }
       } catch (err) {
         console.log(err);

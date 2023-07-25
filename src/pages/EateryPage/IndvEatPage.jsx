@@ -18,7 +18,8 @@ export default function IndvEat() {
         if (response.ok) {
           const data = await response.json();
           setOneEat(data);
-          console.log("at least here");
+        } else {
+          console.log("Failed to get the chosen eatery");
         }
       } catch (err) {
         console.log(err);

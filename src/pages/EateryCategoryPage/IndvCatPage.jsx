@@ -19,6 +19,9 @@ export default function IndvCat() {
         if (response.ok) {
           const data = await response.json();
           setOneCat(data);
+        } else {
+          console.log("Failed to get the chosen category"
+          )
         }
       } catch (err) {
         console.log(err);
