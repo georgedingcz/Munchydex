@@ -27,11 +27,11 @@ export default function CategoryList({ existingCategories }) {
         {existingCategories.map((existingCategory, index) => (
           <Carousel.Item
             key={index}
-            onClick={() => handleOneCatPage(existingCategory._id)}
+            onClick={() => handleOneCatPage(existingCategory?._id)}
           >
             <Image
               className="d-block w-100"
-              src={existingCategory.image}
+              src={existingCategory?.image}
               alt="category"
               fluid
             />
@@ -42,7 +42,7 @@ export default function CategoryList({ existingCategories }) {
                 color: "white",
               }}
             >
-              <h3>{existingCategory.name}</h3>
+              <h3>{existingCategory?.name}</h3>
             </Carousel.Caption>
           </Carousel.Item>
         ))}

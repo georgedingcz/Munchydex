@@ -15,16 +15,20 @@ export default function DeleteReviewForm({
     evt.preventDefault();
     const id = newMegaState.reviewID;
     try {
-      await fetch(`/reviews/${id}`, {
+      const response = await fetch(`/reviews/${id}`, {
         method: "DELETE",
         headers: {
           "Content-Type": "application/json",
         },
       });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to delete review")
+      }
     } catch (err) {
       console.log(err);
     }
-    setForReviewFetch(!forReviewFetch);
   };
   return (
     <Form className="section-container">

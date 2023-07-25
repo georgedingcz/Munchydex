@@ -9,6 +9,7 @@ export default function DeleteEateryForm({
   forEateryFetch,
   setForEateryFetch,
   newMegaState,
+  setExistingCategories,
 }) {
   const handleDelete = async (evt) => {
     evt.preventDefault();
@@ -20,14 +21,19 @@ export default function DeleteEateryForm({
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
+      if (response.ok) {
+        setExistingEateries(
+          existingEateries.filter(
+            (eatery) => eatery._id !== newMegaState.eateryID
+          )
+        );
+        setForEateryFetch(!forEateryFetch);
+      } else {
+        console.log("Failed to delete eatery");
+      }
     } catch (err) {
       console.log(err);
     }
-    setExistingEateries(
-      existingEateries.filter((eatery) => eatery._id !== evt.target.value)
-    );
-    setForEateryFetch(!forEateryFetch);
   };
   return (
     <Form className="section-container">

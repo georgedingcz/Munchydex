@@ -15,7 +15,6 @@ export default function CreateCatForm({
       image: newMegaState.categoryImage,
       briefDesc: newMegaState.categoryDesc,
     };
-    setExistingCategories([...existingCategories, categoryData]);
     try {
       const response = await fetch("/categories", {
         method: "POST",
@@ -24,6 +23,11 @@ export default function CreateCatForm({
         },
         body: JSON.stringify(categoryData),
       });
+      if (response.ok) {
+        setExistingCategories([...existingCategories, categoryData]);
+      } else {
+        console.log("Failed to create category");
+      }
     } catch (err) {
       console.log(err);
     }

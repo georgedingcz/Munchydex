@@ -26,11 +26,14 @@ export default function UpdateEateryForm({
         },
         body: JSON.stringify(updatedEatData),
       });
-      console.log(response);
+      if (response.ok) {
+        setForEateryFetch(!forEateryFetch);
+      } else {
+        console.log("Failed to update eatery")
+      }
     } catch (err) {
       console.log(err);
     }
-    setForEateryFetch(!forEateryFetch);
   };
   return (
     <Form className="section-container">

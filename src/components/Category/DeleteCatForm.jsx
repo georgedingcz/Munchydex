@@ -22,16 +22,14 @@ export default function DeleteCatForm({
           "Content-Type": "application/json",
         },
       });
-      console.log(response);
       if (response.ok) {
         setExistingCategories(
           existingCategories.filter(
             (category) => category._id !== newMegaState.categoryID
           )
         );
-        console.log("Category deleted successfully!");
       } else {
-        console.log("Failed to delete the category.");
+        console.log("Failed to delete category.");
       }
     } catch (err) {
       console.log(err);

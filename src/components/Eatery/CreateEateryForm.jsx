@@ -8,8 +8,6 @@ export default function CreateEateryForm({
   setNewMegaState,
   existingEateries,
   setExistingEateries,
-  forEateryFetch,
-  setForEateryFetch,
 }) {
   const handleCreateEatery = async (evt) => {
     evt.preventDefault();
@@ -21,15 +19,19 @@ export default function CreateEateryForm({
       location: newMegaState.eateryLocation,
       image: newMegaState.eateryImage,
     };
-    setExistingEateries([...existingEateries, eateryData]);
     try {
-      await fetch("/eateries", {
+      const response = await fetch("/eateries", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(eateryData),
       });
+      if (response.ok) {
+        setExistingEateries([...existingEateries, eateryData]);
+      } else {
+        console.log("Failed to create eatery")
+      }
     } catch (err) {
       console.log(err);
     }
@@ -39,7 +41,6 @@ export default function CreateEateryForm({
       eateryLocation: "",
       eateryImage: "",
     });
-    setForEateryFetch(!forEateryFetch);
   };
 
   return (

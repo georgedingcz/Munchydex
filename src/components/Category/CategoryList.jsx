@@ -1,6 +1,12 @@
 import { Card, Col, Row } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 export default function CategoryList({ existingCategories }) {
+  const navigate = useNavigate();
+  const handleOneCatPage = (id) => {
+    navigate(`/eatcat/` + id);
+    console.log(id);
+  };
   return (
     <div className="section-container">
       <h2>Food categories available:</h2>
@@ -10,7 +16,11 @@ export default function CategoryList({ existingCategories }) {
         <Row xs={1} md={2} lg={3}>
           {existingCategories.map((existingCategory, index) => (
             <Col key={index}>
-              <Card key={index} style={{ width: "18rem" }}>
+              <Card
+                key={index}
+                style={{ width: "18rem" }}
+                onClick={() => handleOneCatPage(existingCategory?._id)}
+              >
                 <Card.Img
                   src={existingCategory?.image}
                   alt="category"

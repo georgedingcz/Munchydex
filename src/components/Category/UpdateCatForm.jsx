@@ -7,6 +7,7 @@ export default function UpdateCatForm({
   forCategoryFetch,
   setForCategoryFetch,
   setNewMegaState,
+  setExistingCategories
 }) {
   const handleUpdateCatSelect = async (evt) => {
     console.log(evt.target.value);
@@ -24,7 +25,6 @@ export default function UpdateCatForm({
   const handleUpdateCat = async (evt) => {
     evt.preventDefault();
     const id = newMegaState.categoryID;
-    console.log("this thing", JSON.stringify(id));
     const updatedCatData = {
       name: newMegaState.categoryName,
       image: newMegaState.categoryImage,
@@ -38,11 +38,14 @@ export default function UpdateCatForm({
         },
         body: JSON.stringify(updatedCatData),
       });
-      console.log(response);
+      if (response.ok) {
+        setForCategoryFetch(!forCategoryFetch);
+      } else {
+        console.log("Failed to update category")
+      }
     } catch (err) {
       console.log(err);
     }
-    setForCategoryFetch(!forCategoryFetch);
   };
 
   return (

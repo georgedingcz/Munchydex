@@ -32,13 +32,18 @@ export default function CreateReviewForm({
       score: newMegaState.reviewScore,
     };
     try {
-      await fetch("/reviews", {
+      const response = await fetch("/reviews", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(reviewData),
       });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to create review")
+      }
     } catch (err) {
       console.log(err);
     }
@@ -53,7 +58,6 @@ export default function CreateReviewForm({
       reviewPrice: 0,
       reviewScore: 0,
     });
-    setForReviewFetch(!forReviewFetch);
   };
 
   return (

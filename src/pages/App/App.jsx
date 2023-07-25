@@ -134,8 +134,6 @@ function App() {
         if (response.ok) {
           const data = await response.json();
           setExistingEateries(data);
-        } else {
-          console.log("Problem with the response");
         }
       } catch (err) {
         console.log(err);

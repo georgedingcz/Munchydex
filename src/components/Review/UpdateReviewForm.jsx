@@ -24,17 +24,21 @@ export default function UpdateReviewForm({
       score: newMegaState.reviewScore,
     };
     try {
-      await fetch(`/reviews/${id}`, {
+      const response = await fetch(`/reviews/${id}`, {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(updatedReviewData),
       });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to update review")
+      }
     } catch (err) {
       console.log(err);
     }
-    setForReviewFetch(!forReviewFetch);
   };
 
   return (
