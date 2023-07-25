@@ -14,7 +14,6 @@ export default function SiteIntro() {
             extensive database of food categories, eateries, and genuine reviews
             from food enthusiasts like yourself.
           </p>
-
           <p>
             Discover a diverse world of flavors and cuisines as Munchydex takes
             you on a gastronomic journey like no other. Whether you're craving
@@ -22,7 +21,6 @@ export default function SiteIntro() {
             delectable desserts, our user-friendly interface allows you to
             easily navigate through a treasure trove of dining options.
           </p>
-
           <p>
             What sets Munchydex apart is its community-driven approach. We
             believe in the power of real food experiences shared by real people.
@@ -30,7 +28,6 @@ export default function SiteIntro() {
             fellow foodies, ensuring that you get authentic insights before you
             set out to satisfy your taste buds.
           </p>
-
           <p>
             Looking for the best pizza joint in town or the hidden gem that
             serves mouthwatering dim sum? Munchydex has got you covered. Our
@@ -38,7 +35,6 @@ export default function SiteIntro() {
             it a breeze to find your ideal culinary destination, whether you're
             at home or traveling abroad.
           </p>
-
           <p>
             So, whether you're a connoisseur seeking new epicurean heights or a
             casual diner looking for a reliable spot to enjoy a great meal,
