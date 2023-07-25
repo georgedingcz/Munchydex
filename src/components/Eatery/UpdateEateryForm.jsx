@@ -70,7 +70,7 @@ export default function UpdateEateryForm({
         <Form.Control
           type="text"
           name="categoryName"
-          value={newMegaState.categoryName}
+          value={newMegaState.eateryName}
           onChange={handleChange}
         />
       </Form.Group>

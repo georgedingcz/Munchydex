@@ -69,36 +69,42 @@ export default function ReviewListPerCat({
           </Form.Select>
         </Form.Group>
       </Form>
-      <Row xs={1} md={2} lg={3}>
-        {existingReviews.map((existingReview, index) => (
-          <Col key={index}>
-            <Card
-              key={index}
-              style={{ width: "18rem" }}
-              onClick={() => handleOneReviewPage(existingReview?._id)}
-            >
-              <Card.Img
-                src={existingReview?.image}
-                alt="category"
-                width="50"
-                height="200"
-                variant="top"
-              />
-              <Card.Body>
-                <Card.Title>{existingReview?.title}</Card.Title>
-                <Card.Subtitle>{existingReview?.name?.name}</Card.Subtitle>
-              </Card.Body>
-              <ListGroup className="list-group-flush">
-                <ListGroup.Item>
-                  {formatDate(existingReview?.date)}
-                </ListGroup.Item>
-                <ListGroup.Item>${existingReview?.price}</ListGroup.Item>
-                <ListGroup.Item>Score: {existingReview?.score}</ListGroup.Item>
-              </ListGroup>
-            </Card>
-          </Col>
-        ))}
-      </Row>
+      {existingReviews.length === 0 ? (
+        <>No existing reviews for this category</>
+      ) : (
+        <Row xs={1} md={2} lg={3}>
+          {existingReviews.map((existingReview, index) => (
+            <Col key={index}>
+              <Card
+                key={index}
+                style={{ width: "18rem" }}
+                onClick={() => handleOneReviewPage(existingReview?._id)}
+              >
+                <Card.Img
+                  src={existingReview?.image}
+                  alt="category"
+                  width="50"
+                  height="200"
+                  variant="top"
+                />
+                <Card.Body>
+                  <Card.Title>{existingReview?.title}</Card.Title>
+                  <Card.Subtitle>{existingReview?.name?.name}</Card.Subtitle>
+                </Card.Body>
+                <ListGroup className="list-group-flush">
+                  <ListGroup.Item>
+                    {formatDate(existingReview?.date)}
+                  </ListGroup.Item>
+                  <ListGroup.Item>${existingReview?.price}</ListGroup.Item>
+                  <ListGroup.Item>
+                    Score: {existingReview?.score}
+                  </ListGroup.Item>
+                </ListGroup>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }

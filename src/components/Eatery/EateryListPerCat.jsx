@@ -30,29 +30,33 @@ export default function EateryListPerCat({
           ))}
         </Form.Select>
       </Form.Group>
-      <Row xs={1} md={2} lg={3}>
-        {existingEateries.map((existingEatery, index) => (
-          <Col key={index}>
-            <Card
-              key={index}
-              style={{ width: "18rem" }}
-              onClick={() => handleOneEatPage(existingEatery?._id)}
-            >
-              <Card.Img
-                src={existingEatery?.image}
-                alt="eatery"
-                width="50"
-                height="200"
-                variant="top"
-              />
-              <Card.Body>
-                <Card.Title>{existingEatery?.name}</Card.Title>
-              </Card.Body>
-            </Card>
-            <br />
-          </Col>
-        ))}
-      </Row>
+      {existingEateries.length === 0 ? (
+        <>No eateries for this category</>
+      ) : (
+        <Row xs={1} md={2} lg={3}>
+          {existingEateries.map((existingEatery, index) => (
+            <Col key={index}>
+              <Card
+                key={index}
+                style={{ width: "18rem" }}
+                onClick={() => handleOneEatPage(existingEatery?._id)}
+              >
+                <Card.Img
+                  src={existingEatery?.image}
+                  alt="eatery"
+                  width="50"
+                  height="200"
+                  variant="top"
+                />
+                <Card.Body>
+                  <Card.Title>{existingEatery?.name}</Card.Title>
+                </Card.Body>
+              </Card>
+              <br />
+            </Col>
+          ))}
+        </Row>
+      )}
     </div>
   );
 }
