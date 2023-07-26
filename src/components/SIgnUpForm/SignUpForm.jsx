@@ -34,7 +34,10 @@ export default class SignUpForm extends Component {
   };
 
   render() {
-    const disable = this.state.password !== this.state.confirm;
+    const disable =
+      this.state.password !== this.state.confirm ||
+      this.state.email === "" ||
+      this.state.name === "";
     if (this.state.signUpSuccess) {
       return <Navigate to="/homepage" />;
     }
@@ -47,8 +50,10 @@ export default class SignUpForm extends Component {
             name="name"
             value={this.state.name}
             onChange={this.handleChange}
-            required
           />
+          <Form.Text id="userNameHelp" muted>
+            (Required)
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Email</Form.Label>
@@ -57,8 +62,10 @@ export default class SignUpForm extends Component {
             name="email"
             value={this.state.email}
             onChange={this.handleChange}
-            required
           />
+          <Form.Text id="userEmailHelp" muted>
+            (Required)
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
@@ -67,8 +74,10 @@ export default class SignUpForm extends Component {
             name="password"
             value={this.state.password}
             onChange={this.handleChange}
-            required
           />
+          <Form.Text id="passHelp" muted>
+            (Required) Your password must be at least 3 characters long
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Confirm</Form.Label>
@@ -77,8 +86,10 @@ export default class SignUpForm extends Component {
             name="confirm"
             value={this.state.confirm}
             onChange={this.handleChange}
-            required
           />
+          <Form.Text id="confirmPassHelp" muted>
+            (Required) Repeat the same password as above
+          </Form.Text>
         </Form.Group>
         <Button
           variant="primary"

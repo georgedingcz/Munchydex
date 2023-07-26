@@ -41,8 +41,10 @@ export default function LoginForm({ setUser }) {
             name="email"
             value={credentials.email}
             onChange={handleChange}
-            required
           />
+          <Form.Text id="userEmailHelp" muted>
+            (Required)
+          </Form.Text>
         </Form.Group>
         <Form.Group className="mb-3">
           <Form.Label>Password</Form.Label>
@@ -51,8 +53,10 @@ export default function LoginForm({ setUser }) {
             name="password"
             value={credentials.password}
             onChange={handleChange}
-            required
           />
+          <Form.Text id="passHelp" muted>
+            (Required)
+          </Form.Text>
         </Form.Group>
         <Button variant="primary" size="lg" onClick={handleSubmit}>
           LOG IN
