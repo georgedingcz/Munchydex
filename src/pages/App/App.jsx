@@ -151,7 +151,6 @@ function App() {
       <NavBar setUser={setUser} user={user} />
       <Routes>
         <Route path="/" element={<HomePage {...reusedProps} />} />
-        <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
         <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
         <Route path="/eatery/:id" element={<IndvEat {...reusedProps} />} />

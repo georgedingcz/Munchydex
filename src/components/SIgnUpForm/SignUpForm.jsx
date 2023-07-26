@@ -39,7 +39,7 @@ export default class SignUpForm extends Component {
       this.state.email === "" ||
       this.state.name === "";
     if (this.state.signUpSuccess) {
-      return <Navigate to="/homepage" />;
+      return <Navigate to="/" />;
     }
     return (
       <Form className="section-container">

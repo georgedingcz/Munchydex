@@ -29,7 +29,7 @@ export default function LoginForm({ setUser }) {
   }
 
   if (loginSuccess) {
-    return <Navigate to="/homepage" />;
+    return <Navigate to="/" />;
   }
 
   return (

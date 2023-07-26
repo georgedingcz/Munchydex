@@ -16,15 +16,15 @@ export default function NavBar({ setUser, user }) {
       data-bs-theme="light"
     >
       <Container>
-        <Navbar.Brand href="/homepage">Munchydex</Navbar.Brand>
+        <Navbar.Brand href="/">Munchydex</Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/homepage">Home</Nav.Link>
+            <Nav.Link href="/">Home</Nav.Link>
             {user ? (
               <>
                 {/* <Nav.Link href="/editpass">Edit Password</Nav.Link> */}
-                <Nav.Link href="/homepage" onClick={handleLogOut}>
+                <Nav.Link href="/" onClick={handleLogOut}>
                   Log Out
                 </Nav.Link>
                 {user.isAdmin ? (
