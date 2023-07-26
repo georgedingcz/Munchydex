@@ -59,9 +59,15 @@ export default function SearchForm() {
           onChange={handleSearchChange}
         />
         <ListGroup>
-          {filteredEat.map((eatery) => (
-            <ListGroup.Item key={eatery._id}>{eatery.name}</ListGroup.Item>
-          ))}
+          {searchName ? (
+            <>
+              {filteredEat.map((eatery) => (
+                <ListGroup.Item key={eatery._id}>{eatery.name}</ListGroup.Item>
+              ))}
+            </>
+          ) : (
+            <></>
+          )}
         </ListGroup>
       </Form.Group>
       <Button onClick={handleSearch} type="submit">
