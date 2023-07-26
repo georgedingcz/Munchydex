@@ -1,12 +1,16 @@
-import { Link } from "react-router-dom";
 import * as userService from "../../utilities/users-service";
-import { Container, Nav, Navbar } from "react-bootstrap";
-
+import {
+  Container,
+  Nav,
+  Navbar,
+} from "react-bootstrap";
 export default function NavBar({ setUser, user }) {
   function handleLogOut() {
     userService.logOut();
     setUser(null);
   }
+
+  
 
   return (
     <Navbar
@@ -37,7 +41,7 @@ export default function NavBar({ setUser, user }) {
                     <Nav.Link href="/review">Review</Nav.Link>
                   </>
                 )}
-                <Navbar.Text>Signed in as: {user.name}</Navbar.Text>
+                {/* <Navbar.Text>Signed in as: {user.name}</Navbar.Text> */}
               </>
             ) : (
               <Nav.Link href="/authpage">Log In</Nav.Link>

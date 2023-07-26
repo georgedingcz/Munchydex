@@ -24,7 +24,6 @@ export default function ReviewListPerCat({
   const navigate = useNavigate();
 
   const id = newMegaState.categoryID;
-  console.log(id);
 
   const handleOneReviewPage = (id) => {
     navigate(`/review/` + id);
@@ -60,7 +59,7 @@ export default function ReviewListPerCat({
             id="categoryType-select"
             onChange={handleUpdateCatSelect}
           >
-            <option value="">View Reviews</option>
+            <option value="">View Reviews Per Category</option>
             {existingCategories.map((existingCategory, index) => (
               <option key={index} value={existingCategory._id}>
                 {existingCategory.name}

@@ -148,7 +148,7 @@ function App() {
 
   return (
     <main className="App">
-      <NavBar setUser={setUser} user={user} />
+      <NavBar {...reusedProps} />
       <Routes>
         <Route path="/" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />

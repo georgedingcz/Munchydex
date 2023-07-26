@@ -6,6 +6,8 @@ router.post("/", eatCtrl.create);
 
 router.get("/category/:id", eatCtrl.listForOneCat);
 
+router.get("/", eatCtrl.listAll)
+
 router.delete("/:id", eatCtrl.deleteOne);
 
 router.patch("/:id", eatCtrl.updateOne);
