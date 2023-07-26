@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Container, Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 export default function EditPass({ user, setUser, newMegaState }) {
   const [credentials, setCredentials] = useState({

@@ -11,7 +11,6 @@ export default function EatCat({
   forCategoryFetch,
   newMegaState,
   setNewMegaState,
-
   handleChange,
 }) {
   const reusedProps = {

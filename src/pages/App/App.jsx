@@ -95,9 +95,7 @@ function App() {
     setForReviewFetch,
     newMegaState,
     setNewMegaState,
-
     handleChange,
-
     formatDate,
   };
 

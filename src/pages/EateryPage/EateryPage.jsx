@@ -12,7 +12,6 @@ export default function Eatery({
   setForEateryFetch,
   newMegaState,
   setNewMegaState,
-
   handleChange,
 }) {
   const handleEatCatSelect = async (evt) => {
@@ -44,7 +43,6 @@ export default function Eatery({
     setForEateryFetch,
     newMegaState,
     setNewMegaState,
-
     handleChange,
     handleEatCatSelect,
     handleEatSelect,

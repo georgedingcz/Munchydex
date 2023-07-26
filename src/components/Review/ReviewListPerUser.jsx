@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Card, Col, ListGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 

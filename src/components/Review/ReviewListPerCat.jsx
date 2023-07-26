@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Card, Col, Container, Form, ListGroup, Row } from "react-bootstrap";
+import { Card, Col, Form, ListGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export default function ReviewListPerCat({

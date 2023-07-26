@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Button, Col, Row, Form, ListGroup } from "react-bootstrap";
+import { Button, Form, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchForm() {

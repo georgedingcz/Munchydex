@@ -2,17 +2,13 @@ import { Button, Form } from "react-bootstrap";
 
 export default function CreateReviewForm({
   user,
-
   handleCatSelect,
   handleEatSelect,
   handleChange,
-
   existingCategories,
   existingEateries,
-
   newMegaState,
   setNewMegaState,
-
   forReviewFetch,
   setForReviewFetch,
 }) {

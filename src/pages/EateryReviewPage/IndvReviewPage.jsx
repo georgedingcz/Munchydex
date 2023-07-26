@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { Card, ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export default function IndvReview({ formatDate }) {

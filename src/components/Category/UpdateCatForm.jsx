@@ -7,7 +7,6 @@ export default function UpdateCatForm({
   forCategoryFetch,
   setForCategoryFetch,
   setNewMegaState,
-  setExistingCategories
 }) {
   const handleUpdateCatSelect = async (evt) => {
     console.log(evt.target.value);

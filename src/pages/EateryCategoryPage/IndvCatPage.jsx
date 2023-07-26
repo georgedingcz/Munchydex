@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { Card, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
-import ReviewListPerCat from "../../components/Review/ReviewListPerCat";
 
 export default function IndvCat() {
   const [oneCat, setOneCat] = useState({});

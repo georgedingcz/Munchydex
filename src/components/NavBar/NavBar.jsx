@@ -1,16 +1,10 @@
 import * as userService from "../../utilities/users-service";
-import {
-  Container,
-  Nav,
-  Navbar,
-} from "react-bootstrap";
+import { Container, Nav, Navbar } from "react-bootstrap";
 export default function NavBar({ setUser, user }) {
   function handleLogOut() {
     userService.logOut();
     setUser(null);
   }
-
-  
 
   return (
     <Navbar
