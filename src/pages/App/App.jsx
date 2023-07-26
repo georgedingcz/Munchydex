@@ -114,7 +114,7 @@ function App() {
           const data = await response.json();
           setExistingCategories(data);
         } else {
-          console.log("Failed to get categories")
+          console.log("Failed to get categories");
         }
       } catch (err) {
         console.log(err);
@@ -137,7 +137,7 @@ function App() {
           const data = await response.json();
           setExistingEateries(data);
         } else {
-          console.log("Failed to get eateries for one category")
+          console.log("Failed to get eateries for one category");
         }
       } catch (err) {
         console.log(err);
@@ -150,6 +150,7 @@ function App() {
     <main className="App">
       <NavBar setUser={setUser} user={user} />
       <Routes>
+        <Route path="/" element={<HomePage {...reusedProps} />} />
         <Route path="/homepage" element={<HomePage {...reusedProps} />} />
         <Route path="/authpage" element={<Auth {...reusedProps} />} />
         <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
