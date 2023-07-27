@@ -75,7 +75,9 @@ export default function UpdateReviewForm({
                 (existingReview) => existingReview.category.name
               )
             ),
-          ].map((categoryName, index) => (
+          ].sort((a, b) => {if (a < b) {
+            return -1
+          }}).map((categoryName, index) => (
             <option key={index} value={categoryName}>
               {categoryName}
             </option>
@@ -96,7 +98,9 @@ export default function UpdateReviewForm({
                 (filteredReview) => filteredReview.name.name
               )
             ),
-          ].map((eateryName, index) => (
+          ].sort((a, b) => {if (a < b) {
+            return -1
+          }}).map((eateryName, index) => (
             <option key={index} value={eateryName}>
               {eateryName}
             </option>
@@ -111,7 +115,9 @@ export default function UpdateReviewForm({
           onChange={handleUserTitleSelect}
         >
           <option value="">Select a title</option>
-          {filteredReviewsByEatery.map((filteredReview, index) => (
+          {filteredReviewsByEatery.sort((a, b) => {if (a.title < b.title) {
+              return -1
+            }}).map((filteredReview, index) => (
             <option key={index} value={filteredReview._id}>
               {filteredReview.title}
             </option>

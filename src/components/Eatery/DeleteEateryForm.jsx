@@ -46,11 +46,17 @@ export default function DeleteEateryForm({
           onChange={handleEatCatSelect}
         >
           <option value="">Select a category</option>
-          {existingCategories.map((existingCategory, index) => (
-            <option key={index} value={existingCategory._id}>
-              {existingCategory.name}
-            </option>
-          ))}
+          {existingCategories
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+            })
+            .map((existingCategory, index) => (
+              <option key={index} value={existingCategory._id}>
+                {existingCategory.name}
+              </option>
+            ))}
         </Form.Select>
       </Form.Group>
       <Form.Group className="mb-3" controlId="eatName">
@@ -61,11 +67,17 @@ export default function DeleteEateryForm({
           onChange={handleEatSelect}
         >
           <option value="">Select an eatery</option>
-          {existingEateries.map((existingEatery, index) => (
-            <option key={index} value={existingEatery._id}>
-              {existingEatery.name}
-            </option>
-          ))}
+          {existingEateries
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+            })
+            .map((existingEatery, index) => (
+              <option key={index} value={existingEatery._id}>
+                {existingEatery.name}
+              </option>
+            ))}
         </Form.Select>
       </Form.Group>
       <Button variant="primary" size="lg" onClick={handleDelete}>

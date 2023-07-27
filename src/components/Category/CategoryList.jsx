@@ -14,27 +14,33 @@ export default function CategoryList({ existingCategories }) {
         <>There are no categories</>
       ) : (
         <Row xs={1} md={2} lg={3}>
-          {existingCategories.map((existingCategory, index) => (
-            <Col key={index}>
-              <Card
-                key={index}
-                style={{ width: "18rem" }}
-                onClick={() => handleOneCatPage(existingCategory?._id)}
-              >
-                <Card.Img
-                  src={existingCategory?.image}
-                  alt="category"
-                  width="50"
-                  height="200"
-                  variant="top"
-                />
-                <Card.Body>
-                  <Card.Title>{existingCategory?.name}</Card.Title>
-                </Card.Body>
-              </Card>
-              <br />
-            </Col>
-          ))}
+          {existingCategories
+            .sort((a, b) => {
+              if (a.name < b.name) {
+                return -1;
+              }
+            })
+            .map((existingCategory, index) => (
+              <Col key={index}>
+                <Card
+                  key={index}
+                  style={{ width: "18rem" }}
+                  onClick={() => handleOneCatPage(existingCategory?._id)}
+                >
+                  <Card.Img
+                    src={existingCategory?.image}
+                    alt="category"
+                    width="50"
+                    height="200"
+                    variant="top"
+                  />
+                  <Card.Body>
+                    <Card.Title>{existingCategory?.name}</Card.Title>
+                  </Card.Body>
+                </Card>
+                <br />
+              </Col>
+            ))}
         </Row>
       )}
     </div>

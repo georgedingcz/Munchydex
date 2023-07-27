@@ -60,11 +60,17 @@ export default function ReviewListPerCat({
             onChange={handleUpdateCatSelect}
           >
             <option value="">View Reviews Per Category</option>
-            {existingCategories.map((existingCategory, index) => (
-              <option key={index} value={existingCategory._id}>
-                {existingCategory.name}
-              </option>
-            ))}
+            {existingCategories
+              .sort((a, b) => {
+                if (a.name < b.name) {
+                  return -1;
+                }
+              })
+              .map((existingCategory, index) => (
+                <option key={index} value={existingCategory._id}>
+                  {existingCategory.name}
+                </option>
+              ))}
           </Form.Select>
         </Form.Group>
       </Form>
