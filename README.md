@@ -48,11 +48,15 @@
 - MongoDB
 - Mongoose
 - React-Bootstrap
+- MUI
 
+# Getting Started
 ## Trello with user stories
-
 [Trello](https://trello.com/b/yLdsVuRL/munchydex)
-
-# Live URL
-
+## Live URL
 [Munchydex](https://munchydex.onrender.com/)
+
+# Next Steps
+- Alternative/Additional 'reads' to interact with existing review data
+- Interacting with reviews (comment? like?)
+
