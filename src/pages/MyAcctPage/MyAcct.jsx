@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Container, Form } from "react-bootstrap";
 import sendRequest from "../../utilities/send-request";
 import * as userService from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
@@ -41,7 +41,7 @@ export default function MyAcct({ user, setUser }) {
   }
 
   return (
-    <>
+    <Container>
       <Form className="section-container">
         <h2>Update Password</h2>
         <Form.Group>
@@ -78,6 +78,6 @@ export default function MyAcct({ user, setUser }) {
           Log Out
         </Button>
       </Form>
-    </>
+    </Container>
   );
 }
