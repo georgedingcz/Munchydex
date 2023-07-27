@@ -1,4 +1,7 @@
 import { Button, Form } from "react-bootstrap";
+import CatNameFormCtrl from "./CatFormCtrl/CatNameFormCtrl";
+import CatImageFormCtrl from "./CatFormCtrl/CatImageFormCtrl";
+import CatDescFormCtrl from "./CatFormCtrl/CatDescFormCtrl";
 
 export default function UpdateCatForm({
   newMegaState,
@@ -7,6 +10,7 @@ export default function UpdateCatForm({
   forCategoryFetch,
   setForCategoryFetch,
   setNewMegaState,
+  setExistingCategories,
 }) {
   const handleUpdateCatSelect = async (evt) => {
     console.log(evt.target.value);
@@ -40,11 +44,19 @@ export default function UpdateCatForm({
       if (response.ok) {
         setForCategoryFetch(!forCategoryFetch);
       } else {
-        console.log("Failed to update category")
+        console.log("Failed to update category");
       }
     } catch (err) {
       console.log(err);
     }
+  };
+
+  const reusedProps = {
+    newMegaState,
+    setNewMegaState,
+    existingCategories,
+    setExistingCategories,
+    handleChange,
   };
 
   return (
@@ -64,35 +76,9 @@ export default function UpdateCatForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="catName">
-        <Form.Label className="form-label">Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="categoryName"
-          value={newMegaState.categoryName}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="catImage">
-        <Form.Label className="form-label">Image URL</Form.Label>
-        <Form.Control
-          type="text"
-          name="categoryImage"
-          value={newMegaState.categoryImage}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="catDesc">
-        <Form.Label className="form-label">Description</Form.Label>
-        <Form.Control
-          type="text"
-          name="categoryDesc"
-          as="textarea"
-          rows={5}
-          value={newMegaState.categoryDesc}
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <CatNameFormCtrl {...reusedProps} />
+      <CatImageFormCtrl {...reusedProps} />
+      <CatDescFormCtrl {...reusedProps} />
       <Button variant="primary" size="lg" onClick={handleUpdateCat}>
         Submit
       </Button>

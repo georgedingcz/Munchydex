@@ -1,4 +1,10 @@
 import { Button, Form } from "react-bootstrap";
+import ReviewTitleFormCtrl from "./ReviewFormCtrl/ReviewTitleFormCtrl";
+import ReviewImageFormCtrl from "./ReviewFormCtrl/ReviewImageFormCtrl";
+import ReviewDescFormCtrl from "./ReviewFormCtrl/ReviewDescFormCtrl";
+import ReviewDateFormCtrl from "./ReviewFormCtrl/ReviewDateFormCtrl";
+import ReviewPriceFormCtrl from "./ReviewFormCtrl/ReviewPriceFormCtrl";
+import ReviewScoreFormCtrl from "./ReviewFormCtrl/ReviewScoreFormCtrl";
 
 export default function UpdateReviewForm({
   handleChange,
@@ -34,13 +40,24 @@ export default function UpdateReviewForm({
       if (response.ok) {
         setForReviewFetch(!forReviewFetch);
       } else {
-        console.log("Failed to update review")
+        console.log("Failed to update review");
       }
     } catch (err) {
       console.log(err);
     }
   };
-
+  const reusedProps = {
+    handleChange,
+    newMegaState,
+    existingReviews,
+    forReviewFetch,
+    setForReviewFetch,
+    handleUserCatSelect,
+    handleUserEatSelect,
+    filteredReviewsByCat,
+    handleUserTitleSelect,
+    filteredReviewsByEatery,
+  };
   return (
     <Form className="section-container">
       <h2>Update a review</h2>
@@ -101,62 +118,12 @@ export default function UpdateReviewForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewTitle">
-        <Form.Label className="form-label">Title</Form.Label>
-        <Form.Control
-          type="text"
-          name="reviewTitle"
-          value={newMegaState.reviewTitle}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewImage">
-        <Form.Label className="form-label">Image</Form.Label>
-        <Form.Control
-          type="text"
-          name="reviewImage"
-          value={newMegaState.reviewImage}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewDesc">
-        <Form.Label className="form-label">Description</Form.Label>
-        <Form.Control
-          type="text"
-          name="reviewDesc"
-          as="textarea"
-          rows={5}
-          value={newMegaState.reviewDesc}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewDate">
-        <Form.Label className="form-label">Date</Form.Label>
-        <Form.Control
-          type="date"
-          name="reviewDate"
-          value={newMegaState.reviewDate}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewPrice">
-        <Form.Label className="form-label">Price</Form.Label>
-        <Form.Control
-          type="number"
-          name="reviewPrice"
-          value={newMegaState.reviewPrice}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="reviewScore">
-        <Form.Label className="form-label">Score</Form.Label>
-        <Form.Control
-          type="number"
-          name="reviewScore"
-          value={newMegaState.reviewScore}
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <ReviewTitleFormCtrl {...reusedProps} />
+      <ReviewImageFormCtrl {...reusedProps} />
+      <ReviewDescFormCtrl {...reusedProps} />
+      <ReviewDateFormCtrl {...reusedProps} />
+      <ReviewPriceFormCtrl {...reusedProps} />
+      <ReviewScoreFormCtrl {...reusedProps} />
       <Button variant="primary" size="lg" onClick={handleUpdateReview}>
         Update a review
       </Button>

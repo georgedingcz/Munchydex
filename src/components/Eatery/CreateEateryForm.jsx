@@ -1,4 +1,7 @@
 import { Button, Form } from "react-bootstrap";
+import EatNameFormCtrl from "./EatFormCtrl/EatNameFormCtrl";
+import EatLocationFormCtrl from "./EatFormCtrl/EatLocationFormCtrl";
+import EatImageFormCtrl from "./EatFormCtrl/EatImageFormCtrl";
 
 export default function CreateEateryForm({
   existingCategories,
@@ -30,7 +33,7 @@ export default function CreateEateryForm({
       if (response.ok) {
         setExistingEateries([...existingEateries, eateryData]);
       } else {
-        console.log("Failed to create eatery")
+        console.log("Failed to create eatery");
       }
     } catch (err) {
       console.log(err);
@@ -43,6 +46,15 @@ export default function CreateEateryForm({
     });
   };
 
+  const reusedProps = {
+    existingCategories,
+    handleEatCatSelect,
+    handleChange,
+    newMegaState,
+    setNewMegaState,
+    existingEateries,
+    setExistingEateries,
+  };
   return (
     <Form className="section-container">
       <h2>Create eatery</h2>
@@ -61,33 +73,9 @@ export default function CreateEateryForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="eatName">
-        <Form.Label className="form-label">Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="eateryName"
-          value={newMegaState.eateryName}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="eatLocation">
-        <Form.Label className="form-label">Location</Form.Label>
-        <Form.Control
-          type="text"
-          name="eateryLocation"
-          value={newMegaState.eateryLocation}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="eatImage">
-        <Form.Label className="form-label">Image</Form.Label>
-        <Form.Control
-          type="text"
-          name="eateryImage"
-          value={newMegaState.eateryImage}
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <EatNameFormCtrl {...reusedProps} />
+      <EatLocationFormCtrl {...reusedProps} />
+      <EatImageFormCtrl {...reusedProps} />
       <Button variant="primary" size="lg" onClick={handleCreateEatery}>
         Create an eatery
       </Button>

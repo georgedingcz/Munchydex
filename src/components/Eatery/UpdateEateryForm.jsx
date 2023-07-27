@@ -1,4 +1,7 @@
 import { Button, Form } from "react-bootstrap";
+import EatNameFormCtrl from "./EatFormCtrl/EatNameFormCtrl";
+import EatLocationFormCtrl from "./EatFormCtrl/EatLocationFormCtrl";
+import EatImageFormCtrl from "./EatFormCtrl/EatImageFormCtrl";
 
 export default function UpdateEateryForm({
   existingCategories,
@@ -9,6 +12,8 @@ export default function UpdateEateryForm({
   forEateryFetch,
   setForEateryFetch,
   handleEatSelect,
+  setNewMegaState,
+  setExistingEateries,
 }) {
   const handleUpdateEat = async (evt) => {
     evt.preventDefault();
@@ -29,11 +34,20 @@ export default function UpdateEateryForm({
       if (response.ok) {
         setForEateryFetch(!forEateryFetch);
       } else {
-        console.log("Failed to update eatery")
+        console.log("Failed to update eatery");
       }
     } catch (err) {
       console.log(err);
     }
+  };
+  const reusedProps = {
+    existingCategories,
+    handleEatCatSelect,
+    handleChange,
+    newMegaState,
+    setNewMegaState,
+    existingEateries,
+    setExistingEateries,
   };
   return (
     <Form className="section-container">
@@ -68,33 +82,9 @@ export default function UpdateEateryForm({
           ))}
         </Form.Select>
       </Form.Group>
-      <Form.Group className="mb-3" controlId="eatName">
-        <Form.Label className="form-label">Name</Form.Label>
-        <Form.Control
-          type="text"
-          name="categoryName"
-          value={newMegaState.eateryName}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="eatLocation">
-        <Form.Label className="form-label">Location</Form.Label>
-        <Form.Control
-          type="text"
-          name="eateryLocation"
-          value={newMegaState.eateryLocation}
-          onChange={handleChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="eatImage">
-        <Form.Label className="form-label">Image</Form.Label>
-        <Form.Control
-          type="text"
-          name="eateryImage"
-          value={newMegaState.eateryImage}
-          onChange={handleChange}
-        />
-      </Form.Group>
+      <EatNameFormCtrl {...reusedProps} />
+      <EatLocationFormCtrl {...reusedProps} />
+      <EatImageFormCtrl {...reusedProps} />
       <Button variant="primary" size="lg" onClick={handleUpdateEat}>
         Update an eatery
       </Button>
