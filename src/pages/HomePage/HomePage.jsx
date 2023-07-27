@@ -2,7 +2,6 @@ import { Container } from "react-bootstrap";
 import HomeCatCarousel from "../../components/Home/HomeCatCarousel";
 import SiteIntro from "../../components/Home/SiteIntro";
 import ReviewListPerCat from "../../components/Review/ReviewListPerCat";
-import SearchForm from "../../components/Eatery/SearchForm";
 
 export default function HomePage({
   existingCategories,
@@ -26,7 +25,6 @@ export default function HomePage({
     <Container>
       <SiteIntro {...reusedProps} />
       <HomeCatCarousel {...reusedProps} />
-      <SearchForm {...reusedProps} />
       <ReviewListPerCat {...reusedProps} />
     </Container>
   );

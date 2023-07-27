@@ -1,11 +1,11 @@
 import * as userService from "../../utilities/users-service";
-import { Container, Nav, Navbar } from "react-bootstrap";
+import { Container, Form, Nav, Navbar, Row } from "react-bootstrap";
+import SearchForm from "../Eatery/SearchForm";
 export default function NavBar({ setUser, user }) {
   function handleLogOut() {
     userService.logOut();
     setUser(null);
   }
-
   return (
     <Navbar
       expand="md"
@@ -18,7 +18,6 @@ export default function NavBar({ setUser, user }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            <Nav.Link href="/">Home</Nav.Link>
             {user ? (
               <>
                 <Nav.Link href="/editpass">My Acct.</Nav.Link>
@@ -35,11 +34,15 @@ export default function NavBar({ setUser, user }) {
                     <Nav.Link href="/review">Review</Nav.Link>
                   </>
                 )}
-                {/* <Navbar.Text>Signed in as: {user.name}</Navbar.Text> */}
               </>
             ) : (
               <Nav.Link href="/authpage">Log In</Nav.Link>
             )}
+            <Form inline>
+              <Row xs="auto">
+                <SearchForm />
+              </Row>
+            </Form>
           </Nav>
         </Navbar.Collapse>
       </Container>

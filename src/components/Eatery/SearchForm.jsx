@@ -1,3 +1,4 @@
+import { Autocomplete, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
 import { Button, Form, ListGroup } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
@@ -28,51 +29,44 @@ export default function SearchForm() {
   }, []);
 
   const [searchName, setSearchName] = useState("");
-  const [filteredEat, setFilteredEat] = useState([]);
-
-  const handleSearchChange = (event) => {
-    setSearchName(event.target.value);
-    setFilteredEat(
-      allEateries.filter((eatery) =>
-        eatery.name.toLowerCase().startsWith(searchName.toLowerCase())
-      )
-    );
-  };
 
   const navigate = useNavigate();
 
   const handleSearch = async (evt) => {
     const chosenEatery = allEateries.find(
-      (eatery) => eatery.name.toLowerCase() === searchName
+      (eatery) => eatery.name.toLowerCase() === searchName.toLowerCase()
     );
-    navigate(`/eatery/` + chosenEatery._id);
-    console.log(chosenEatery._id);
+
+    if (chosenEatery) {
+      navigate(`/eatery/` + chosenEatery._id);
+      console.log(chosenEatery._id);
+    } else {
+      console.log("No matching eatery found");
+      console.log(JSON.stringify(chosenEatery));
+    }
   };
   return (
-    <Form className="section-container">
-      <Form.Group className="mb-3" controlId="searchEatery">
-        <Form.Control
-          type="text"
-          placeholder="Search Eateries"
-          className=" mr-sm-2"
-          value={searchName}
-          onChange={handleSearchChange}
-        />
-        <ListGroup>
-          {searchName ? (
-            <>
-              {filteredEat.map((eatery) => (
-                <ListGroup.Item key={eatery._id}>{eatery.name}</ListGroup.Item>
-              ))}
-            </>
-          ) : (
-            <></>
-          )}
-        </ListGroup>
-      </Form.Group>
-      <Button onClick={handleSearch} type="submit">
+    <>
+      <Autocomplete
+        disablePortal
+        id="combo-box-demo"
+        options={allEateries.map((eatery) => eatery.name)}
+        sx={{ width: 200 }}
+        renderInput={(params) => (
+          <TextField {...params} label="Eatery Search" size="small" />
+        )}
+        inputValue={searchName}
+        onInputChange={(event, value) => {
+          setSearchName(value);
+        }}
+        value={searchName}
+        onChange={(event, value) => {
+          setSearchName(value);
+        }}
+      />
+      <Button variant="primary" size="sm" onClick={handleSearch} type="submit">
         Submit
       </Button>
-    </Form>
+    </>
   );
 }
