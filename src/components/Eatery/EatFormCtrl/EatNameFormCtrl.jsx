@@ -10,6 +10,9 @@ export default function EatNameFormCtrl({ newMegaState, handleChange }) {
         value={newMegaState.eateryName}
         onChange={handleChange}
       />
+      <Form.Text id="eatName" muted>
+        (Required)
+      </Form.Text>
     </Form.Group>
   );
 }

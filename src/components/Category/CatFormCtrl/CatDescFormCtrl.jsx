@@ -12,6 +12,9 @@ export default function CatDescFormCtrl({ newMegaState, handleChange }) {
         value={newMegaState.categoryDesc}
         onChange={handleChange}
       />
+      <Form.Text id="catDesc" muted>
+        (Required)
+      </Form.Text>
     </Form.Group>
   );
 }

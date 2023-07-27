@@ -10,6 +10,9 @@ export default function EatLocationFormCtrl({ newMegaState, handleChange }) {
         value={newMegaState.eateryLocation}
         onChange={handleChange}
       />
+      <Form.Text id="eatLocation" muted>
+        (Required)
+      </Form.Text>
     </Form.Group>
   );
 }
