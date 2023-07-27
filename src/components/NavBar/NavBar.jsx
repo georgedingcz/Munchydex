@@ -1,11 +1,6 @@
-import * as userService from "../../utilities/users-service";
 import { Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 import SearchForm from "../Eatery/SearchForm";
 export default function NavBar({ setUser, user }) {
-  function handleLogOut() {
-    userService.logOut();
-    setUser(null);
-  }
   return (
     <Navbar
       expand="md"
@@ -20,10 +15,7 @@ export default function NavBar({ setUser, user }) {
           <Nav className="me-auto">
             {user ? (
               <>
-                <Nav.Link href="/editpass">My Acct.</Nav.Link>
-                <Nav.Link href="/" onClick={handleLogOut}>
-                  Log Out
-                </Nav.Link>
+                <Nav.Link href="/myAcct">My Acct.</Nav.Link>
                 {user.isAdmin ? (
                   <>
                     <Nav.Link href="/eatcat">Category</Nav.Link>

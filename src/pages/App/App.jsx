@@ -8,7 +8,7 @@ import HomePage from "../HomePage/HomePage";
 import EatCat from "../EateryCategoryPage/EatCatPage";
 import Eatery from "../EateryPage/EateryPage";
 import EateryReview from "../EateryReviewPage/EateryReviewPage";
-import EditPass from "../EditPassPage/EditPassPage";
+import MyAcct from "../MyAcctPage/MyAcct";
 import IndvCat from "../EateryCategoryPage/IndvCatPage";
 import IndvEat from "../EateryPage/IndvEatPage";
 import IndvReview from "../EateryReviewPage/IndvReviewPage";
@@ -155,7 +155,7 @@ function App() {
         <Route path="/review/:id" element={<IndvReview {...reusedProps} />} />
         {user ? (
           <>
-            <Route path="/editpass/" element={<EditPass {...reusedProps} />} />
+            <Route path="/myAcct/" element={<MyAcct {...reusedProps} />} />
             <>
               {user.isAdmin ? (
                 <>

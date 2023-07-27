@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import sendRequest from "../../utilities/send-request";
+import * as userService from "../../utilities/users-service";
+import { useNavigate } from "react-router-dom";
 
-export default function EditPass({ user, setUser, newMegaState }) {
+export default function MyAcct({ user, setUser }) {
+  const navigate = useNavigate();
+
   const [credentials, setCredentials] = useState({
     currentPass: "",
     newPass: "",
@@ -22,14 +26,24 @@ export default function EditPass({ user, setUser, newMegaState }) {
         "PATCH",
         credentials
       );
-      setPassChangeSuccess(true);
+      if (response.ok) {
+        setPassChangeSuccess(true);
+      }
     } catch (err) {
       console.log(err);
     }
   }
+
+  function handleLogOut() {
+    userService.logOut();
+    setUser(null);
+    navigate("/");
+  }
+
   return (
     <>
       <Form className="section-container">
+        <h2>Update Password</h2>
         <Form.Group>
           <Form.Label>Current Password</Form.Label>
           <Form.Control
@@ -58,6 +72,11 @@ export default function EditPass({ user, setUser, newMegaState }) {
         ) : (
           <></>
         )}
+      </Form>
+      <Form className="section-container">
+        <Button variant="primary" size="lg" onClick={handleLogOut}>
+          Log Out
+        </Button>
       </Form>
     </>
   );
