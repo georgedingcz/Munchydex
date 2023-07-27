@@ -1,10 +1,12 @@
 import { Autocomplete, TextField } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Button, Form, ListGroup } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchForm() {
+  const navigate = useNavigate();
   const [allEateries, setAllEateries] = useState([]);
+  const [searchName, setSearchName] = useState();
 
   useEffect(() => {
     const fetchEateries = async () => {
@@ -28,15 +30,10 @@ export default function SearchForm() {
     fetchEateries();
   }, []);
 
-  const [searchName, setSearchName] = useState("");
-
-  const navigate = useNavigate();
-
-  const handleSearch = async (evt) => {
+  const handleSearch = async () => {
     const chosenEatery = allEateries.find(
       (eatery) => eatery.name.toLowerCase() === searchName.toLowerCase()
     );
-
     if (chosenEatery) {
       navigate(`/eatery/` + chosenEatery._id);
       console.log(chosenEatery._id);
