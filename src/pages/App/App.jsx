@@ -155,7 +155,7 @@ function App() {
         <Route path="/review/:id" element={<IndvReview {...reusedProps} />} />
         {user ? (
           <>
-            {/* <Route path="/editpass" element={<EditPass {...reusedProps} />} /> */}
+            <Route path="/editpass/" element={<EditPass {...reusedProps} />} />
             <>
               {user.isAdmin ? (
                 <>

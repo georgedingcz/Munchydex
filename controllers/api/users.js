@@ -43,11 +43,17 @@ function checkToken(req, res) {
 async function updatePass(req, res) {
   try {
     const userID = req.params.id;
-    const newPass = req.body.password
-    console.log(newPass)
-    const user = await User.findByIdAndUpdate(userID, req.body);
+    console.log(userID);
+    const user = await User.findById(userID);
+    const match = await bcrypt.compare(req.body.currentPass, user.password);
+    if (!user) throw new Error();
+    if (!match) throw new Error();
+    const newPass = req.body.newPass;
+    const hashNewPass = await bcrypt.hash(newPass, 6);
+    await User.findByIdAndUpdate(userID, { password: hashNewPass });
     res.status(200).json(user);
   } catch (err) {
     res.status(500).json(err);
   }
 }
+

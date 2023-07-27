@@ -21,7 +21,7 @@ export default function NavBar({ setUser, user }) {
             <Nav.Link href="/">Home</Nav.Link>
             {user ? (
               <>
-                {/* <Nav.Link href="/editpass">Edit Password</Nav.Link> */}
+                <Nav.Link href="/editpass">My Acct.</Nav.Link>
                 <Nav.Link href="/" onClick={handleLogOut}>
                   Log Out
                 </Nav.Link>
