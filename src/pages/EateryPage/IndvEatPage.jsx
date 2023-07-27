@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Card } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 
 export default function IndvEat() {
@@ -29,12 +29,14 @@ export default function IndvEat() {
   }, []);
 
   return (
-    <Card>
-      <Card.Img src={oneEat?.image} alt="eatery" fluid="true" variant="top" />
-      <Card.Body>
-        <Card.Title>{oneEat?.name}</Card.Title>
-        <Card.Text>{oneEat?.location}</Card.Text>
-      </Card.Body>
-    </Card>
+    <Container>
+      <Card>
+        <Card.Img src={oneEat?.image} alt="eatery" fluid="true" variant="top" />
+        <Card.Body>
+          <Card.Title>{oneEat?.name}</Card.Title>
+          <Card.Text>{oneEat?.location}</Card.Text>
+        </Card.Body>
+      </Card>
+    </Container>
   );
 }
