@@ -56,6 +56,23 @@
 ## Live URL
 [Munchydex](https://munchydex.onrender.com/)
 
+# Site Screenshots
+## Homepage:
+
+![Homepage](/screenshots/homepage.png)
+
+## Eatery Categories:
+
+![Categories](/screenshots/categories.png)
+
+## Individual Eateries:
+
+![Eatery](/screenshots/indvCat.png)
+
+## Change Passowrd:
+
+![Change password](/screenshots/pass.png)
+
 # Next Steps
 - Alternative/Additional 'reads' to interact with existing review data
 - Interacting with reviews (comment? like?)
