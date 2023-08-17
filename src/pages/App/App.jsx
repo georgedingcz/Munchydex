@@ -125,6 +125,27 @@ export default function App() {
     fetchOneCatEateries();
   }, [forEateryFetch]);
 
+  const handleEatCatSelect = async (evt) => {
+    await setNewMegaState({
+      ...newMegaState,
+      categoryID: evt.target.value,
+    });
+    setForEateryFetch(!forEateryFetch);
+  };
+
+  const handleEatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const chosenEat = existingEateries.find(
+      (chosenEatery) => chosenEatery._id === evt.target.value
+    );
+    setNewMegaState({
+      eateryName: chosenEat.name,
+      eateryLocation: chosenEat.location,
+      eateryImage: chosenEat.image,
+      eateryID: chosenEat._id,
+    });
+  };
+
   return (
     <MunchyContext.Provider
       value={{
@@ -146,6 +167,8 @@ export default function App() {
         setNewMegaState,
         handleChange,
         formatDate,
+        handleEatCatSelect,
+        handleEatSelect,
       }}
     >
       <main className="App">
