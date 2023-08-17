@@ -4,40 +4,21 @@ import CreateCatForm from "../../components/Category/CreateCatForm";
 import DeleteCatForm from "../../components/Category/DeleteCatForm";
 import UpdateCatForm from "../../components/Category/UpdateCatForm";
 
-export default function EatCat({
-  existingCategories,
-  setExistingCategories,
-  setForCategoryFetch,
-  forCategoryFetch,
-  newMegaState,
-  setNewMegaState,
-  handleChange,
-}) {
-  const reusedProps = {
-    existingCategories,
-    setExistingCategories,
-    setForCategoryFetch,
-    forCategoryFetch,
-    newMegaState,
-    setNewMegaState,
-
-    handleChange,
-  };
-
+export default function EatCat() {
   return (
     <Container>
       <Tabs defaultActiveKey="createCat" id="auth-tab" className="mb-3" fill>
         <Tab eventKey="createCat" title="Create Category">
-          <CreateCatForm {...reusedProps} />
+          <CreateCatForm />
         </Tab>
         <Tab eventKey="updateCat" title="Update Category">
-          <UpdateCatForm {...reusedProps} />
+          <UpdateCatForm />
         </Tab>
         <Tab eventKey="deleteCat" title="Delete Category">
-          <DeleteCatForm {...reusedProps} />
+          <DeleteCatForm />
         </Tab>
       </Tabs>
-      <CategoryList {...reusedProps} />
+      <CategoryList />
     </Container>
   );
 }
