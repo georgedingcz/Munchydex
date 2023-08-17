@@ -1,6 +1,11 @@
 import { Container, Form, Nav, Navbar, Row } from "react-bootstrap";
 import SearchForm from "../Eatery/SearchForm";
-export default function NavBar({ setUser, user }) {
+import { MunchyContext } from "../../pages/App/App";
+import React, { useContext } from "react";
+
+export default function NavBar() {
+  const context = useContext(MunchyContext);
+
   return (
     <Navbar
       expand="md"
@@ -13,10 +18,10 @@ export default function NavBar({ setUser, user }) {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto">
-            {user ? (
+            {context.user ? (
               <>
                 <Nav.Link href="/myAcct">My Acct.</Nav.Link>
-                {user.isAdmin ? (
+                {context.user.isAdmin ? (
                   <>
                     <Nav.Link href="/eatcat">Category</Nav.Link>
                   </>

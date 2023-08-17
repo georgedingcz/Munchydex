@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { Routes, Route } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
@@ -13,7 +13,9 @@ import IndvCat from "../EateryCategoryPage/IndvCatPage";
 import IndvEat from "../EateryPage/IndvEatPage";
 import IndvReview from "../EateryReviewPage/IndvReviewPage";
 
-function App() {
+export const MunchyContext = createContext();
+
+export default function App() {
   const [user, setUser] = useState(getUser());
 
   const [existingCategories, setExistingCategories] = useState([]);
@@ -78,27 +80,6 @@ function App() {
     });
   };
 
-  const reusedProps = {
-    user,
-    setUser,
-    existingCategories,
-    setExistingCategories,
-    existingEateries,
-    setExistingEateries,
-    existingReviews,
-    setExistingReviews,
-    forCategoryFetch,
-    setForCategoryFetch,
-    forEateryFetch,
-    setForEateryFetch,
-    forReviewFetch,
-    setForReviewFetch,
-    newMegaState,
-    setNewMegaState,
-    handleChange,
-    formatDate,
-  };
-
   useEffect(() => {
     const fetchCategories = async () => {
       try {
@@ -145,39 +126,57 @@ function App() {
   }, [forEateryFetch]);
 
   return (
-    <main className="App">
-      <NavBar {...reusedProps} />
-      <Routes>
-        <Route path="/" element={<HomePage {...reusedProps} />} />
-        <Route path="/authpage" element={<Auth {...reusedProps} />} />
-        <Route path="/eatcat/:id" element={<IndvCat {...reusedProps} />} />
-        <Route path="/eatery/:id" element={<IndvEat {...reusedProps} />} />
-        <Route path="/review/:id" element={<IndvReview {...reusedProps} />} />
-        {user ? (
-          <>
-            <Route path="/myAcct/" element={<MyAcct {...reusedProps} />} />
+    <MunchyContext.Provider
+      value={{
+        user,
+        setUser,
+        existingCategories,
+        setExistingCategories,
+        existingEateries,
+        setExistingEateries,
+        existingReviews,
+        setExistingReviews,
+        forCategoryFetch,
+        setForCategoryFetch,
+        forEateryFetch,
+        setForEateryFetch,
+        forReviewFetch,
+        setForReviewFetch,
+        newMegaState,
+        setNewMegaState,
+        handleChange,
+        formatDate,
+      }}
+    >
+      <main className="App">
+        <NavBar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/authpage" element={<Auth />} />
+          <Route path="/eatcat/:id" element={<IndvCat />} />
+          <Route path="/eatery/:id" element={<IndvEat />} />
+          <Route path="/review/:id" element={<IndvReview />} />
+          {user ? (
             <>
-              {user.isAdmin ? (
-                <>
-                  <Route path="/eatcat" element={<EatCat {...reusedProps} />} />
-                </>
-              ) : (
-                <>
-                  <Route path="/eatery" element={<Eatery {...reusedProps} />} />
-                  <Route
-                    path="/review"
-                    element={<EateryReview {...reusedProps} />}
-                  />
-                </>
-              )}
+              <Route path="/myAcct/" element={<MyAcct />} />
+              <>
+                {user.isAdmin ? (
+                  <>
+                    <Route path="/eatcat" element={<EatCat />} />
+                  </>
+                ) : (
+                  <>
+                    <Route path="/eatery" element={<Eatery />} />
+                    <Route path="/review" element={<EateryReview />} />
+                  </>
+                )}
+              </>
             </>
-          </>
-        ) : (
-          <></>
-        )}
-      </Routes>
-    </main>
+          ) : (
+            <></>
+          )}
+        </Routes>
+      </main>
+    </MunchyContext.Provider>
   );
 }
-
-export default App;

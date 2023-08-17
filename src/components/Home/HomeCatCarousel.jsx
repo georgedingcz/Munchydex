@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Carousel, Image } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function CategoryList({ existingCategories }) {
+export default function CategoryList() {
+  const context = useContext(MunchyContext);
+
   const navigate = useNavigate();
 
   const [index, setIndex] = useState(0);
@@ -13,7 +16,7 @@ export default function CategoryList({ existingCategories }) {
 
   const handleOneCatPage = (id) => {
     navigate(`/eatcat/` + id);
-    console.log(id)
+    console.log(id);
   };
 
   return (
@@ -24,7 +27,7 @@ export default function CategoryList({ existingCategories }) {
         data-bs-theme="light"
         className="carousel-container"
       >
-        {existingCategories.map((existingCategory, index) => (
+        {context.existingCategories.map((existingCategory, index) => (
           <Carousel.Item
             key={index}
             onClick={() => handleOneCatPage(existingCategory?._id)}

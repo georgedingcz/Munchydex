@@ -3,29 +3,12 @@ import HomeCatCarousel from "../../components/Home/HomeCatCarousel";
 import SiteIntro from "../../components/Home/SiteIntro";
 import ReviewListPerCat from "../../components/Review/ReviewListPerCat";
 
-export default function HomePage({
-  existingCategories,
-  setExistingCategories,
-  setNewMegaState,
-  setExistingReviews,
-  existingReviews,
-  formatDate,
-  newMegaState,
-}) {
-  const reusedProps = {
-    existingCategories,
-    setExistingCategories,
-    setNewMegaState,
-    setExistingReviews,
-    existingReviews,
-    formatDate,
-    newMegaState,
-  };
+export default function HomePage() {
   return (
     <Container>
-      <SiteIntro {...reusedProps} />
-      <HomeCatCarousel {...reusedProps} />
-      <ReviewListPerCat {...reusedProps} />
+      <SiteIntro />
+      <HomeCatCarousel />
+      <ReviewListPerCat />
     </Container>
   );
 }
