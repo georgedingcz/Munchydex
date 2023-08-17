@@ -1,5 +1,5 @@
 import React, { useEffect, useState, createContext } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import { getUser } from "../../utilities/users-service";
 import "./App.css";
 import Auth from "../AuthPage/AuthPage";
@@ -27,6 +27,9 @@ export default function App() {
   const [forReviewFetch, setForReviewFetch] = useState(false);
   const [filteredReviewsByCat, setFilteredReviewsByCat] = useState([]);
   const [filteredReviewsByEatery, setFilteredReviewsByEatery] = useState([]);
+
+  const [allEateries, setAllEateries] = useState([]);
+  const [searchName, setSearchName] = useState();
 
   const [newMegaState, setNewMegaState] = useState({
     userID: "",
@@ -320,6 +323,134 @@ export default function App() {
     }
   };
 
+  const handleCreateEatery = async (evt) => {
+    evt.preventDefault();
+    setNewMegaState({ ...newMegaState });
+    console.log(JSON.stringify(newMegaState));
+    const eateryData = {
+      category: newMegaState.categoryID,
+      name: newMegaState.eateryName,
+      location: newMegaState.eateryLocation,
+      image: newMegaState.eateryImage,
+    };
+    try {
+      const response = await fetch("/eateries", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(eateryData),
+      });
+      if (response.ok) {
+        setExistingEateries([...existingEateries, eateryData]);
+      } else {
+        console.log("Failed to create eatery");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setNewMegaState({
+      categoryID: eateryData.category,
+      eateryName: "",
+      eateryLocation: "",
+      eateryImage: "",
+    });
+  };
+
+  const handleDelete = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.eateryID;
+    try {
+      const response = await fetch(`/eateries/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setExistingEateries(
+          existingEateries.filter(
+            (eatery) => eatery._id !== newMegaState.eateryID
+          )
+        );
+        setForEateryFetch(!forEateryFetch);
+      } else {
+        console.log("Failed to delete eatery");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const navigate = useNavigate();
+
+  const handleOneEatPage = (id) => {
+    navigate(`/eatery/` + id);
+    console.log(id);
+  };
+
+
+  useEffect(() => {
+    const fetchEateries = async () => {
+      try {
+        const response = await fetch("/eateries", {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setAllEateries(data);
+        } else {
+          console.log("Failed to get categories");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchEateries();
+  }, []);
+
+  const handleSearch = async () => {
+    const chosenEatery = allEateries.find(
+      (eatery) => eatery.name.toLowerCase() === searchName.toLowerCase()
+    );
+    if (chosenEatery) {
+      navigate(`/eatery/` + chosenEatery._id);
+      console.log(chosenEatery._id);
+    } else {
+      console.log("No matching eatery found");
+      console.log(JSON.stringify(chosenEatery));
+    }
+  };
+
+  const handleUpdateEat = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.eateryID;
+    const updatedEatData = {
+      name: newMegaState.eateryName,
+      location: newMegaState.eateryLocation,
+      image: newMegaState.eateryImage,
+    };
+    try {
+      const response = await fetch(`/eateries/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedEatData),
+      });
+      if (response.ok) {
+        setForEateryFetch(!forEateryFetch);
+      } else {
+        console.log("Failed to update eatery");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <MunchyContext.Provider
       value={{
@@ -343,6 +474,10 @@ export default function App() {
         setFilteredReviewsByCat,
         filteredReviewsByEatery,
         setFilteredReviewsByEatery,
+        allEateries,
+        setAllEateries,
+        searchName,
+        setSearchName,
 
         handleChange,
         handleEatCatSelect,
@@ -355,6 +490,11 @@ export default function App() {
         handleCatDelete,
         handleUpdateCatSelect,
         handleUpdateCat,
+        handleCreateEatery,
+        handleDelete,
+        handleOneEatPage,
+        handleSearch,
+        handleUpdateEat,
 
         formatDate,
       }}

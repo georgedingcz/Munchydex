@@ -1,40 +1,10 @@
+import { useContext } from "react";
 import { Button, Form } from "react-bootstrap";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function DeleteEateryForm({
-  handleEatCatSelect,
-  handleEatSelect,
-  existingCategories,
-  existingEateries,
-  setExistingEateries,
-  forEateryFetch,
-  setForEateryFetch,
-  newMegaState,
-  setExistingCategories,
-}) {
-  const handleDelete = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.eateryID;
-    try {
-      const response = await fetch(`/eateries/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        setExistingEateries(
-          existingEateries.filter(
-            (eatery) => eatery._id !== newMegaState.eateryID
-          )
-        );
-        setForEateryFetch(!forEateryFetch);
-      } else {
-        console.log("Failed to delete eatery");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+export default function DeleteEateryForm() {
+  const context = useContext(MunchyContext);
+
   return (
     <Form className="section-container">
       <h2>Delete eatery</h2>
@@ -43,10 +13,10 @@ export default function DeleteEateryForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleEatCatSelect}
+          onChange={context.handleEatCatSelect}
         >
           <option value="">Select a category</option>
-          {existingCategories
+          {context.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
@@ -64,10 +34,10 @@ export default function DeleteEateryForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleEatSelect}
+          onChange={context.handleEatSelect}
         >
           <option value="">Select an eatery</option>
-          {existingEateries
+          {context.existingEateries
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
@@ -80,7 +50,7 @@ export default function DeleteEateryForm({
             ))}
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" size="lg" onClick={handleDelete}>
+      <Button variant="primary" size="lg" onClick={context.handleDelete}>
         Delete eatery
       </Button>
     </Form>
