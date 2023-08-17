@@ -1,21 +1,18 @@
+import { useContext } from "react";
 import { Card, Col, ListGroup, Row } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function ReviewListPerUser({ existingReviews, formatDate }) {
-  const navigate = useNavigate();
+export default function ReviewListPerUser() {
+  const context = useContext(MunchyContext);
 
-  const handleOneReviewPage = (id) => {
-    navigate(`/review/` + id);
-    console.log(id);
-  };
   return (
     <div className="section-container">
       <h2>List of reviews</h2>
-      {existingReviews.length === 0 ? (
+      {context.existingReviews.length === 0 ? (
         <>You have not reviewed anything yet. Create one now! :)</>
       ) : (
         <Row xs={1} md={2} lg={3}>
-          {existingReviews
+          {context.existingReviews
             .sort((a, b) => {
               if (a.title < b.title) {
                 return -1;
@@ -26,7 +23,9 @@ export default function ReviewListPerUser({ existingReviews, formatDate }) {
                 <Card
                   key={index}
                   style={{ width: "18rem" }}
-                  onClick={() => handleOneReviewPage(existingReview._id)}
+                  onClick={() =>
+                    context.handleOneReviewPage(existingReview._id)
+                  }
                 >
                   <Card.Img
                     src={existingReview?.image}
@@ -37,11 +36,11 @@ export default function ReviewListPerUser({ existingReviews, formatDate }) {
                   />
                   <Card.Body>
                     <Card.Title>{existingReview?.title}</Card.Title>
-                    <Card.Subtitle>{existingReview?.name.name}</Card.Subtitle>
+                    <Card.Subtitle>{existingReview?.name?.name}</Card.Subtitle>
                   </Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroup.Item>
-                      {formatDate(existingReview?.date)}
+                      {context.formatDate(existingReview?.date)}
                     </ListGroup.Item>
                     <ListGroup.Item>${existingReview?.price}</ListGroup.Item>
                     <ListGroup.Item>

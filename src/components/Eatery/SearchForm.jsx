@@ -1,67 +1,36 @@
 import { Autocomplete, TextField } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext } from "react";
 import { Button } from "react-bootstrap";
-import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../../pages/App/App";
 
 export default function SearchForm() {
-  const navigate = useNavigate();
-  const [allEateries, setAllEateries] = useState([]);
-  const [searchName, setSearchName] = useState();
+  const context = useContext(MunchyContext);
 
-  useEffect(() => {
-    const fetchEateries = async () => {
-      try {
-        const response = await fetch("/eateries", {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        if (response.ok) {
-          const data = await response.json();
-          setAllEateries(data);
-        } else {
-          console.log("Failed to get categories");
-        }
-      } catch (err) {
-        console.log(err);
-      }
-    };
-    fetchEateries();
-  }, []);
-
-  const handleSearch = async () => {
-    const chosenEatery = allEateries.find(
-      (eatery) => eatery.name.toLowerCase() === searchName.toLowerCase()
-    );
-    if (chosenEatery) {
-      navigate(`/eatery/` + chosenEatery._id);
-      console.log(chosenEatery._id);
-    } else {
-      console.log("No matching eatery found");
-      console.log(JSON.stringify(chosenEatery));
-    }
-  };
   return (
     <>
       <Autocomplete
         disablePortal
         id="combo-box-demo"
-        options={allEateries.map((eatery) => eatery.name)}
+        options={context.allEateries.map((eatery) => eatery.name)}
         sx={{ width: 200 }}
         renderInput={(params) => (
           <TextField {...params} label="Eatery Search" size="small" />
         )}
-        inputValue={searchName}
+        inputValue={context.searchName}
         onInputChange={(event, value) => {
-          setSearchName(value);
+          context.setSearchName(value);
         }}
-        value={searchName}
+        value={context.searchName}
         onChange={(event, value) => {
-          setSearchName(value);
+          context.setSearchName(value);
         }}
       />
-      <Button variant="primary" size="sm" onClick={handleSearch} type="submit">
+      <Button
+        variant="primary"
+        size="sm"
+        onClick={context.handleSearch}
+        type="submit"
+      >
         Submit
       </Button>
     </>

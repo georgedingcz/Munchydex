@@ -1,20 +1,16 @@
-import { useEffect } from "react";
+import { useContext, useEffect } from "react";
 import { Card, Col, Form, ListGroup, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function ReviewListPerCat({
-  setExistingReviews,
-  existingReviews,
-  formatDate,
-  newMegaState,
-  existingCategories,
-  setNewMegaState,
-}) {
+export default function ReviewListPerCat() {
+  const context = useContext(MunchyContext);
+
   const handleUpdateCatSelect = async (evt) => {
-    const chosenCat = existingCategories.find(
+    const chosenCat = context.existingCategories.find(
       (chosenCategory) => chosenCategory._id === evt.target.value
     );
-    setNewMegaState({
+    context.setNewMegaState({
       categoryName: chosenCat.name,
       categoryImage: chosenCat.image,
       categoryDesc: chosenCat.briefDesc,
@@ -23,7 +19,7 @@ export default function ReviewListPerCat({
   };
   const navigate = useNavigate();
 
-  const id = newMegaState.categoryID;
+  const id = context.newMegaState.categoryID;
 
   const handleOneReviewPage = (id) => {
     navigate(`/review/` + id);
@@ -40,7 +36,7 @@ export default function ReviewListPerCat({
         });
         if (response.ok) {
           const data = await response.json();
-          setExistingReviews(data);
+          context.setExistingReviews(data);
         } else {
           console.log("Failed to get reviews for one category");
         }
@@ -49,7 +45,7 @@ export default function ReviewListPerCat({
       }
     };
     fetchOneCatReviews();
-  }, [newMegaState.categoryID]);
+  }, [context.newMegaState.categoryID]);
   return (
     <div className="section-container">
       <Form>
@@ -60,7 +56,7 @@ export default function ReviewListPerCat({
             onChange={handleUpdateCatSelect}
           >
             <option value="">View Reviews Per Category</option>
-            {existingCategories
+            {context.existingCategories
               .sort((a, b) => {
                 if (a.name < b.name) {
                   return -1;
@@ -74,11 +70,11 @@ export default function ReviewListPerCat({
           </Form.Select>
         </Form.Group>
       </Form>
-      {existingReviews.length === 0 ? (
+      {context.existingReviews.length === 0 ? (
         <>No existing reviews for this category</>
       ) : (
         <Row xs={1} md={2} lg={3}>
-          {existingReviews.map((existingReview, index) => (
+          {context.existingReviews.map((existingReview, index) => (
             <Col key={index}>
               <Card
                 key={index}
@@ -98,7 +94,7 @@ export default function ReviewListPerCat({
                 </Card.Body>
                 <ListGroup className="list-group-flush">
                   <ListGroup.Item>
-                    {formatDate(existingReview?.date)}
+                    {context.formatDate(existingReview?.date)}
                   </ListGroup.Item>
                   <ListGroup.Item>${existingReview?.price}</ListGroup.Item>
                   <ListGroup.Item>

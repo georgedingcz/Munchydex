@@ -1,40 +1,9 @@
+import { useContext } from "react";
 import { Button, Form } from "react-bootstrap";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function DeleteCatForm({
-  existingCategories,
-  setExistingCategories,
-  newMegaState,
-  setNewMegaState,
-}) {
-  const handleCatSelect = async (evt) => {
-    setNewMegaState({
-      categoryID: evt.target.value,
-    });
-  };
-
-  const handleCatDelete = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.categoryID;
-    try {
-      const response = await fetch(`/categories/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        setExistingCategories(
-          existingCategories.filter(
-            (category) => category._id !== newMegaState.categoryID
-          )
-        );
-      } else {
-        console.log("Failed to delete category.");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+export default function DeleteCatForm() {
+  const context = useContext(MunchyContext);
 
   return (
     <Form className="section-container">
@@ -43,10 +12,10 @@ export default function DeleteCatForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleCatSelect}
+          onChange={context.handleCatSelect}
         >
           <option value="">Select a category</option>
-          {existingCategories
+          {context.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
@@ -59,7 +28,7 @@ export default function DeleteCatForm({
             ))}
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" size="lg" onClick={handleCatDelete}>
+      <Button variant="primary" size="lg" onClick={context.handleCatDelete}>
         Submit
       </Button>
     </Form>

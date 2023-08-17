@@ -3,59 +3,19 @@ import Form from "react-bootstrap/Form";
 import CatNameFormCtrl from "./CatFormCtrl/CatNameFormCtrl";
 import CatImageFormCtrl from "./CatFormCtrl/CatImageFormCtrl";
 import CatDescFormCtrl from "./CatFormCtrl/CatDescFormCtrl";
+import { useContext } from "react";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function CreateCatForm({
-  newMegaState,
-  setNewMegaState,
-  existingCategories,
-  setExistingCategories,
-  handleChange,
-}) {
-  const handleCreateCat = async (evt) => {
-    evt.preventDefault();
-    const categoryData = {
-      name: newMegaState.categoryName,
-      image: newMegaState.categoryImage,
-      briefDesc: newMegaState.categoryDesc,
-    };
-    try {
-      const response = await fetch("/categories", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(categoryData),
-      });
-      if (response.ok) {
-        setExistingCategories([...existingCategories, categoryData]);
-      } else {
-        console.log("Failed to create category");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setNewMegaState({
-      categoryName: "",
-      categoryImage: "",
-      categoryDesc: "",
-    });
-  };
-
-  const reusedProps = {
-    newMegaState,
-    setNewMegaState,
-    existingCategories,
-    setExistingCategories,
-    handleChange,
-  };
+export default function CreateCatForm() {
+  const context = useContext(MunchyContext);
 
   return (
     <Form className="section-container">
       <h2>Add eatery categories</h2>
-      <CatNameFormCtrl {...reusedProps} />
-      <CatImageFormCtrl {...reusedProps} />
-      <CatDescFormCtrl {...reusedProps} />
-      <Button variant="primary" size="lg" onClick={handleCreateCat}>
+      <CatNameFormCtrl />
+      <CatImageFormCtrl />
+      <CatDescFormCtrl />
+      <Button variant="primary" size="lg" onClick={context.handleCreateCat}>
         Submit
       </Button>
     </Form>

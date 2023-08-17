@@ -5,74 +5,12 @@ import ReviewDescFormCtrl from "./ReviewFormCtrl/ReviewDescFormCtrl";
 import ReviewDateFormCtrl from "./ReviewFormCtrl/ReviewDateFormCtrl";
 import ReviewPriceFormCtrl from "./ReviewFormCtrl/ReviewPriceFormCtrl";
 import ReviewScoreFormCtrl from "./ReviewFormCtrl/ReviewScoreFormCtrl";
+import { useContext } from "react";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function CreateReviewForm({
-  user,
-  handleCatSelect,
-  handleEatSelect,
-  handleChange,
-  existingCategories,
-  existingEateries,
-  newMegaState,
-  setNewMegaState,
-  forReviewFetch,
-  setForReviewFetch,
-}) {
-  const handleCreateReview = async (evt) => {
-    evt.preventDefault();
-    setNewMegaState({ ...newMegaState });
-    console.log(JSON.stringify(newMegaState));
-    const reviewData = {
-      category: newMegaState.categoryID,
-      user: user._id,
-      name: newMegaState.eateryID,
-      title: newMegaState.reviewTitle,
-      image: newMegaState.reviewImage,
-      desc: newMegaState.reviewDesc,
-      date: newMegaState.reviewDate,
-      price: newMegaState.reviewPrice,
-      score: newMegaState.reviewScore,
-    };
-    try {
-      const response = await fetch("/reviews", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(reviewData),
-      });
-      if (response.ok) {
-        setForReviewFetch(!forReviewFetch);
-      } else {
-        console.log("Failed to create review");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setNewMegaState({
-      categoryID: "",
-      userID: "",
-      eateryID: "",
-      reviewTitle: "",
-      reviewImage: "",
-      reviewDesc: "",
-      reviewDate: new Date(),
-      reviewPrice: 0,
-      reviewScore: 0,
-    });
-  };
-  const reusedProps = {
-    user,
-    handleCatSelect,
-    handleEatSelect,
-    handleChange,
-    existingCategories,
-    existingEateries,
-    newMegaState,
-    setNewMegaState,
-    forReviewFetch,
-    setForReviewFetch,
-  };
+export default function CreateReviewForm() {
+  const context = useContext(MunchyContext);
+
   return (
     <Form className="section-container">
       <h2>Write a review</h2>
@@ -81,17 +19,17 @@ export default function CreateReviewForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleCatSelect}
+          onChange={context.handleCatSelect}
         >
           <option value="">Select a category</option>
-          {existingCategories
+          {context.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
               }
             })
             .map((existingCategory, index) => (
-              <option key={index} value={existingCategory._id}>
+              <option key={index} value={existingCategory?._id}>
                 {existingCategory.name}
               </option>
             ))}
@@ -102,10 +40,10 @@ export default function CreateReviewForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleEatSelect}
+          onChange={context.handleEatSelect}
         >
           <option value="">Select an eatery</option>
-          {existingEateries
+          {context.existingEateries
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
@@ -118,13 +56,13 @@ export default function CreateReviewForm({
             ))}
         </Form.Select>
       </Form.Group>
-      <ReviewTitleFormCtrl {...reusedProps} />
-      <ReviewImageFormCtrl {...reusedProps} />
-      <ReviewDescFormCtrl {...reusedProps} />
-      <ReviewDateFormCtrl {...reusedProps} />
-      <ReviewPriceFormCtrl {...reusedProps} />
-      <ReviewScoreFormCtrl {...reusedProps} />
-      <Button variant="primary" size="lg" onClick={handleCreateReview}>
+      <ReviewTitleFormCtrl />
+      <ReviewImageFormCtrl />
+      <ReviewDescFormCtrl />
+      <ReviewDateFormCtrl />
+      <ReviewPriceFormCtrl />
+      <ReviewScoreFormCtrl />
+      <Button variant="primary" size="lg" onClick={context.handleCreateReview}>
         Create a review
       </Button>
     </Form>

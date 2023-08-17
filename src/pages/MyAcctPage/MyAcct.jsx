@@ -1,10 +1,13 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Button, Container, Form } from "react-bootstrap";
 import sendRequest from "../../utilities/send-request";
 import * as userService from "../../utilities/users-service";
 import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../App/App";
 
-export default function MyAcct({ user, setUser }) {
+export default function MyAcct() {
+  const context = useContext(MunchyContext);
+
   const navigate = useNavigate();
 
   const [credentials, setCredentials] = useState({
@@ -20,7 +23,7 @@ export default function MyAcct({ user, setUser }) {
 
   async function handleUpdatePass(evt) {
     try {
-      const id = user._id;
+      const id = context.user._id;
       const response = await sendRequest(
         `/api/users/${id}`,
         "PATCH",
@@ -36,7 +39,7 @@ export default function MyAcct({ user, setUser }) {
 
   function handleLogOut() {
     userService.logOut();
-    setUser(null);
+    context.setUser(null);
     navigate("/");
   }
 

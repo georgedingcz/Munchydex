@@ -1,14 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useNavigate, useParams } from "react-router-dom";
+import { MunchyContext } from "../App/App";
 
-export default function IndvCat({
-  setNewMegaState,
-  newMegaState,
-  setForEateryFetch,
-  forEateryFetch,
-  existingEateries,
-}) {
+export default function IndvCat() {
+  const context = useContext(MunchyContext);
+
   const [oneCat, setOneCat] = useState({});
 
   const navigate = useNavigate();
@@ -32,13 +29,11 @@ export default function IndvCat({
           const data = await response.json();
           setOneCat(data);
 
-          //
-          await setNewMegaState({
-            ...newMegaState,
+          await context.setNewMegaState({
+            ...context.newMegaState,
             categoryID: id,
           });
-          setForEateryFetch(!forEateryFetch);
-          //
+          context.setForEateryFetch(!context.forEateryFetch);
         } else {
           console.log("Failed to get the chosen category");
         }
@@ -59,11 +54,11 @@ export default function IndvCat({
         </Card.Body>
       </Card>
       <Container>
-        {existingEateries.length === 0 ? (
+        {context.existingEateries.length === 0 ? (
           <>No eateries for this category</>
         ) : (
           <Row xs={1} md={2} lg={3}>
-            {existingEateries.map((existingEatery, index) => (
+            {context.existingEateries.map((existingEatery, index) => (
               <Col key={index}>
                 <Card
                   key={index}
