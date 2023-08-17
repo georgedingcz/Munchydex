@@ -1,8 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
+import { MunchyContext } from "../App/App";
 
-export default function IndvReview({ formatDate }) {
+export default function IndvReview() {
+  const context = useContext(MunchyContext);
+
   const [oneReview, setOneReview] = useState({});
 
   const { id } = useParams();
@@ -19,7 +22,7 @@ export default function IndvReview({ formatDate }) {
           const data = await response.json();
           setOneReview(data);
         } else {
-          console.log("Failed to get chosen review")
+          console.log("Failed to get chosen review");
         }
       } catch (err) {
         console.log(err);
@@ -38,7 +41,7 @@ export default function IndvReview({ formatDate }) {
       </Card.Body>
       <ListGroup className="list-group-flush">
         <ListGroup.Item>Eatery: {oneReview?.name?.name}</ListGroup.Item>
-        <ListGroup.Item>{formatDate(oneReview?.date)}</ListGroup.Item>
+        <ListGroup.Item>{context.formatDate(oneReview?.date)}</ListGroup.Item>
         <ListGroup.Item>${oneReview?.price}</ListGroup.Item>
         <ListGroup.Item>Score: {oneReview?.score}</ListGroup.Item>
       </ListGroup>

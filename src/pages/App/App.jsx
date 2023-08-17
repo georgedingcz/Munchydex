@@ -5,13 +5,13 @@ import "./App.css";
 import Auth from "../AuthPage/AuthPage";
 import NavBar from "../../components/NavBar/NavBar";
 import HomePage from "../HomePage/HomePage";
-import EatCat from "../EateryCategoryPage/EatCatPage";
-import Eatery from "../EateryPage/EateryPage";
-import EateryReview from "../EateryReviewPage/EateryReviewPage";
+import EatCat from "../EateryCategoryPages/EatCatPage";
+import Eatery from "../EateryPages/EateryPage";
+import EateryReview from "../EateryReviewPages/EateryReviewPage";
 import MyAcct from "../MyAcctPage/MyAcct";
-import IndvCat from "../EateryCategoryPage/IndvCatPage";
-import IndvEat from "../EateryPage/IndvEatPage";
-import IndvReview from "../EateryReviewPage/IndvReviewPage";
+import IndvCat from "../EateryCategoryPages/IndvCatPage";
+import IndvEat from "../EateryPages/IndvEatPage";
+import IndvReview from "../EateryReviewPages/IndvReviewPage";
 
 export const MunchyContext = createContext();
 
