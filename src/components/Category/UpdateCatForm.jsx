@@ -2,62 +2,11 @@ import { Button, Form } from "react-bootstrap";
 import CatNameFormCtrl from "./CatFormCtrl/CatNameFormCtrl";
 import CatImageFormCtrl from "./CatFormCtrl/CatImageFormCtrl";
 import CatDescFormCtrl from "./CatFormCtrl/CatDescFormCtrl";
+import { useContext } from "react";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function UpdateCatForm({
-  newMegaState,
-  existingCategories,
-  handleChange,
-  forCategoryFetch,
-  setForCategoryFetch,
-  setNewMegaState,
-  setExistingCategories,
-}) {
-  const handleUpdateCatSelect = async (evt) => {
-    console.log(evt.target.value);
-    const chosenCat = existingCategories.find(
-      (chosenCategory) => chosenCategory._id === evt.target.value
-    );
-    setNewMegaState({
-      categoryName: chosenCat.name,
-      categoryImage: chosenCat.image,
-      categoryDesc: chosenCat.briefDesc,
-      categoryID: chosenCat._id,
-    });
-  };
-
-  const handleUpdateCat = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.categoryID;
-    const updatedCatData = {
-      name: newMegaState.categoryName,
-      image: newMegaState.categoryImage,
-      briefDesc: newMegaState.categoryDesc,
-    };
-    try {
-      const response = await fetch(`/categories/${id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(updatedCatData),
-      });
-      if (response.ok) {
-        setForCategoryFetch(!forCategoryFetch);
-      } else {
-        console.log("Failed to update category");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const reusedProps = {
-    newMegaState,
-    setNewMegaState,
-    existingCategories,
-    setExistingCategories,
-    handleChange,
-  };
+export default function UpdateCatForm() {
+  const context = useContext(MunchyContext);
 
   return (
     <Form className="section-container">
@@ -66,10 +15,10 @@ export default function UpdateCatForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleUpdateCatSelect}
+          onChange={context.handleUpdateCatSelect}
         >
           <option value="">Select a category</option>
-          {existingCategories
+          {context.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
@@ -82,10 +31,10 @@ export default function UpdateCatForm({
             ))}
         </Form.Select>
       </Form.Group>
-      <CatNameFormCtrl {...reusedProps} />
-      <CatImageFormCtrl {...reusedProps} />
-      <CatDescFormCtrl {...reusedProps} />
-      <Button variant="primary" size="lg" onClick={handleUpdateCat}>
+      <CatNameFormCtrl />
+      <CatImageFormCtrl />
+      <CatDescFormCtrl />
+      <Button variant="primary" size="lg" onClick={context.handleUpdateCat}>
         Submit
       </Button>
     </Form>

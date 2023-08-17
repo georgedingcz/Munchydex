@@ -227,6 +227,99 @@ export default function App() {
     });
   };
 
+  const handleCreateCat = async (evt) => {
+    evt.preventDefault();
+    const categoryData = {
+      name: newMegaState.categoryName,
+      image: newMegaState.categoryImage,
+      briefDesc: newMegaState.categoryDesc,
+    };
+    try {
+      const response = await fetch("/categories", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(categoryData),
+      });
+      if (response.ok) {
+        setExistingCategories([...existingCategories, categoryData]);
+      } else {
+        console.log("Failed to create category");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setNewMegaState({
+      categoryName: "",
+      categoryImage: "",
+      categoryDesc: "",
+    });
+  };
+
+  const handleCatDelete = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.categoryID;
+    try {
+      const response = await fetch(`/categories/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setExistingCategories(
+          existingCategories.filter(
+            (category) => category._id !== newMegaState.categoryID
+          )
+        );
+      } else {
+        console.log("Failed to delete category.");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleUpdateCatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const chosenCat = existingCategories.find(
+      (chosenCategory) => chosenCategory._id === evt.target.value
+    );
+    setNewMegaState({
+      categoryName: chosenCat.name,
+      categoryImage: chosenCat.image,
+      categoryDesc: chosenCat.briefDesc,
+      categoryID: chosenCat._id,
+    });
+  };
+
+  const handleUpdateCat = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.categoryID;
+    const updatedCatData = {
+      name: newMegaState.categoryName,
+      image: newMegaState.categoryImage,
+      briefDesc: newMegaState.categoryDesc,
+    };
+    try {
+      const response = await fetch(`/categories/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedCatData),
+      });
+      if (response.ok) {
+        setForCategoryFetch(!forCategoryFetch);
+      } else {
+        console.log("Failed to update category");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <MunchyContext.Provider
       value={{
@@ -246,18 +339,24 @@ export default function App() {
         setForReviewFetch,
         newMegaState,
         setNewMegaState,
-        handleChange,
-        formatDate,
-        handleEatCatSelect,
-        handleEatSelect,
         filteredReviewsByCat,
         setFilteredReviewsByCat,
         filteredReviewsByEatery,
         setFilteredReviewsByEatery,
+
+        handleChange,
+        handleEatCatSelect,
+        handleEatSelect,
         handleCatSelect,
         handleUserCatSelect,
         handleUserEatSelect,
         handleUserTitleSelect,
+        handleCreateCat,
+        handleCatDelete,
+        handleUpdateCatSelect,
+        handleUpdateCat,
+
+        formatDate,
       }}
     >
       <main className="App">

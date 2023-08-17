@@ -1,7 +1,11 @@
+import { useContext } from "react";
 import { Card, Col, Row } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function CategoryList({ existingCategories }) {
+export default function CategoryList() {
+  const context = useContext(MunchyContext);
+
   const navigate = useNavigate();
   const handleOneCatPage = (id) => {
     navigate(`/eatcat/` + id);
@@ -10,11 +14,11 @@ export default function CategoryList({ existingCategories }) {
   return (
     <div className="section-container">
       <h2>Food categories available:</h2>
-      {existingCategories.length === 0 ? (
+      {context.existingCategories.length === 0 ? (
         <>There are no categories</>
       ) : (
         <Row xs={1} md={2} lg={3}>
-          {existingCategories
+          {context.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
