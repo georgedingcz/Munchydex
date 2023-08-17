@@ -25,6 +25,8 @@ export default function App() {
   const [forCategoryFetch, setForCategoryFetch] = useState(false);
   const [forEateryFetch, setForEateryFetch] = useState(false);
   const [forReviewFetch, setForReviewFetch] = useState(false);
+  const [filteredReviewsByCat, setFilteredReviewsByCat] = useState([]);
+  const [filteredReviewsByEatery, setFilteredReviewsByEatery] = useState([]);
 
   const [newMegaState, setNewMegaState] = useState({
     userID: "",
@@ -146,6 +148,85 @@ export default function App() {
     });
   };
 
+  const handleCatSelect = async (evt) => {
+    await setNewMegaState({
+      ...newMegaState,
+      categoryID: evt.target.value,
+    });
+    setForEateryFetch(!forEateryFetch);
+  };
+
+  useEffect(() => {
+    const fetchOneUserReviews = async () => {
+      try {
+        const id = user._id;
+        const response = await fetch(`/reviews/user/${id}`, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const data = await response.json();
+          setExistingReviews(data);
+        } else {
+          console.log("Failed to get reviews for one user");
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+    fetchOneUserReviews();
+  }, [forReviewFetch]);
+
+  const handleUserCatSelect = async (evt) => {
+    const userChosenCat = existingReviews.find(
+      (existingReview) => existingReview.category.name === evt.target.value
+    );
+    const userChosenCatID = userChosenCat.category._id;
+    await setNewMegaState({
+      ...newMegaState,
+      categoryID: userChosenCatID,
+    });
+    setFilteredReviewsByCat(
+      existingReviews.filter(
+        (review) => review.category._id === userChosenCatID
+      )
+    );
+  };
+
+  const handleUserEatSelect = async (evt) => {
+    console.log(evt.target.value);
+    const userChosenEat = existingReviews.find(
+      (chosenEatery) => chosenEatery.name.name === evt.target.value
+    );
+    const userChosenEateryID = userChosenEat.name._id;
+    await setNewMegaState({
+      ...newMegaState,
+      eateryID: userChosenEateryID,
+    });
+    setFilteredReviewsByEatery(
+      filteredReviewsByCat.filter(
+        (review) => review.name._id === userChosenEateryID
+      )
+    );
+  };
+
+  const handleUserTitleSelect = async (evt) => {
+    const userChosenReview = existingReviews.find(
+      (chosenReview) => chosenReview._id === evt.target.value
+    );
+    setNewMegaState({
+      reviewTitle: userChosenReview.title,
+      reviewImage: userChosenReview.image,
+      reviewDesc: userChosenReview.desc,
+      reviewDate: userChosenReview.date,
+      reviewPrice: userChosenReview.price,
+      reviewScore: userChosenReview.score,
+      reviewID: userChosenReview._id,
+    });
+  };
+
   return (
     <MunchyContext.Provider
       value={{
@@ -169,6 +250,14 @@ export default function App() {
         formatDate,
         handleEatCatSelect,
         handleEatSelect,
+        filteredReviewsByCat,
+        setFilteredReviewsByCat,
+        filteredReviewsByEatery,
+        setFilteredReviewsByEatery,
+        handleCatSelect,
+        handleUserCatSelect,
+        handleUserEatSelect,
+        handleUserTitleSelect,
       }}
     >
       <main className="App">
