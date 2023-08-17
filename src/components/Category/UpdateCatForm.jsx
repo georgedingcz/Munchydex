@@ -18,15 +18,19 @@ export default function UpdateCatForm() {
           onChange={context.handleUpdateCatSelect}
         >
           <option value="">Select a category</option>
-          {context.existingCategories
+          {context?.existingCategories
             .sort((a, b) => {
               if (a.name < b.name) {
                 return -1;
               }
+              if (a > b) {
+                return 1;
+              }
+              return 0;
             })
             .map((existingCategory, index) => (
-              <option key={index} value={existingCategory._id}>
-                {existingCategory.name}
+              <option key={index} value={existingCategory?._id}>
+                {existingCategory?.name}
               </option>
             ))}
         </Form.Select>

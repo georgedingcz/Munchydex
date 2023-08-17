@@ -19,7 +19,7 @@ export default function DeleteReviewForm() {
           {[
             ...new Set(
               context.existingReviews.map(
-                (existingReview) => existingReview.category.name
+                (existingReview) => existingReview?.category?.name
               )
             ),
           ]
@@ -46,7 +46,7 @@ export default function DeleteReviewForm() {
           {[
             ...new Set(
               context.filteredReviewsByCat.map(
-                (filteredReview) => filteredReview.name.name
+                (filteredReview) => filteredReview?.name?.name
               )
             ),
           ]

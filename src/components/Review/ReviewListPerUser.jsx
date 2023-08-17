@@ -36,7 +36,7 @@ export default function ReviewListPerUser() {
                   />
                   <Card.Body>
                     <Card.Title>{existingReview?.title}</Card.Title>
-                    <Card.Subtitle>{existingReview?.name.name}</Card.Subtitle>
+                    <Card.Subtitle>{existingReview?.name?.name}</Card.Subtitle>
                   </Card.Body>
                   <ListGroup className="list-group-flush">
                     <ListGroup.Item>

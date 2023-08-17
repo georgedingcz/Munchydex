@@ -29,7 +29,7 @@ export default function CreateReviewForm() {
               }
             })
             .map((existingCategory, index) => (
-              <option key={index} value={existingCategory._id}>
+              <option key={index} value={existingCategory?._id}>
                 {existingCategory.name}
               </option>
             ))}

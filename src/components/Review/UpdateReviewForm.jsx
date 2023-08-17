@@ -24,8 +24,8 @@ export default function UpdateReviewForm() {
           <option value="">Select a category</option>
           {[
             ...new Set(
-              context.existingReviews.map(
-                (existingReview) => existingReview.category.name
+              context?.existingReviews.map(
+                (existingReview) => existingReview?.category?.name
               )
             ),
           ]
@@ -33,6 +33,10 @@ export default function UpdateReviewForm() {
               if (a < b) {
                 return -1;
               }
+              if (a > b) {
+                return 1;
+              }
+              return 0;
             })
             .map((categoryName, index) => (
               <option key={index} value={categoryName}>
@@ -60,6 +64,10 @@ export default function UpdateReviewForm() {
               if (a < b) {
                 return -1;
               }
+              if (a > b) {
+                return 1;
+              }
+              return 0;
             })
             .map((eateryName, index) => (
               <option key={index} value={eateryName}>
@@ -81,6 +89,10 @@ export default function UpdateReviewForm() {
               if (a.title < b.title) {
                 return -1;
               }
+              if (a > b) {
+                return 1;
+              }
+              return 0;
             })
             .map((filteredReview, index) => (
               <option key={index} value={filteredReview._id}>

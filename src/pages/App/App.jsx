@@ -144,6 +144,7 @@ export default function App() {
       (chosenEatery) => chosenEatery._id === evt.target.value
     );
     setNewMegaState({
+      ...newMegaState,
       eateryName: chosenEat.name,
       eateryLocation: chosenEat.location,
       eateryImage: chosenEat.image,
@@ -184,16 +185,16 @@ export default function App() {
 
   const handleUserCatSelect = async (evt) => {
     const userChosenCat = existingReviews.find(
-      (existingReview) => existingReview.category.name === evt.target.value
+      (existingReview) => existingReview?.category?.name === evt.target.value
     );
-    const userChosenCatID = userChosenCat.category._id;
+    const userChosenCatID = userChosenCat?.category?._id;
     await setNewMegaState({
       ...newMegaState,
       categoryID: userChosenCatID,
     });
     setFilteredReviewsByCat(
       existingReviews.filter(
-        (review) => review.category._id === userChosenCatID
+        (review) => review?.category?._id === userChosenCatID
       )
     );
   };
@@ -388,7 +389,6 @@ export default function App() {
     navigate(`/eatery/` + id);
     console.log(id);
   };
-
 
   useEffect(() => {
     const fetchEateries = async () => {
