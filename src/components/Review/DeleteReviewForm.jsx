@@ -1,35 +1,10 @@
+import { useContext } from "react";
 import { Button, Form } from "react-bootstrap";
+import { MunchyContext } from "../../pages/App/App";
 
-export default function DeleteReviewForm({
-  handleUserCatSelect,
-  existingReviews,
-  handleUserEatSelect,
-  filteredReviewsByCat,
-  handleUserTitleSelect,
-  filteredReviewsByEatery,
-  newMegaState,
-  setForReviewFetch,
-  forReviewFetch,
-}) {
-  const handleDeleteReview = async (evt) => {
-    evt.preventDefault();
-    const id = newMegaState.reviewID;
-    try {
-      const response = await fetch(`/reviews/${id}`, {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      if (response.ok) {
-        setForReviewFetch(!forReviewFetch);
-      } else {
-        console.log("Failed to delete review");
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
+export default function DeleteReviewForm() {
+  const context = useContext(MunchyContext);
+
   return (
     <Form className="section-container">
       <h2>Delete a review</h2>
@@ -38,12 +13,12 @@ export default function DeleteReviewForm({
         <Form.Select
           name="categoryType"
           id="categoryType-select"
-          onChange={handleUserCatSelect}
+          onChange={context.handleUserCatSelect}
         >
           <option value="">Select a category</option>
           {[
             ...new Set(
-              existingReviews.map(
+              context.existingReviews.map(
                 (existingReview) => existingReview.category.name
               )
             ),
@@ -65,12 +40,12 @@ export default function DeleteReviewForm({
         <Form.Select
           name="eateryName"
           id="eateryName-select"
-          onChange={handleUserEatSelect}
+          onChange={context.handleUserEatSelect}
         >
           <option value="">Select an eatery</option>
           {[
             ...new Set(
-              filteredReviewsByCat.map(
+              context.filteredReviewsByCat.map(
                 (filteredReview) => filteredReview.name.name
               )
             ),
@@ -92,10 +67,10 @@ export default function DeleteReviewForm({
         <Form.Select
           name="title"
           id="title-select"
-          onChange={handleUserTitleSelect}
+          onChange={context.handleUserTitleSelect}
         >
           <option value="">Select a title</option>
-          {filteredReviewsByEatery
+          {context.filteredReviewsByEatery
             .sort((a, b) => {
               if (a.title < b.title) {
                 return -1;
@@ -108,7 +83,7 @@ export default function DeleteReviewForm({
             ))}
         </Form.Select>
       </Form.Group>
-      <Button variant="primary" size="lg" onClick={handleDeleteReview}>
+      <Button variant="primary" size="lg" onClick={context.handleDeleteReview}>
         Delete a review
       </Button>
     </Form>

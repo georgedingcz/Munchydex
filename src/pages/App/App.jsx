@@ -451,6 +451,104 @@ export default function App() {
     }
   };
 
+  const handleCreateReview = async (evt) => {
+    evt.preventDefault();
+    setNewMegaState({ ...newMegaState });
+    console.log(JSON.stringify(newMegaState));
+    const reviewData = {
+      category: newMegaState.categoryID,
+      user: user._id,
+      name: newMegaState.eateryID,
+      title: newMegaState.reviewTitle,
+      image: newMegaState.reviewImage,
+      desc: newMegaState.reviewDesc,
+      date: newMegaState.reviewDate,
+      price: newMegaState.reviewPrice,
+      score: newMegaState.reviewScore,
+    };
+    try {
+      const response = await fetch("/reviews", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(reviewData),
+      });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to create review");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setNewMegaState({
+      categoryID: "",
+      userID: "",
+      eateryID: "",
+      reviewTitle: "",
+      reviewImage: "",
+      reviewDesc: "",
+      reviewDate: new Date(),
+      reviewPrice: 0,
+      reviewScore: 0,
+    });
+  };
+
+  const handleDeleteReview = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.reviewID;
+    try {
+      const response = await fetch(`/reviews/${id}`, {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to delete review");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const handleOneReviewPage = (id) => {
+    navigate(`/review/` + id);
+    console.log(id);
+  };
+
+  const handleUpdateReview = async (evt) => {
+    evt.preventDefault();
+    const id = newMegaState.reviewID;
+    const updatedReviewData = {
+      title: newMegaState.reviewTitle,
+      image: newMegaState.reviewImage,
+      desc: newMegaState.reviewDesc,
+      date: newMegaState.reviewDate,
+      price: newMegaState.reviewPrice,
+      score: newMegaState.reviewScore,
+    };
+    try {
+      const response = await fetch(`/reviews/${id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedReviewData),
+      });
+      if (response.ok) {
+        setForReviewFetch(!forReviewFetch);
+      } else {
+        console.log("Failed to update review");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <MunchyContext.Provider
       value={{
@@ -495,6 +593,10 @@ export default function App() {
         handleOneEatPage,
         handleSearch,
         handleUpdateEat,
+        handleCreateReview,
+        handleDeleteReview,
+        handleOneReviewPage,
+        handleUpdateReview,
 
         formatDate,
       }}
